@@ -18,6 +18,9 @@ final class PayMongoGateway implements Gateway
     {
         $items = array_map(static fn(array $item): array => ['name' => $item['product_name_snapshot'], 'amount' => $item['unit_price'], 'quantity' => $item['quantity'], 'currency' => 'PHP'], $order['items']);
         if ($order['shipping_fee']) { $items[] = ['name' => 'Delivery', 'amount' => $order['shipping_fee'], 'quantity' => 1, 'currency' => 'PHP']; }
+        if (($order['merchandise_discount'] ?? 0)+($order['shipping_discount'] ?? 0)>0) {
+            $items=[['name'=>'SaleSync order '.$order['order_number'].' (vouchers applied)','amount'=>$order['total'],'quantity'=>1,'currency'=>'PHP']];
+        }
         $url = rtrim($this->config['app_url'], '/') . '/#orders/' . $order['order_id'];
         return $this->request('POST', '/v2/checkout_sessions', ['data' => ['attributes' => [
             'line_items' => $items,

@@ -9,7 +9,7 @@ final class CatalogService
 {
     public function __construct(private readonly Database $db) {}
 
-    private const SELECT = 'SELECT p.product_id,p.seller_id,p.category_id,p.sku,p.name,p.description,p.price,p.stock_qty,p.image_url,s.store_name,c.category_name FROM products p JOIN seller_profiles s ON s.seller_id=p.seller_id JOIN users u ON u.user_id=s.user_id JOIN categories c ON c.category_id=p.category_id';
+    private const SELECT = 'SELECT p.product_id,p.seller_id,p.category_id,p.sku,p.name,p.description,p.price,p.stock_qty,p.image_url,p.presentation,s.store_name,c.category_name FROM products p JOIN seller_profiles s ON s.seller_id=p.seller_id JOIN users u ON u.user_id=s.user_id JOIN categories c ON c.category_id=p.category_id';
     public const VISIBLE = "p.status='published' AND s.approval_status='approved' AND u.status='active'";
 
     public function products(array $query): array
@@ -34,12 +34,27 @@ final class CatalogService
         if (!is_string($sort) || !isset($sorts[$sort])) { throw new ApiError(422, 'Invalid product sort.'); }
         $filter = ' WHERE ' . implode(' AND ', $where);
         $total = $this->db->one('SELECT COUNT(*) AS count FROM products p JOIN seller_profiles s ON s.seller_id=p.seller_id JOIN users u ON u.user_id=s.user_id' . $filter, $values)['count'];
-        return ['items' => $this->db->all(self::SELECT . $filter . ' ORDER BY ' . $sorts[$sort] . ' LIMIT ' . $limit . ' OFFSET ' . (($page - 1) * $limit), $values), 'page' => $page, 'limit' => $limit, 'total' => $total];
+        return ['items' => array_map($this->decorate(...), $this->db->all(self::SELECT . $filter . ' ORDER BY ' . $sorts[$sort] . ' LIMIT ' . $limit . ' OFFSET ' . (($page - 1) * $limit), $values)), 'page' => $page, 'limit' => $limit, 'total' => $total];
     }
 
     public function product(int $id): array
     {
-        return $this->db->one(self::SELECT . ' WHERE p.product_id = ? AND ' . self::VISIBLE, [$id]) ?? throw new ApiError(404, 'Product not found.');
+        return $this->decorate($this->db->one(self::SELECT . ' WHERE p.product_id = ? AND ' . self::VISIBLE, [$id]) ?? throw new ApiError(404, 'Product not found.'));
+    }
+
+    private function decorate(array $product): array
+    {
+        $product['presentation'] = json_decode($product['presentation'], true, 512, JSON_THROW_ON_ERROR);
+        $product['variants'] = $this->db->all('SELECT variant_id,name,attributes,price_delta FROM product_variants WHERE product_id=? ORDER BY rowid', [$product['product_id']]);
+        foreach ($product['variants'] as &$variant) { $variant['attributes'] = json_decode($variant['attributes'], true, 512, JSON_THROW_ON_ERROR); }
+        return $product;
+    }
+
+    public function stores(): array
+    {
+        $stores = $this->db->all("SELECT s.seller_id,s.store_name,s.description,s.presentation FROM seller_profiles s JOIN users u ON u.user_id=s.user_id WHERE s.approval_status='approved' AND u.status='active' ORDER BY s.seller_id");
+        foreach ($stores as &$store) { $store['presentation'] = json_decode($store['presentation'], true, 512, JSON_THROW_ON_ERROR); }
+        return $stores;
     }
 
     public function categories(): array
@@ -49,6 +64,7 @@ final class CatalogService
 
     public function store(int $id): array
     {
-        return $this->db->one("SELECT s.seller_id,s.store_name,s.description FROM seller_profiles s JOIN users u ON u.user_id=s.user_id WHERE s.seller_id=? AND s.approval_status='approved' AND u.status='active'", [$id]) ?? throw new ApiError(404, 'Store not found.');
+        foreach ($this->stores() as $store) { if ($store['seller_id'] === $id) { return $store; } }
+        throw new ApiError(404, 'Store not found.');
     }
 }

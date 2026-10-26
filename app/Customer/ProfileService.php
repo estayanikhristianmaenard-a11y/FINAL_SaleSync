@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace SaleSync\Customer;
 
 use SaleSync\Core\{ApiError, Database, Input};
+use SaleSync\Auth\RegistrationDetails;
 
 final class ProfileService
 {
@@ -18,7 +19,7 @@ final class ProfileService
 
     public function addresses(int $userId): array
     {
-        return $this->db->all('SELECT address_id,label,recipient_name,phone,address_text,is_default FROM addresses WHERE user_id=? ORDER BY is_default DESC,address_id DESC', [$userId]);
+        return $this->db->all('SELECT address_id,label,recipient_name,phone,address_text,is_default,house_number,street,province_code,city_code,barangay_code,postal_code FROM addresses WHERE user_id=? ORDER BY is_default DESC,address_id DESC', [$userId]);
     }
 
     public function address(int $userId, int $addressId): array
@@ -28,17 +29,24 @@ final class ProfileService
 
     public function saveAddress(int $userId, ?int $id, array $input): array
     {
-        $fields = [Input::text($input, 'label', 40), Input::text($input, 'recipient_name', 100), Input::text($input, 'phone', 25, 7), Input::text($input, 'address_text', 1000, 10)];
         if (isset($input['is_default']) && !is_bool($input['is_default'])) { throw new ApiError(422, 'is_default must be a boolean.'); }
-        return $this->db->transaction(function () use ($userId, $id, $input, $fields): array {
+        return $this->db->transaction(function () use ($userId, $id, $input): array {
             $existing = $id ? $this->address($userId, $id) : null;
+            $hasLocation = (bool) array_intersect(array_keys($input), ['house_number','street','province','city','barangay','postal_code']);
+            if (isset($input['address_text']) && $existing && !$hasLocation && $input['address_text'] !== $existing['address_text']) {
+                throw new ApiError(422, 'Choose the province/region, city and barangay to update this address.');
+            }
+            $details = !$existing || $hasLocation ? AddressDetails::fromInput($input) : AddressDetails::stored($existing);
+            $values = array_replace($existing ?? [], $input);
+            $phone = !$existing || array_key_exists('phone', $input) ? RegistrationDetails::phone($values) : $existing['phone'];
+            $fields = [Input::text($values, 'label', 40), Input::text($values, 'recipient_name', 100), $phone, ...array_values($details)];
             if (!$id && count($this->addresses($userId)) >= 20) { throw new ApiError(422, 'You can save up to 20 addresses.'); }
             $default = ($input['is_default'] ?? (bool) ($existing['is_default'] ?? false)) || !$this->db->one('SELECT address_id FROM addresses WHERE user_id=? AND is_default=1', [$userId]);
             if ($default) { $this->db->run('UPDATE addresses SET is_default=0 WHERE user_id=?', [$userId]); }
             if ($id) {
-                $this->db->run('UPDATE addresses SET label=?,recipient_name=?,phone=?,address_text=?,is_default=? WHERE address_id=? AND user_id=?', [...$fields, (int) $default, $id, $userId]);
+                $this->db->run('UPDATE addresses SET label=?,recipient_name=?,phone=?,address_text=?,house_number=?,street=?,province_code=?,city_code=?,barangay_code=?,postal_code=?,is_default=? WHERE address_id=? AND user_id=?', [...$fields, (int) $default, $id, $userId]);
             } else {
-                $this->db->run('INSERT INTO addresses(label,recipient_name,phone,address_text,is_default,user_id) VALUES (?,?,?,?,?,?)', [...$fields, (int) $default, $userId]);
+                $this->db->run('INSERT INTO addresses(label,recipient_name,phone,address_text,house_number,street,province_code,city_code,barangay_code,postal_code,is_default,user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)', [...$fields, (int) $default, $userId]);
                 $id = $this->db->id();
             }
             // Clearing the default on the current default leaves another address selected.

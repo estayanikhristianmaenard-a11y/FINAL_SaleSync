@@ -15,9 +15,6 @@ header('X-Frame-Options: DENY');
 $requestId = bin2hex(random_bytes(8));
 header('X-Request-Id: ' . $requestId);
 try {
-    if ((int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 65536) { throw new ApiError(413, 'Request is too large.'); }
-    $raw = file_get_contents('php://input', false, null, 0, 65537);
-    if (strlen($raw) > 65536) { throw new ApiError(413, 'Request is too large.'); }
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $base = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
     $path = '/' . ltrim(substr($uri, strlen($base)), '/');
@@ -26,6 +23,10 @@ try {
         if (!is_string($_GET['route'])) { throw new ApiError(422, 'Invalid route.'); }
         $path = '/' . ltrim($_GET['route'], '/');
     }
+    $limit=$path==='/uploads'?3000000:65536;
+    if ((int)($_SERVER['CONTENT_LENGTH']??0)>$limit) throw new ApiError(413,'Request is too large.');
+    $raw=file_get_contents('php://input',false,null,0,$limit+1);
+    if (strlen($raw)>$limit) throw new ApiError(413,'Request is too large.');
     $data = (new Api($config))->dispatch($_SERVER['REQUEST_METHOD'], $path, $raw);
     echo json_encode(['data' => $data], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
 } catch (ApiError $error) {

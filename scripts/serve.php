@@ -2,6 +2,7 @@
 declare(strict_types=1);
 // Router for: php -S 127.0.0.1:8080 -t public scripts/serve.php
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+if ($path==='/api/attachment.php') { require dirname(__DIR__).'/public/api/attachment.php'; return true; }
 if ($path === '/api' || str_starts_with($path, '/api/')) {
     $_SERVER['SCRIPT_NAME'] = '/api/index.php';
     require dirname(__DIR__) . '/public/api/index.php';

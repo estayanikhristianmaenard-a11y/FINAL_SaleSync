@@ -38,10 +38,11 @@ final class Session
         }
     }
 
-    public static function login(int $userId): void
+    public static function login(int $userId, int $authVersion = 0): void
     {
         session_regenerate_id(true);
         $_SESSION['user_id'] = $userId;
+        $_SESSION['auth_version'] = $authVersion;
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
     }
 

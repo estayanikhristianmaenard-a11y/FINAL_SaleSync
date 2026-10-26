@@ -5,6 +5,7 @@ namespace SaleSync\Payments;
 
 use SaleSync\Core\{ApiError, Database};
 use SaleSync\Customer\OrderService;
+use SaleSync\Customer\NotificationService;
 
 final class PaymentService
 {
@@ -75,7 +76,7 @@ final class PaymentService
                 $this->db->run("UPDATE payments SET status='paid',paid_at=strftime('%Y-%m-%dT%H:%M:%SZ','now') WHERE payment_id=?", [$record['payment_id']]);
                 $this->db->run("UPDATE orders SET status='processing' WHERE order_id=? AND status='pending_payment'", [$record['order_id']]);
                 $this->db->run("INSERT INTO order_status_history(order_id,status) VALUES (?,'processing')", [$record['order_id']]);
-                $this->db->run('INSERT INTO notifications(user_id,title,message) VALUES (?,?,?)', [$record['customer_id'], 'Payment confirmed', $record['order_number'] . ' is paid and ready for processing.']);
+                (new NotificationService($this->db))->notify((int)$record['customer_id'],'Payment confirmed',$record['order_number'].' is paid and ready for processing.','Order','order',(int)$record['order_id']);
             } elseif (!$paid && ($attributes['status'] ?? '') === 'expired' && $record['status'] !== 'paid') {
                 $this->orders->release((int) $record['order_id']);
             }

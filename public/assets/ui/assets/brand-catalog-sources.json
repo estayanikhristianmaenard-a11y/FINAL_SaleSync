@@ -1,0 +1,1076 @@
+{
+  "checked": "2026-10-26",
+  "notice": "Sample reference catalog; no affiliation. All prices, stock, reviews and transactions are local simulations. Exact appearance and availability must be checked with the source. Some entries are explicitly category examples, not verified SKUs.",
+  "stores": [
+    {
+      "id": "brand-anker",
+      "name": "Anker Official Store",
+      "brand": "Anker",
+      "category": "Electronics",
+      "sourceUrl": "https://www.anker.com.ph/collections/power-banks",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "Anker Zolo 10,000mAh 30W Power Bank",
+          "type": "powerbank",
+          "price": 1695,
+          "specs": {
+            "Capacity": "10,000 mAh",
+            "Output": "30 W",
+            "Built-in cable": "USB-C"
+          }
+        },
+        {
+          "name": "Anker Zolo 20,000mAh 30W Power Bank",
+          "type": "powerbank",
+          "price": 2395,
+          "specs": {
+            "Capacity": "20,000 mAh",
+            "Output": "30 W",
+            "Built-in cable": "USB-C"
+          }
+        },
+        {
+          "name": "Anker Nano 10,000mAh 45W Power Bank",
+          "type": "powerbank",
+          "price": 2895,
+          "specs": {
+            "Capacity": "10,000 mAh",
+            "Output": "45 W"
+          }
+        },
+        {
+          "name": "Anker Nano 70W 3-Port Wall Charger",
+          "type": "wallcharger",
+          "price": 1495,
+          "specs": {
+            "Output": "70 W",
+            "Ports": "3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-xiaomi",
+      "name": "Xiaomi Official Store Global",
+      "brand": "Xiaomi",
+      "category": "Electronics",
+      "sourceUrl": "https://www.mi.com/ph/sitemap",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "Xiaomi Smart Band 9 Active",
+          "type": "watch",
+          "price": 1099,
+          "specs": {
+            "Product family": "Smart fitness band"
+          }
+        },
+        {
+          "name": "REDMI Buds 6 Play",
+          "type": "earbuds",
+          "price": 499,
+          "specs": {
+            "Product family": "True wireless earbuds"
+          }
+        },
+        {
+          "name": "Xiaomi Wireless Mouse 3",
+          "type": "mouse",
+          "price": 699,
+          "specs": {
+            "Product family": "Wireless computer mouse"
+          }
+        },
+        {
+          "name": "Xiaomi Bluetooth Speaker Mini",
+          "type": "speaker",
+          "price": 1599,
+          "specs": {
+            "Connectivity": "Bluetooth"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-logitech",
+      "name": "Logitech Official Store",
+      "brand": "Logitech",
+      "category": "Electronics",
+      "sourceUrl": "https://www.logitech.com/en-ph",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "Logitech K380 Multi-Device Bluetooth Keyboard",
+          "type": "keyboard",
+          "price": 1995,
+          "specs": {
+            "Connectivity": "Bluetooth",
+            "Layout": "Compact, multi-device"
+          }
+        },
+        {
+          "name": "Logitech M331 Silent Plus Wireless Mouse",
+          "type": "mouse",
+          "price": 899,
+          "specs": {
+            "Product family": "Silent wireless mouse"
+          }
+        },
+        {
+          "name": "Logitech G102 LIGHTSYNC Gaming Mouse",
+          "type": "mouse",
+          "price": 1195,
+          "specs": {
+            "Connectivity": "Wired USB",
+            "Lighting": "LIGHTSYNC RGB"
+          }
+        },
+        {
+          "name": "Logitech C920 HD Pro Webcam",
+          "type": "webcam",
+          "price": 4595,
+          "specs": {
+            "Video resolution": "Full HD 1080p",
+            "Product family": "USB webcam"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-tplink",
+      "name": "TP-Link Official Store",
+      "brand": "TP-Link",
+      "category": "Electronics",
+      "sourceUrl": "https://www.tp-link.com/ph/",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "TP-Link Archer AX23 Wi-Fi 6 Router",
+          "type": "router",
+          "price": 2499,
+          "specs": {
+            "Wi-Fi generation": "Wi-Fi 6",
+            "Model": "Archer AX23"
+          }
+        },
+        {
+          "name": "TP-Link RE305 Wi-Fi Range Extender",
+          "type": "router",
+          "price": 1399,
+          "specs": {
+            "Product family": "Range extender",
+            "Model": "RE305"
+          }
+        },
+        {
+          "name": "Tapo C200 Pan/Tilt Wi-Fi Camera",
+          "type": "camera",
+          "price": 1199,
+          "specs": {
+            "Video resolution": "1080p",
+            "Product family": "Pan/tilt indoor camera"
+          }
+        },
+        {
+          "name": "Tapo C210 Pan/Tilt Wi-Fi Camera",
+          "type": "camera",
+          "price": 1499,
+          "specs": {
+            "Product family": "Pan/tilt indoor camera",
+            "Model": "C210"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-bench",
+      "name": "Bench Official Store",
+      "brand": "Bench",
+      "category": "Fashion",
+      "sourceUrl": "https://shop.bench.com.ph/collections/all",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "Bench Men's Logo T-Shirt",
+          "type": "tee",
+          "price": 499,
+          "specs": {
+            "Style": "Logo T-shirt"
+          }
+        },
+        {
+          "name": "Bench Men's Knitted Hoodie Jacket",
+          "type": "hoodie",
+          "price": 999,
+          "specs": {
+            "Style": "Knitted hoodie jacket"
+          }
+        },
+        {
+          "name": "Bench Baseball Cap — Sample style",
+          "type": "cap",
+          "price": 399,
+          "specs": {
+            "Style": "Adjustable baseball cap"
+          }
+        },
+        {
+          "name": "Bench Denim Jacket — Sample style",
+          "type": "jacket",
+          "price": 1499,
+          "specs": {
+            "Style": "Casual denim outerwear"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-penshoppe",
+      "name": "Penshoppe Official Store",
+      "brand": "Penshoppe",
+      "category": "Fashion",
+      "sourceUrl": "https://www.penshoppe.com/collections/mens-clothing",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "Penshoppe Dress Code Textured T-Shirt",
+          "type": "tee",
+          "price": 699,
+          "specs": {
+            "Collection": "Dress Code",
+            "Style": "Textured T-shirt"
+          }
+        },
+        {
+          "name": "Penshoppe Relaxed Graphic Hoodie",
+          "type": "hoodie",
+          "price": 1399,
+          "specs": {
+            "Fit": "Relaxed",
+            "Style": "Graphic hoodie"
+          }
+        },
+        {
+          "name": "Penshoppe Essentials T-Shirt",
+          "type": "tee",
+          "price": 349,
+          "specs": {
+            "Collection": "Essentials"
+          }
+        },
+        {
+          "name": "Penshoppe Essentials Classic Straight Fit Jeans",
+          "type": "pants",
+          "price": 1499,
+          "specs": {
+            "Fit": "Straight",
+            "Fabric type": "Denim"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-lovito",
+      "name": "Lovito Official Store",
+      "brand": "Lovito",
+      "category": "Fashion",
+      "sourceUrl": "https://shopee.ph/lovito.ph",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "Lovito Casual Colorblock Dress LK6ED064",
+          "type": "dress",
+          "price": 549,
+          "specs": {
+            "Reference model": "LK6ED064",
+            "Style": "Colorblock dress"
+          }
+        },
+        {
+          "name": "Lovito Casual Lace Pleated Blouse L195ED061",
+          "type": "shirt",
+          "price": 399,
+          "specs": {
+            "Reference model": "L195ED061",
+            "Style": "Lace pleated blouse"
+          }
+        },
+        {
+          "name": "Lovito Striped Geometric Shorts L104ED126",
+          "type": "shorts",
+          "price": 349,
+          "specs": {
+            "Reference model": "L104ED126",
+            "Style": "Striped shorts"
+          }
+        },
+        {
+          "name": "Lovito Multi-pocket Backpack L41BA05",
+          "type": "backpack",
+          "price": 499,
+          "specs": {
+            "Reference model": "L41BA05",
+            "Style": "Multi-pocket backpack"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-incerun",
+      "name": "Incerun Official Store",
+      "brand": "Incerun",
+      "category": "Fashion",
+      "sourceUrl": "https://www.incerunmen.com/",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "Incerun Avant-Garde Crop Jacket SKUL83120",
+          "type": "jacket",
+          "price": 1299,
+          "specs": {
+            "Reference model": "SKUL83120",
+            "Style": "Cropped jacket"
+          }
+        },
+        {
+          "name": "Incerun Longline Long Sleeve T-shirt SKUL83123",
+          "type": "shirt",
+          "price": 799,
+          "specs": {
+            "Reference model": "SKUL83123",
+            "Style": "Longline T-shirt"
+          }
+        },
+        {
+          "name": "Incerun Relaxed Shirt — Sample style",
+          "type": "shirt",
+          "price": 699,
+          "specs": {
+            "Style": "Relaxed casual shirt"
+          }
+        },
+        {
+          "name": "Incerun Wide-leg Trousers — Sample style",
+          "type": "pants",
+          "price": 899,
+          "specs": {
+            "Fit": "Wide leg"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-popmart",
+      "name": "POP MART Flagship Store",
+      "brand": "POP MART",
+      "category": "Accessories",
+      "sourceUrl": "https://www.popmart.com/ph",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "POP MART THE MONSTERS Have a Seat Vinyl Plush Blind Box",
+          "type": "blindbox",
+          "price": 1299,
+          "specs": {
+            "Series": "THE MONSTERS · Have a Seat",
+            "Format": "Blind box; random character"
+          }
+        },
+        {
+          "name": "POP MART HIRONO Little Mischief Series",
+          "type": "blindbox",
+          "price": 999,
+          "specs": {
+            "Series": "HIRONO · Little Mischief",
+            "Format": "Blind box figure"
+          }
+        },
+        {
+          "name": "POP MART SKULLPANDA Petals in Four Acts Series",
+          "type": "blindbox",
+          "price": 999,
+          "specs": {
+            "Series": "SKULLPANDA · Petals in Four Acts",
+            "Format": "Blind box figure"
+          }
+        },
+        {
+          "name": "POP MART MOLLY Scenery Along the Way 20th Anniversary Series",
+          "type": "blindbox",
+          "price": 1099,
+          "specs": {
+            "Series": "MOLLY · 20th Anniversary",
+            "Format": "Blind box figure"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-mikana",
+      "name": "Mikana Official Store",
+      "brand": "Mikana",
+      "category": "Accessories",
+      "sourceUrl": "https://mikana.jp/",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "Mikana Cruise Atsuyo Pearl Choker Necklace",
+          "type": "necklace",
+          "price": 449,
+          "specs": {
+            "Collection": "Cruise",
+            "Style": "Pearl choker"
+          }
+        },
+        {
+          "name": "Mikana Cruise Fuyume Stud Earrings",
+          "type": "earrings",
+          "price": 399,
+          "specs": {
+            "Collection": "Cruise",
+            "Style": "Stud earrings"
+          }
+        },
+        {
+          "name": "Mikana Cruise Arino Pearl Link Bracelet",
+          "type": "bracelet",
+          "price": 449,
+          "specs": {
+            "Collection": "Cruise",
+            "Style": "Pearl link bracelet"
+          }
+        },
+        {
+          "name": "Mikana Cruise Guen Ring",
+          "type": "ring",
+          "price": 349,
+          "specs": {
+            "Collection": "Cruise",
+            "Style": "Fashion ring"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-sunnies",
+      "name": "Sunnies Studios Official Store",
+      "brand": "Sunnies Studios",
+      "category": "Accessories",
+      "sourceUrl": "https://ph.sunniesstudios.com/",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "Sunnies Studios Paloma Sunglasses",
+          "type": "sunglasses",
+          "price": 1995,
+          "specs": {
+            "Style": "Pilot sunglasses",
+            "Frame": "Acetate"
+          }
+        },
+        {
+          "name": "Sunnies Studios Yara Optical Frames",
+          "type": "sunglasses",
+          "price": 2995,
+          "specs": {
+            "Product family": "Optical frames; confirm prescription separately"
+          }
+        },
+        {
+          "name": "Sunnies Studios Dumpling Pouch",
+          "type": "pouch",
+          "price": 795,
+          "specs": {
+            "Product family": "Eyewear accessory pouch"
+          }
+        },
+        {
+          "name": "Sunnies Flask 40oz",
+          "type": "bottle",
+          "price": 1295,
+          "specs": {
+            "Capacity": "40 oz",
+            "Product family": "Reusable flask"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-silverworks",
+      "name": "Silverworks Official Store",
+      "brand": "SilverWorks",
+      "category": "Accessories",
+      "sourceUrl": "https://www.silverworks.com/",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "SilverWorks Emman Silver Cross Pendant Necklace",
+          "type": "necklace",
+          "price": 390,
+          "specs": {
+            "Material": "Stainless steel",
+            "Style": "Cross pendant"
+          }
+        },
+        {
+          "name": "SilverWorks Zia Drop Pendant Necklace",
+          "type": "necklace",
+          "price": 490,
+          "specs": {
+            "Material": "Stainless steel",
+            "Style": "Drop pendant"
+          }
+        },
+        {
+          "name": "SilverWorks Denize Layered Necklace",
+          "type": "necklace",
+          "price": 550,
+          "specs": {
+            "Material": "Stainless steel",
+            "Style": "Layered necklace"
+          }
+        },
+        {
+          "name": "SilverWorks 20-inch Curb Chain Necklace",
+          "type": "necklace",
+          "price": 2495,
+          "specs": {
+            "Material": "925 sterling silver",
+            "Chain length": "20 inches"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-uratex",
+      "name": "Uratex Foam Official Store",
+      "brand": "Uratex",
+      "category": "Home",
+      "sourceUrl": "https://uratex.com.ph/collections/mattresses",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "Uratex Classic Mattress in Tricot Cover",
+          "type": "mattress",
+          "price": 3189,
+          "specs": {
+            "Product family": "Classic foam mattress",
+            "Cover": "Tricot"
+          }
+        },
+        {
+          "name": "Uratex Comfort Quilt Mattress",
+          "type": "mattress",
+          "price": 4899,
+          "specs": {
+            "Product family": "Quilted foam mattress"
+          }
+        },
+        {
+          "name": "Uratex Wink Pure Pillow",
+          "type": "pillow",
+          "price": 1350,
+          "specs": {
+            "Filling": "Siliconized microfiber",
+            "Product family": "Fiberfill pillow"
+          }
+        },
+        {
+          "name": "Uratex Fibersoft Pillow",
+          "type": "pillow",
+          "price": 460,
+          "specs": {
+            "Product family": "Fiberfill pillow"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-tefal",
+      "name": "Tefal Official Store",
+      "brand": "Tefal",
+      "category": "Home",
+      "sourceUrl": "https://tefalph.com/cooking-appliances/",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "Tefal Easy Rice Compact Rice Cooker",
+          "type": "ricecooker",
+          "price": 6395,
+          "specs": {
+            "Product family": "Compact rice cooker"
+          }
+        },
+        {
+          "name": "Tefal Easy Fry Deluxe XXL",
+          "type": "airfryer",
+          "price": 7995,
+          "specs": {
+            "Product family": "Air fryer"
+          }
+        },
+        {
+          "name": "Tefal Cook N Easy Wok",
+          "type": "fryingpan",
+          "price": 1995,
+          "specs": {
+            "Product family": "Cooking wok"
+          }
+        },
+        {
+          "name": "Tefal Daily Cook Frypan 24cm",
+          "type": "fryingpan",
+          "price": 2999,
+          "specs": {
+            "Diameter": "24 cm",
+            "Product family": "Frying pan"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-locaupin",
+      "name": "Locaupin Home",
+      "brand": "Locaupin",
+      "category": "Home",
+      "sourceUrl": "https://shopee.com.my/locaupin",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "Locaupin Stackable Desk Drawer Organizer",
+          "type": "storage",
+          "price": 399,
+          "specs": {
+            "Product family": "Stackable desk organizer"
+          }
+        },
+        {
+          "name": "Locaupin Refrigerator Organizer Bin",
+          "type": "storage",
+          "price": 249,
+          "specs": {
+            "Product family": "Refrigerator storage bin"
+          }
+        },
+        {
+          "name": "Locaupin 4-Tier Shoe Rack",
+          "type": "shelf",
+          "price": 999,
+          "specs": {
+            "Shelves": "4 tiers",
+            "Product family": "Shoe storage"
+          }
+        },
+        {
+          "name": "Locaupin Glass Water Bottle with Silicone Sleeve",
+          "type": "bottle",
+          "price": 399,
+          "specs": {
+            "Material": "Glass",
+            "Product family": "Reusable water bottle"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-homezania",
+      "name": "HomeZania PH",
+      "brand": "HomeZania",
+      "category": "Home",
+      "sourceUrl": "https://heylink.me/homezaniaph/",
+      "referenceLevel": "Category examples; exact models unverified",
+      "products": [
+        {
+          "name": "HomeZania LED Lamp — Sample style",
+          "type": "lamp",
+          "price": 399,
+          "specs": {
+            "Product family": "LED lamp"
+          }
+        },
+        {
+          "name": "HomeZania Stand Rack — Sample style",
+          "type": "shelf",
+          "price": 899,
+          "specs": {
+            "Product family": "Storage rack"
+          }
+        },
+        {
+          "name": "HomeZania Luxury Style Mug — Sample style",
+          "type": "mug",
+          "price": 249,
+          "specs": {
+            "Product family": "Drinking mug"
+          }
+        },
+        {
+          "name": "HomeZania Air Fryer — Sample style",
+          "type": "airfryer",
+          "price": 2499,
+          "specs": {
+            "Product family": "Air fryer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-watsons",
+      "name": "Watsons Official Store",
+      "brand": "Watsons",
+      "category": "Beauty",
+      "sourceUrl": "https://www.watsons.com.ph/",
+      "referenceLevel": "Category examples; exact SKUs unverified",
+      "products": [
+        {
+          "name": "Watsons Facial Cleanser — Sample selection",
+          "type": "cleanser",
+          "price": 199,
+          "specs": {
+            "Department": "Skin care"
+          }
+        },
+        {
+          "name": "Watsons Body Lotion — Sample selection",
+          "type": "serum",
+          "price": 179,
+          "specs": {
+            "Department": "Personal care"
+          }
+        },
+        {
+          "name": "Watsons Cotton Pads — Sample selection",
+          "type": "cottonpads",
+          "price": 89,
+          "specs": {
+            "Department": "Beauty tools"
+          }
+        },
+        {
+          "name": "Watsons Lip Care — Sample selection",
+          "type": "lipstick",
+          "price": 129,
+          "specs": {
+            "Department": "Lip care"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-maybelline",
+      "name": "Maybelline Official Store",
+      "brand": "Maybelline",
+      "category": "Beauty",
+      "sourceUrl": "https://www.maybelline.com.ph/",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "Maybelline Fit Me Matte + Poreless Foundation",
+          "type": "foundation",
+          "price": 499,
+          "specs": {
+            "Volume": "30 ml",
+            "Product family": "Liquid foundation"
+          }
+        },
+        {
+          "name": "Maybelline Superstay Matte Ink Liquid Lipstick",
+          "type": "lipstick",
+          "price": 499,
+          "specs": {
+            "Product family": "Liquid lipstick"
+          }
+        },
+        {
+          "name": "Maybelline Lash Sensational Sky High Mascara",
+          "type": "mascara",
+          "price": 599,
+          "specs": {
+            "Product family": "Mascara"
+          }
+        },
+        {
+          "name": "Maybelline Instant Age Rewind Concealer",
+          "type": "foundation",
+          "price": 549,
+          "specs": {
+            "Product family": "Concealer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-cosrx",
+      "name": "COSRX Official Store",
+      "brand": "COSRX",
+      "category": "Beauty",
+      "sourceUrl": "https://www.cosrx.com/collections/snail-mucin",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "COSRX Advanced Snail 96 Mucin Power Essence",
+          "type": "serum",
+          "price": 899,
+          "specs": {
+            "Volume": "100 ml",
+            "Product family": "Essence"
+          }
+        },
+        {
+          "name": "COSRX Advanced Snail 92 All In One Cream",
+          "type": "skincare",
+          "price": 999,
+          "specs": {
+            "Product family": "Moisturizing cream"
+          }
+        },
+        {
+          "name": "COSRX Advanced Snail Mucin Gel Cleanser",
+          "type": "cleanser",
+          "price": 699,
+          "specs": {
+            "Product family": "Gel cleanser"
+          }
+        },
+        {
+          "name": "COSRX Advanced Snail Peptide Eye Cream",
+          "type": "serum",
+          "price": 1199,
+          "specs": {
+            "Product family": "Eye cream"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-vice",
+      "name": "Vice Cosmetics Official Store",
+      "brand": "Vice Cosmetics",
+      "category": "Beauty",
+      "sourceUrl": "https://linktr.ee/vicecosmeticsph",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "Vice Cosmetics Dew It All Liquid Blush",
+          "type": "foundation",
+          "price": 245,
+          "specs": {
+            "Product family": "Liquid blush"
+          }
+        },
+        {
+          "name": "Vice Cosmetics Perfect Kizz Lip Frescas",
+          "type": "lipstick",
+          "price": 295,
+          "specs": {
+            "Collection": "Perfect Kizz",
+            "Product family": "Lip color"
+          }
+        },
+        {
+          "name": "Vice Cosmetics Color Drop Jelly Tint",
+          "type": "lipstick",
+          "price": 395,
+          "specs": {
+            "Product family": "Jelly tint"
+          }
+        },
+        {
+          "name": "Vice Cosmetics On The Daily Quartet",
+          "type": "compact",
+          "price": 395,
+          "specs": {
+            "Product family": "Makeup palette"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-decathlon",
+      "name": "Decathlon Official Store",
+      "brand": "Decathlon",
+      "category": "Sports",
+      "sourceUrl": "https://www.decathlon.ph/",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "DOMYOS Beginner Yoga Mat 5mm",
+          "type": "mat",
+          "price": 990,
+          "specs": {
+            "Reference": "8928284",
+            "Dimensions": "180 × 50 cm",
+            "Thickness": "5 mm"
+          }
+        },
+        {
+          "name": "DOMYOS 20kg Weight Training Dumbbell Kit",
+          "type": "dumbbell",
+          "price": 3490,
+          "specs": {
+            "Reference": "8018574",
+            "Total weight": "20 kg"
+          }
+        },
+        {
+          "name": "DOMYOS 5kg Fitness Dumbbells Twin-Pack",
+          "type": "dumbbell",
+          "price": 1490,
+          "specs": {
+            "Reference": "8336580",
+            "Set weight": "2 × 5 kg"
+          }
+        },
+        {
+          "name": "KIMJALY Foldable Travel Yoga Mat",
+          "type": "mat",
+          "price": 1290,
+          "specs": {
+            "Reference": "8600698",
+            "Dimensions": "180 × 62 cm",
+            "Thickness": "1.33 mm"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-anta",
+      "name": "ANTA Official Store",
+      "brand": "ANTA",
+      "category": "Sports",
+      "sourceUrl": "https://anta.ph/",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "ANTA KAI 2 TEAM Basketball Shoes",
+          "type": "sportsshoe",
+          "price": 5595,
+          "specs": {
+            "Sport": "Basketball",
+            "Model": "KAI 2 TEAM"
+          }
+        },
+        {
+          "name": "ANTA Shock Wave 7 Basketball Shoes",
+          "type": "sportsshoe",
+          "price": 5995,
+          "specs": {
+            "Sport": "Basketball",
+            "Model": "Shock Wave 7"
+          }
+        },
+        {
+          "name": "ANTA KAI 1 Jelly Basketball Shoes",
+          "type": "sportsshoe",
+          "price": 8595,
+          "specs": {
+            "Sport": "Basketball",
+            "Model": "KAI 1 · Jelly"
+          }
+        },
+        {
+          "name": "ANTA KAI Short T-Shirt Unisex",
+          "type": "tee",
+          "price": 2395,
+          "specs": {
+            "Product family": "Sports T-shirt",
+            "Fit": "Unisex"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-361",
+      "name": "361 Degrees Official Store",
+      "brand": "361°",
+      "category": "Sports",
+      "sourceUrl": "https://361sport.com/",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "361° BIG3 4.0 Quick Reverse",
+          "type": "sportsshoe",
+          "price": 4995,
+          "specs": {
+            "Sport": "Basketball",
+            "Model": "BIG3 4.0 Quick"
+          }
+        },
+        {
+          "name": "361° BIG3 5.0 Quick Reverse",
+          "type": "sportsshoe",
+          "price": 5495,
+          "specs": {
+            "Sport": "Basketball",
+            "Model": "BIG3 5.0 Quick"
+          }
+        },
+        {
+          "name": "361° Joker 2 Denver",
+          "type": "sportsshoe",
+          "price": 5995,
+          "specs": {
+            "Sport": "Basketball",
+            "Model": "Joker 2"
+          }
+        },
+        {
+          "name": "361° MEGA3 Pro Threshold",
+          "type": "sportsshoe",
+          "price": 6495,
+          "specs": {
+            "Sport": "Running",
+            "Model": "MEGA3 Pro"
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand-movingpeach",
+      "name": "Moving Peach Official Store",
+      "brand": "Moving Peach",
+      "category": "Sports",
+      "sourceUrl": "https://shopee.ph/movingpeach.ph",
+      "referenceLevel": "Model references",
+      "products": [
+        {
+          "name": "Moving Peach Compression Leggings BLG",
+          "type": "leggings",
+          "price": 854,
+          "specs": {
+            "Reference model": "BLG",
+            "Style": "Compression leggings with pocket"
+          }
+        },
+        {
+          "name": "Moving Peach Seamless Sports Leggings ALG",
+          "type": "leggings",
+          "price": 759,
+          "specs": {
+            "Reference model": "ALG",
+            "Style": "High waist seamless leggings"
+          }
+        },
+        {
+          "name": "Moving Peach Yoga Running Shorts APO",
+          "type": "shorts",
+          "price": 665,
+          "specs": {
+            "Reference model": "APO",
+            "Style": "Shorts with inner lining"
+          }
+        },
+        {
+          "name": "Moving Peach Slim Fit Sports Jacket AST",
+          "type": "sportjacket",
+          "price": 1480,
+          "specs": {
+            "Reference model": "AST",
+            "Style": "Full zip sports jacket"
+          }
+        }
+      ]
+    }
+  ]
+}

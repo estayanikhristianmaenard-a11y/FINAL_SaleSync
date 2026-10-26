@@ -14,4 +14,6 @@ return [
     'paymongo_webhook_secret' => '',
     'payment_methods' => ['card', 'gcash'],
     'shipping_fee' => 0, // Integer centavos; confirm the team's shipping rule.
+    'minimum_customer_age' => 18, // Minimum age for new customer registrations.
+    'return_request_days' => 7, // Configurable from recorded delivery/completion; confirm with the team.
 ];

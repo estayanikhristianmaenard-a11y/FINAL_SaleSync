@@ -1,0 +1,12 @@
+{
+  "type": "plant",
+  "file": "assets/products/plant.webp",
+  "title": "Jade plant in white pot",
+  "source": "https://unsplash.com/photos/a-jade-plant-sits-in-a-white-pot-FGjhDeB7AcI",
+  "download": "https://images.unsplash.com/photo-1751109291987-ac66890353dd?auto=format&fit=max&w=700&q=85",
+  "artist": "Lucie Hošová",
+  "license": "Unsplash License",
+  "licenseUrl": "https://unsplash.com/license",
+  "modifications": "Resized and converted to WebP",
+  "retrieved": "2026-10-26"
+}

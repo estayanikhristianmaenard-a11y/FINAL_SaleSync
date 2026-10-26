@@ -56,4 +56,18 @@ final class Database
             throw $error;
         }
     }
+
+    /** SQLite table rebuilds require foreign keys off before BEGIN, then a check before COMMIT. */
+    public function migrate(callable $work): void
+    {
+        $this->pdo->exec('PRAGMA foreign_keys=OFF');
+        try {
+            $this->transaction(function() use($work): void {
+                $work();
+                if ($this->all('PRAGMA foreign_key_check')) throw new \RuntimeException('Migration would violate foreign keys.');
+            });
+        } finally {
+            $this->pdo->exec('PRAGMA foreign_keys=ON');
+        }
+    }
 }

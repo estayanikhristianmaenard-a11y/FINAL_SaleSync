@@ -14,6 +14,7 @@ $db->transaction(function () use ($db): void {
     $categories = $db->all('SELECT category_id FROM categories ORDER BY category_id');
     foreach (['Canvas Tote', 'Desk Notebook', 'Ceramic Mug', 'Travel Pouch', 'Water Bottle', 'Desk Organizer', 'Cotton Towel', 'Pen Set', 'Storage Basket', 'Lunch Container', 'Key Holder', 'Weekly Planner'] as $index => $name) {
         $db->run("INSERT INTO products(seller_id,category_id,sku,name,description,price,stock_qty,status) VALUES (?,?,?,?,?,?,?,'published')", [$sellerId, $categories[$index % count($categories)]['category_id'], 'DEMO-' . ($index + 1), $name, 'Sample product for frontend integration. Replace with your team catalogue.', 10000 + $index * 2500, 20]);
+        $db->run("INSERT INTO product_variants(product_id,variant_id,name) VALUES (?,'std','As pictured')", [$db->id()]);
     }
     echo "Created 12 demo products and one public store.\n";
 });

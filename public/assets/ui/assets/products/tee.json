@@ -1,0 +1,12 @@
+{
+  "type": "tee",
+  "file": "assets/products/tee.webp",
+  "title": "White crew neck T-shirt",
+  "source": "https://unsplash.com/photos/white-crew-neck-t-shirt-gEupiRvyxh0",
+  "download": "https://images.unsplash.com/photo-1618677603286-0ec56cb6e1b5?auto=format&fit=max&w=700&q=85",
+  "artist": "Mediamodifier",
+  "license": "Unsplash License",
+  "licenseUrl": "https://unsplash.com/license",
+  "modifications": "Resized and converted to WebP",
+  "retrieved": "2026-10-26"
+}

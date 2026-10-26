@@ -4,12 +4,16 @@ This is the customer component of a **single PHP application with one shared SQL
 
 Contract version: **1**. This contract describes this branch's integration surface. The other module owners still need to adopt it; their code has not been supplied or tested here.
 
+Contract extension: [customer features and shared records](CUSTOMER-FEATURES.md), schema `005_customer_features.sql`. Read this before connecting seller messages, offer definitions, return decisions/refunds or application review. Shared authentication must adopt `users.auth_version`; migrations use `Database::migrate()` to check rebuilt table references before commit.
+
+The user's [final role plan](FINAL-ROLE-PLAN.md) is authoritative for ownership and required features. The module boundaries below describe the existing foundation; the final plan extends the remaining customer, seller and admin workflows. Owners finish their respective modules on their own branches before the team combines and tests them.
+
 ## Module boundaries
 
 | Component | Owns | Connection to customer |
 | --- | --- | --- |
-| Customer | Own cart, addresses, checkout, own order views and notifications | `SaleSync\Customer\Module` and the documented JSON API |
-| Seller | Store application/profile, published products, stock and permitted fulfillment updates | Shared `seller_profiles`, `products`, `order_items` and `orders` records |
+| Customer | Own account/password, saved products, cart, addresses, checkout, voucher claims, conversations, return/appeal submissions, seller applications, preferences and notifications | `SaleSync\Customer\Module` and the documented JSON API |
+| Seller | Store profile, published products, stock, customer replies, return review and permitted fulfillment updates | Shared catalogue, orders, conversations and return records |
 | Management admin | Account/store approval, listing moderation, business oversight and reports | Shared account status, approval, publication, order and payment records |
 | Maintenance admin | Configuration, integration health and recovery | One application configuration and database; no ordinary access to customer private data |
 | Shared infrastructure | Identity/session, schema migrations, inventory/order consistency and payment verification | Reuse `app/Core`, shared tables and the payment service; designate one owner for each shared file during merging |
@@ -58,6 +62,14 @@ Set `session_cookie_path` to the common application path if the role interfaces 
 ## Agree on the data contract
 
 Run `scripts/migrate.php` once against the shared configured database. The canonical schema is `database/migrations/001_customer.sql`. Add uniquely named later migrations; do not import four copies of the initial schema or copy local SQLite files between branches.
+
+Customer UI integration adds `002_customer_ui.sql`: apply it as well. It introduces `product_variants`, option-specific cart rows and option snapshots. New seller products must create a valid option (at minimum `std` / `As pictured`), with a centavo price delta. Shared product stock is checked across all selected options; do not subtract inventory a second time during seller fulfillment. See [UI integration notes](CUSTOMER-UI-INTEGRATION.md) before extending SKU-level inventory.
+
+Customer registration adds `003_registration_details.sql`: nullable `users.phone` and `users.birth_date` fields. New customers must provide a valid birthday meeting the agreed minimum age of 18 and a phone/address; account, cart and default Home address are created atomically. Existing users are not assigned fabricated birthdays/phone numbers. The primary phone and address recipient phone are separate snapshots; later delivery-address edits do not rewrite the account birthday/contact information.
+
+Registration and address location fields `province`, `city`, `barangay` accept 10-digit PSGC codes, with public local lookup endpoints and server ancestry validation; they no longer accept arbitrary names. Verified canonical names are saved in address text and order snapshots, with structured components persisted by the migration below. Other module owners may reuse the read-only [location directory contract](PHILIPPINE-LOCATIONS.md) rather than maintain conflicting lists.
+
+The subsequent address-edit integration adds `004_structured_addresses.sql`: nullable house/street fields, province/city/barangay codes and postal code on `addresses`. Registration, new addresses and full location edits now save these components alongside canonical full text; edit forms can prefill all three dropdowns. Existing free-text addresses and order snapshots remain intact. Address POST uses the structured registration location fields; PATCH supports independent contact/default changes or a complete location update.
 
 | Shared value | Required meaning |
 | --- | --- |

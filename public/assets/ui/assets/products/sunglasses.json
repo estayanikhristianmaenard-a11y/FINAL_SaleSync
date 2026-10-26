@@ -1,0 +1,12 @@
+{
+  "type": "sunglasses",
+  "file": "assets/products/sunglasses.webp",
+  "title": "Sunglasses on white background",
+  "source": "https://unsplash.com/photos/a-pair-of-sunglasses-on-a-white-background-EkEWSQKF130",
+  "download": "https://images.unsplash.com/photo-1711223499758-8aef018b720e?auto=format&fit=max&w=700&q=85",
+  "artist": "Tory Hoffman",
+  "license": "Unsplash License",
+  "licenseUrl": "https://unsplash.com/license",
+  "modifications": "Resized and converted to WebP",
+  "retrieved": "2026-10-26"
+}

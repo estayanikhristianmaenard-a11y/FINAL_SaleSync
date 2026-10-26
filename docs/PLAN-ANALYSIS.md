@@ -1,14 +1,14 @@
 # Customer module analysis
 
-Source: `SYSTEM DEVELOPMENT PLAN (TENTATIVE) - Google Docs.pdf`, supplied October 25, 2026. The PDF is tentative planning input, not permission to change other modules. Work stays on `customer`.
+Original source: `SYSTEM DEVELOPMENT PLAN (TENTATIVE) - Google Docs.pdf`, supplied October 25, 2026. The user's [final role plan](FINAL-ROLE-PLAN.md), supplied October 27, supersedes conflicting scope/deferment decisions here. Work stays on `customer`; other owners implement their modules on their own branches before combination.
 
 ## Scope and decisions
 
-The customer essentials are registration, sign-in/out, email verification, public product browsing/search/filter/details, public store details, cart quantities, checkout/order summary, PayMongo Test Mode, own order/payment history, profile, saved delivery addresses and in-app notifications.
+The implemented foundation includes registration, sign-in/out, email verification, public product browsing/search/filter/details, public store details, cart quantities, checkout/order summary, PayMongo Test Mode, own order/payment history, profile, saved delivery addresses and in-app notifications. The final required customer scope also includes password management, comparison, saved products, vouchers, invoices, tracking, return/refund requests with evidence and appeals, seller conversations/inbox, seller applications and notification preferences. See the final plan's implementation checklist for current gaps.
 
 This checkout contained only the PDF. PHP 8.2 is installed in XAMPP, and the plan explicitly mentions SQLite. Use dependency-free PHP with PDO SQLite and one shared database. The team confirmed there is no existing required stack. This is a new backend foundation; it cannot yet claim compatibility with an unseen project.
 
-There is exactly one customer HTML entry point: `public/index.php`. Home, Shop, Cart, My Orders and Profile should be sections, hash routes or modals inside it. Your frontend coworker owns all layout, colors, typography and components. The backend supplies a JavaScript API client and an empty mount point without imposing a design. PayMongo's external hosted payment page returns to this same customer page.
+There is exactly one customer HTML entry point: `public/index.php`. Home, Shop, Cart, My Orders and Profile use sections, hash routes or modals inside it. The coworker's layout, colors, typography and components from `OVERALL-UI` were connected on October 27, 2026; see [the integration notes](CUSTOMER-UI-INTEGRATION.md). PayMongo's external hosted payment page returns to this same customer page.
 
 ## Implemented backend
 
@@ -36,14 +36,14 @@ Orders start at `pending_payment`; verified payment moves them to `processing`. 
 
 - Shipping defaults to zero and currency to PHP. Confirm delivery pricing before deployment.
 - Email verification is required for checkout and payment, while unverified signed-in customers can manage their cart/profile.
-- Changing email/password and password recovery are outside this first customer scope; profile updates change the name only.
+- Password management is required by the final plan and remains pending; profile updates currently change the name only. Email-change and recovery policies need definition before implementation.
 - A full address edit uses all address fields. Stored orders retain their delivery snapshot when an address is edited/deleted.
 - Stock is reserved when an order is created. Orders without a provider session may be cancelled by the customer. Once a provider session may exist, it must be confirmed expired before stock is released. Known sessions are reconciled by webhook, refresh, or the CLI job. Unknown creation outcomes require provider dashboard lookup; they are never automatically retried. Schedule the reconciliation job and establish the team's abandoned-order expiry policy.
 - PayMongo test keys, enabled methods, a publicly reachable webhook URL and webhook secret still need configuration. A real provider purchase has not been performed without those credentials.
 - Development email is written to a private local outbox; delivery to real inboxes requires a configured PHP mail transport.
-- The PDF conflicts on who creates products: its role matrix assigns sellers, while a professor note says System Settings. Customer work only reads published products, leaving that decision to those module owners.
-- Wishlist, comparison, reviews, personalized feeds, support conversations and refunds are deferred in the plan.
-- The plan's 200 historical records and sales CSV rules span management/reporting modules. The optional seed here provides 12 catalogue fixtures only; it does not manufacture historical successful payments.
+- The final role matrix assigns listings/options/inventory/product requests to sellers, and registry/categories/moderation to management. It assigns data integrity checks to maintenance. Customer work reads published products and implements its own browse/compare/save actions.
+- Earlier deferrals for saved products, vouchers, conversations and customer return/refund requests are superseded: these are required pending features. Comparison is already connected as a read-only public-data view. Reviews and personalized feeds are not explicitly included in the final role table.
+- The tentative plan's historical records and sales CSV rules span management/reporting modules. The UI catalogue seed supplies 141 visible sample products; the alternative starter seed supplies 12 fixtures. Neither manufactures historical successful payments.
 
 ## Frontend acceptance checklist
 

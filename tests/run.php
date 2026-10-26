@@ -3,15 +3,17 @@ declare(strict_types=1);
 
 use SaleSync\Core\{ApiError, Database, Input, Session};
 use SaleSync\Customer\Module;
+use SaleSync\Customer\LocationDirectory;
 use SaleSync\Http\Api;
 use SaleSync\Payments\{Gateway, Webhook};
+use SaleSync\Auth\RegistrationDetails;
 
 if (PHP_SAPI !== 'cli') { http_response_code(404); exit; }
 $config = require dirname(__DIR__) . '/app/bootstrap.php';
 
 $path = dirname(__DIR__) . '/storage/tests-' . bin2hex(random_bytes(6)) . '/test.sqlite';
 $db = new Database($path);
-$db->pdo->exec(file_get_contents(dirname(__DIR__) . '/database/migrations/001_customer.sql'));
+foreach (glob(dirname(__DIR__).'/database/migrations/*.sql') as $migration) $db->migrate(fn()=>$db->pdo->exec(file_get_contents($migration)));
 $checks = 0;
 function check(bool $condition, string $message): void
 {
@@ -43,6 +45,31 @@ final class FakeGateway implements Gateway
 }
 
 try {
+    $locations = new LocationDirectory();
+    check(count($locations->areas()['items'])===100 && $locations->areas()['source']['counts']['barangays']===42010, 'Bundle all 82 provinces, 18 regions and 42,010 barangays');
+    check($locations->resolve('1300000000','1381200000','1381200011')['barangay']==='Manggahan', 'Resolve Metro Manila to Pasig to Manggahan');
+    fails(422,fn()=>$locations->resolve('0402100000','1381200000','1381200011'),'Reject a city outside the selected province');
+    fails(422,fn()=>$locations->resolve('1300000000','1381500000','1381200011'),'Reject a barangay outside the selected city');
+    check(count($locations->barangays('1380600000'))>800, 'Flatten Manila districts without losing their barangays');
+    check(count($locations->cities('1800000000'))>0, 'Negros Island Region is included');
+    $zamboanga = $locations->cities('0900000000');
+    check(count(array_filter($zamboanga,fn(array $city)=>$city['code']==='0990101000'))===1 && !array_filter($zamboanga,fn(array $city)=>$city['code']==='0990100000'), 'Isabela city is selectable without its empty grouping node');
+    check(count($locations->barangays('0990101000'))>0, 'Isabela city retains its barangays');
+    $directory = json_decode(file_get_contents(dirname(__DIR__).'/database/reference/ph-locations.json'),true);
+    $reachable = [];
+    foreach ($directory['areas'] as $area) {
+        foreach ($locations->cities($area['code']) as $city) {
+            foreach ($locations->barangays($city['code']) as $barangay) $reachable[$barangay['code']]=true;
+        }
+    }
+    check(count($reachable)===42010, 'Every bundled barangay is reachable through the three dropdown levels');
+    $today = new DateTimeImmutable('2026-10-27', new DateTimeZone('Asia/Manila'));
+    check(RegistrationDetails::birthDate(['birth_date'=>'2008-10-27'],18,$today)==='2008-10-27', 'Customer becomes eligible on eighteenth birthday');
+    fails(422, fn()=>RegistrationDetails::birthDate(['birth_date'=>'2008-10-28'],18,$today), 'Reject customer one day before eighteenth birthday');
+    check(RegistrationDetails::birthDate(['birth_date'=>'2008-02-29'],18,$today)==='2008-02-29', 'Accept valid leap-day birthday');
+    fails(422, fn()=>RegistrationDetails::birthDate(['birth_date'=>'2007-02-29'],18,$today), 'Reject nonexistent leap-day birthday');
+    fails(422, fn()=>RegistrationDetails::birthDate(['birth_date'=>'2026-10-28'],18,$today), 'Reject future birthday');
+    fails(422, fn()=>RegistrationDetails::birthDate(['birth_date'=>'2008-2-9'],18,$today), 'Require unambiguous birthday format');
     check(Input::password(['password' => '  preserve spaces  ']) === '  preserve spaces  ', 'Preserve password whitespace');
     fails(422, fn() => Input::password(['password' => str_repeat('é', 40)]), 'Reject passwords beyond bcrypt byte limit');
     foreach ([['Customer A', 'a@example.test', 'customer'], ['Customer B', 'b@example.test', 'customer'], ['Seller', 's@example.test', 'seller']] as $user) {
@@ -51,6 +78,7 @@ try {
     $db->run("INSERT INTO seller_profiles(user_id,store_name,approval_status) VALUES (3,'Test Store','approved')");
     $db->run("INSERT INTO categories(category_name) VALUES ('Test')");
     $db->run("INSERT INTO products(seller_id,category_id,sku,name,price,stock_qty,status) VALUES (1,1,'TEST','Original Product',15000,10,'published')");
+    $db->run("INSERT INTO product_variants(product_id,variant_id,name) VALUES (1,'std','As pictured')");
     $moduleConfig = array_replace($config, ['database' => $path, 'shipping_fee' => 5000, 'session_cookie_path' => '/shared-app']);
     $gateway = new FakeGateway();
     $customer = new Module($moduleConfig, $db, $gateway);
@@ -58,7 +86,9 @@ try {
     $orders = $customer->orders;
     $profiles = $customer->profile;
     $catalog = $customer->catalog;
-    $input = ['label' => 'Home', 'recipient_name' => 'Customer A', 'phone' => '09123456789', 'address_text' => '123 Test Street, Test City', 'is_default' => true];
+    $input = ['label' => 'Home', 'recipient_name' => 'Customer A', 'phone' => '09123456789',
+        'house_number'=>'123','street'=>'Test Street','province'=>'1300000000','city'=>'1381200000','barangay'=>'1381200019','postal_code'=>'1605',
+        'address_text'=>'123 Test Street, San Antonio, City of Pasig, Metro Manila (NCR) 1605','is_default' => true];
     $a = $profiles->saveAddress(1, null, $input);
     $b = $profiles->saveAddress(2, null, $input);
     fails(404, fn() => $profiles->saveAddress(2, $a['address_id'], $input), 'Prevent cross-customer address updates');
@@ -168,6 +198,47 @@ try {
     $old = (string) (time() - 600);
     fails(401, fn() => Webhook::parse($payload, 't=' . $old . ',te=' . hash_hmac('sha256', $old . '.' . $payload, 'test-secret'), 'test-secret'), 'Reject stale webhook');
     fails(503, fn() => Webhook::parse($payload, $signature, ''), 'Reject unconfigured webhook');
+
+    $db->run("INSERT INTO product_variants(product_id,variant_id,name,attributes,price_delta) VALUES (1,'alt','Large','{\"Size\":\"L\"}',500)");
+    fails(422, fn() => $cart->set(2,1,1,'fabricated-option'), 'Reject unknown product options');
+    $cart->set(2,1,2);
+    $cart->set(2,1,3,'alt');
+    check(count($cart->get(2)['items'])===2, 'Store two options of one product independently');
+    fails(409, fn() => $cart->set(2,1,8,'alt'), 'Validate shared stock across product options');
+    $selected = [['product_id'=>1,'variant_id'=>'alt']];
+    $quote = $cart->quote(2,$selected);
+    check(count($quote['items'])===1 && $quote['subtotal']===(99999+500)*3, 'Quote selected option at server-adjusted price');
+    fails(409, fn() => $cart->quote(1,$selected), 'Cannot quote another customer cart selection');
+    $partial = $orders->checkout(2,['address_id'=>$b['address_id'],'items'=>$selected,'total'=>1],'variant-checkout-0001');
+    check($partial['items'][0]['variant_name_snapshot']==='Large' && $partial['items'][0]['unit_price']===100499, 'Snapshot selected option and authoritative price');
+    check(count($cart->get(2)['items'])===1 && $cart->get(2)['items'][0]['variant_id']==='std', 'Preserve unchecked cart option after checkout');
+    $db->run("UPDATE product_variants SET name='Changed option' WHERE product_id=1 AND variant_id='alt'");
+    check($orders->get(2,$partial['order_id'])['items'][0]['variant_name_snapshot']==='Large', 'Later option changes do not rewrite order');
+    $orders->cancel(2,$partial['order_id']);
+
+    $registration = ['name'=>'Atomic Registration','email'=>'atomic@example.test','password'=>'CustomerTest123!',
+        'phone'=>'09171234567','birth_date'=>'1990-01-01','house_number'=>'123','street'=>'Test Street',
+        'barangay'=>'1381200019','city'=>'1381200000','province'=>'1300000000','postal_code'=>'1605'];
+    $cartCount = $db->one('SELECT COUNT(*) AS count FROM carts')['count'];
+    $addressCount = $db->one('SELECT COUNT(*) AS count FROM addresses')['count'];
+    $db->pdo->exec("CREATE TRIGGER simulate_registration_failure BEFORE INSERT ON addresses WHEN NEW.recipient_name='Atomic Registration' BEGIN SELECT RAISE(ABORT,'simulated address write failure'); END;");
+    try {
+        $customer->auth->register($registration);
+        throw new RuntimeException('Expected registration address failure');
+    } catch (PDOException $error) {
+        check($db->one('SELECT user_id FROM users WHERE email=?',['atomic@example.test'])===null, 'Address write failure rolls back new customer account');
+        check($db->one('SELECT COUNT(*) AS count FROM carts')['count']===$cartCount && $db->one('SELECT COUNT(*) AS count FROM addresses')['count']===$addressCount, 'Failed registration leaves no partial cart or address');
+    }
+    $db->pdo->exec('DROP TRIGGER simulate_registration_failure');
+
+    $db->run("INSERT INTO addresses(user_id,label,recipient_name,phone,address_text,is_default) VALUES (1,'Legacy','Customer A','09123456789','Original saved free-text address',0)");
+    $legacyId = $db->id();
+    $legacy = $profiles->saveAddress(1,$legacyId,['is_default'=>true]);
+    check($legacy['address_text']==='Original saved free-text address' && $legacy['province_code']===null,'Default-address changes preserve legacy text without guessing location codes');
+    $updatedLegacy = $profiles->saveAddress(1,$legacyId,$input);
+    check($updatedLegacy['province_code']==='1300000000' && $updatedLegacy['barangay_code']==='1381200019' && $updatedLegacy['house_number']==='123','Existing legacy address can be converted to selected structured location');
+    fails(422,fn()=>$profiles->saveAddress(1,$legacyId,['address_text'=>'Forged replacement address']),'Reject free-text location overwrite without selected hierarchy');
+    check($profiles->address(1,$legacyId)['address_text']===$updatedLegacy['address_text'],'Invalid address update leaves saved address unchanged');
     // Simulate the main application starting and authenticating a shared session
     // before routing a request into the injected customer module.
     Session::start($moduleConfig);
