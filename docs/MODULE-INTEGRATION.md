@@ -41,7 +41,7 @@ $data = $api->dispatch($_SERVER['REQUEST_METHOD'], $customerPath, file_get_conte
 
 The supplied standalone adapter remains `public/api/index.php`; existing frontend endpoints keep working. Host dispatch must happen before output, inside its error handler. `dispatch` uses standard PHP request globals for query parameters and headers. Follow `public/api/index.php` for the size limit, JSON responses and error mapping. Do not expose service methods directly as browser routes: authorization and CSRF checks are enforced by the dispatcher. Trusted in-process callers must apply the same checks.
 
-If the final host mounts the JSON API elsewhere, change the `endpoint` URL in `public/assets/js/api.js` to that route. No customer business service needs to change for a URL or frontend design change.
+If the final host mounts the JSON API elsewhere, change the `endpoint` URL in `public/assets/js/customer/api.js` to that route. No customer business service needs to change for a URL or frontend design change.
 
 ## Agree on identity once
 

@@ -6,7 +6,7 @@ import { spawn, spawnSync } from 'node:child_process';
 import { createServer } from 'node:net';
 import { fileURLToPath } from 'node:url';
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const directory = path.join(root, 'storage', `customer-ui-tests-${Date.now()}`);
 await fs.mkdir(directory, { recursive:true });
 const socket = createServer(); await new Promise(resolve => socket.listen(0,'127.0.0.1',resolve));

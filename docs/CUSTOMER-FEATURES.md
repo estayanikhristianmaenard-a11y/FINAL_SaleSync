@@ -56,10 +56,10 @@ Run `php scripts/migrate.php`. Existing databases receive a private SQLite backu
 
 ```powershell
 & E:\xampp\php\php.exe tests/run.php
-& E:\xampp\php\php.exe tests/customer-features.php
+& E:\xampp\php\php.exe tests/customer/customer-features.php
 node tests/http.mjs
 # With a separate headless Edge/Chromium CDP endpoint on port 9223:
-node tests/customer-ui.mjs
+node tests/customer/customer-ui.mjs
 ```
 
 All tests use isolated databases. Browser tests cover saved products, preferences, message/reply/read state, application submission/status, voucher checkout, return image upload/case/appeal and password change/re-login, plus the existing shopping/address flow and mobile layouts. Provider payments and seller/admin decisions are explicit test fixtures only.

@@ -3,14 +3,15 @@ declare(strict_types=1);
 use SaleSync\Core\{ApiError,Database,Session};
 use SaleSync\Customer\Module;
 if(PHP_SAPI!=='cli'){http_response_code(404);exit;}
-$config=require dirname(__DIR__).'/app/bootstrap.php';
-$path=dirname(__DIR__).'/storage/feature-tests-'.bin2hex(random_bytes(6)).'/test.sqlite';
+$root=dirname(__DIR__,2);
+$config=require $root.'/app/bootstrap.php';
+$path=$root.'/storage/feature-tests-'.bin2hex(random_bytes(6)).'/test.sqlite';
 $config=array_replace($config,['database'=>$path,'shipping_fee'=>5000]);
 $db=new Database($path);$checks=0;
 function check(bool $ok,string $label):void {global $checks;if(!$ok)throw new RuntimeException($label);$checks++;}
 function fails(int $status,callable $fn,string $label):void {try{$fn();}catch(ApiError $e){check($e->status===$status,$label.' status '.$e->status);return;}throw new RuntimeException($label.' did not fail');}
 try {
-    foreach(glob(dirname(__DIR__).'/database/migrations/00[1-4]*.sql')as$file)$db->transaction(fn()=>$db->pdo->exec(file_get_contents($file)));
+    foreach(glob($root.'/database/migrations/00[1-4]*.sql')as$file)$db->transaction(fn()=>$db->pdo->exec(file_get_contents($file)));
     foreach([['A','a@example.test','customer'],['B','b@example.test','customer'],['Seller','s@example.test','seller']]as$user)$db->run("INSERT INTO users(name,email,role,password_hash,email_verified_at)VALUES(?,?,?,?,'2026-01-01T00:00:00Z')",[...$user,password_hash('Initial1234',PASSWORD_DEFAULT)]);
     $db->run("INSERT INTO seller_profiles(user_id,store_name,approval_status)VALUES(3,'Shop','approved')");
     $db->run("INSERT INTO categories(category_name)VALUES('Test')");
@@ -21,7 +22,7 @@ try {
     $db->run("INSERT INTO order_items(order_id,product_id,seller_id,product_name_snapshot,unit_price,quantity,line_total)VALUES(1,1,1,'Old item',10000,1,10000)");
     $db->run('INSERT INTO payments(order_id,amount)VALUES(1,15000)');
     $db->run("INSERT INTO order_status_history(order_id,status)VALUES(1,'pending_payment')");
-    $db->migrate(fn()=>$db->pdo->exec(file_get_contents(dirname(__DIR__).'/database/migrations/005_customer_features.sql')));
+    $db->migrate(fn()=>$db->pdo->exec(file_get_contents($root.'/database/migrations/005_customer_features.sql')));
     check($db->all('PRAGMA foreign_key_check')===[],'Existing order children survive upgrade');
     check($db->one('SELECT total,merchandise_discount FROM orders WHERE order_id=1')===['total'=>15000,'merchandise_discount'=>0],'Existing paid amount preserved');
     $m=new Module($config,$db);

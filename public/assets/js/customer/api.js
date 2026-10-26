@@ -1,5 +1,5 @@
 // Same-origin client; no secrets or prices supplied by the frontend are trusted.
-const endpoint = new URL('../../api/index.php', import.meta.url);
+const endpoint = new URL('../../../api/index.php', import.meta.url);
 let csrfToken;
 
 export class ApiError extends Error {

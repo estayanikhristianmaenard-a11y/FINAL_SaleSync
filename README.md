@@ -46,12 +46,15 @@ docs/                Plan analysis and frontend API handoff
 public/
   index.php          The ONE customer page
   api/               JSON API entry point
-  assets/js/         Customer API, data mapping, rendering and event bridge
+  assets/js/customer/ Customer API, data mapping, rendering and event bridge
   assets/ui/         Coworker's customer templates, styles and images
 scripts/             CLI migrations, demo catalogue, payment reconciliation
 storage/             Private SQLite database, sessions, mail, logs (ignored)
-tests/               Isolated service/payment and HTTP integration tests
+tests/               Shared service/payment and HTTP integration tests
+  customer/          Dedicated customer feature and browser tests
 ```
+
+Customer implementation is grouped in `app/Customer/`, `public/assets/js/customer/`, `public/assets/ui/customer/` and `tests/customer/`. Shared authentication, core services, payments, configuration and migrations remain available to all roles. `public/index.php` remains the single customer page and keeps its existing website URL.
 
 ## Frontend handoff
 
@@ -81,10 +84,10 @@ Real PayMongo requests and real inbox delivery still need configuration and acce
 
 ```powershell
 & E:\xampp\php\php.exe tests/run.php
-& E:\xampp\php\php.exe tests/customer-features.php
+& E:\xampp\php\php.exe tests/customer/customer-features.php
 node tests/http.mjs
 # With a separate headless Chromium/Edge debugging endpoint on port 9223:
-node tests/customer-ui.mjs
+node tests/customer/customer-ui.mjs
 ```
 
 The service tests cover ownership, stock, snapshots, checkout retries, payment authenticity, duplicate events, expiry and uncertain provider failures. HTTP tests start a temporary PHP server and exercise cookies, CSRF, verification, roles and the customer shopping flow. Both use separate databases under ignored `storage/`; HTTP tests never call PayMongo. Set `PHP_BINARY` if PHP is installed elsewhere.

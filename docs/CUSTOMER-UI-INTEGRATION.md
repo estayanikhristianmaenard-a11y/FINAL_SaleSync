@@ -12,9 +12,11 @@ Original handoff notes and image credits are retained under `docs/ui-handoff/`. 
 
 ## Connection layers
 
+Customer JavaScript is grouped under `public/assets/js/customer/`; relative API and attachment URLs resolve from that folder. Dedicated feature/browser suites live under `tests/customer/`. Backend services remain in `app/Customer/`; the original customer templates remain in `public/assets/ui/customer/`. Shared infrastructure stays at its common location.
+
 | File | Purpose |
 | --- | --- |
-| `public/assets/js/api.js` | Same-origin JSON requests, session cookies and CSRF tokens |
+| `public/assets/js/customer/api.js` | Same-origin JSON requests, session cookies and CSRF tokens |
 | `customer-runtime.js` | Transient view state and template helper functions |
 | `customer-data.js` | Server DTO to customer-template mapping; load real account/cart/orders/notifications |
 | `customer-render.js` | Customer-only single-page routing and capability states |
@@ -64,9 +66,9 @@ The preparation script evaluates only catalogue-building code inside an isolated
 
 ```powershell
 & E:\xampp\php\php.exe tests/run.php
-& E:\xampp\php\php.exe tests/customer-features.php
+& E:\xampp\php\php.exe tests/customer/customer-features.php
 node tests/http.mjs
-node tests/customer-ui.mjs
+node tests/customer/customer-ui.mjs
 ```
 
 The browser suite needs a separate headless Chromium/Edge instance with remote debugging on `127.0.0.1:9223` (`CDP_URL` can override). Launch it with a dedicated user-data directory; do not attach tests to your personal browsing session. It creates its own temporary page, PHP server and database, then closes the test page/server. It never contacts PayMongo.

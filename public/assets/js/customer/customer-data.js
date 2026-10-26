@@ -92,7 +92,7 @@ export async function loadConversations() {
     }));
 }
 
-export const attachmentUrl=id=>new URL(`../../api/attachment.php?id=${Number(id)}`,import.meta.url).href;
+export const attachmentUrl=id=>new URL(`../../../api/attachment.php?id=${Number(id)}`,import.meta.url).href;
 
 export async function loadPrivate() {
     if (!userId) { for (const key of ['cart','orders','payments','notifications','wishlist','vouchers','claims','chats','returns','applications','savedRows']) S[key]=[]; return; }
