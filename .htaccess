@@ -1,0 +1,6 @@
+Options -Indexes
+RewriteEngine On
+RewriteRule ^(?:app|config|database|docs|scripts|storage|tests)(?:/|$) - [F,L,NC]
+RewriteRule ^(?:\.git|\.env)(?:/|$) - [F,L,NC]
+RewriteRule ^(?:README\.md|.*\.pdf)$ - [F,L,NC]
+RewriteRule ^$ public/ [R=302,L]
