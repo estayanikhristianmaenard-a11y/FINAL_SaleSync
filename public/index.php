@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="assets/ui/customer/storefront.css">
     <link rel="stylesheet" href="assets/ui/core/workspace.css">
     <link rel="stylesheet" href="assets/ui/core/experience.css">
+    <link rel="stylesheet" href="assets/ui/customer/registration.css">
+    <link rel="stylesheet" href="assets/ui/customer/controls.css">
 </head><body>
     <div id="app" aria-live="polite"></div>
     <dialog id="dialog" class="modal"><div class="modal-title"><span id="modal-title"></span><button type="button" id="close-modal" aria-label="Close dialog">×</button></div><form id="modal-form"><div class="modal-fields" id="modal-fields"></div><p id="modal-error" class="modal-error" style="padding:0 19px" role="alert"></p><div class="modal-actions"><button type="button" class="btn ghost" id="cancel-modal">Cancel</button><button type="submit" class="btn primary" id="modal-btn">Save</button></div></form></dialog>
@@ -29,6 +31,7 @@
     <script src="assets/ui/customer/account/account.js"></script>
     <script src="assets/ui/core/experience.js"></script>
     <script src="assets/ui/customer/shop/compare.js"></script>
+    <script src="assets/js/customer/customer-registration.js"></script>
     <script src="assets/js/customer/customer-render.js"></script>
     <script type="module" src="assets/js/customer/customer.js"></script>
 </body></html>

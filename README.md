@@ -1,5 +1,7 @@
 # SaleSync customer module
 
+Latest handoff: [customer achievements and current limitations](docs/CUSTOMER-PROGRESS.md), including the [open defects found by adversarial QA](docs/CUSTOMER-READINESS-AUDIT.md).
+
 Customer module on the `customer` branch. PHP 8.2 + PDO SQLite; no Composer or npm packages required. The coworker's customer UI from `OVERALL-UI` is connected to the backend through one entry point, `public/index.php`. It retains their styles and customer templates; server APIs replace the prototype's local authentication, cart, order and payment mutations.
 
 ## Start with XAMPP

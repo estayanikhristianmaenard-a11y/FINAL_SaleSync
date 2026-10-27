@@ -11,6 +11,10 @@ $db=new Database($path);$checks=0;
 function check(bool $ok,string $label):void {global $checks;if(!$ok)throw new RuntimeException($label);$checks++;}
 function fails(int $status,callable $fn,string $label):void {try{$fn();}catch(ApiError $e){check($e->status===$status,$label.' status '.$e->status);return;}throw new RuntimeException($label.' did not fail');}
 try {
+    check(\SaleSync\Auth\RegistrationDetails::phone(['phone'=>'09171234567'])==='09171234567','Accept exactly 11 digits and preserve leading zero');
+    foreach (['0917123456','091712345678','0917abc4567','+639171234567','0917 1234567'] as $invalidPhone) {
+        fails(422,fn()=>\SaleSync\Auth\RegistrationDetails::phone(['phone'=>$invalidPhone]),'Reject invalid phone: '.$invalidPhone);
+    }
     foreach(glob($root.'/database/migrations/00[1-4]*.sql')as$file)$db->transaction(fn()=>$db->pdo->exec(file_get_contents($file)));
     foreach([['A','a@example.test','customer'],['B','b@example.test','customer'],['Seller','s@example.test','seller']]as$user)$db->run("INSERT INTO users(name,email,role,password_hash,email_verified_at)VALUES(?,?,?,?,'2026-01-01T00:00:00Z')",[...$user,password_hash('Initial1234',PASSWORD_DEFAULT)]);
     $db->run("INSERT INTO seller_profiles(user_id,store_name,approval_status)VALUES(3,'Shop','approved')");

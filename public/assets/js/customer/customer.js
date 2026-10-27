@@ -3,6 +3,7 @@ import { applyCart, loadPrivate, refresh, selection } from './customer-data.js';
 import { mount as mountLocations, fields as locationFields } from './location-picker.js';
 import { featureAction, quote, voucherIds, readChat, sendMessage } from './customer-features.js';
 import { loadConversations } from './customer-data.js';
+import { chooseDeliveryAddress, updateAddressChoice, viewInvoice } from './customer-controls.js';
 
 export { api };
 
@@ -68,7 +69,7 @@ function editAddress(addressId) {
     openModal(address ? 'Edit address' : 'Add address',
         field('label','Address label','text',address?.label || 'Home','required maxlength="40"') +
         field('recipient_name','Recipient name','text',address?.name || getUser().name,'required maxlength="100"') +
-        field('phone','Phone','tel',address?.phone || getUser().phone || '','required minlength="7" maxlength="25"') +
+        field('phone','Phone','tel',address?.phone || getUser().phone || '','required inputmode="numeric" minlength="11" maxlength="11" pattern="[0-9]{11}" title="Enter exactly 11 digits, e.g. 09171234567"') +
         (address && !address.province_code ? `<div class="notice"><p>Saved address: ${esc(address.line)}</p><p>Select its location and enter the house/street details below to update it.</p></div>` : '') +
         field('house_number','House / building / unit number','text',address?.house_number || '','required maxlength="100" autocomplete="address-line1"') +
         field('street','Street','text',address?.street || '','required maxlength="150" autocomplete="address-line2"') +
@@ -135,7 +136,17 @@ async function act(action, element) {
         case 'signin': go('login'); return;
         case 'logout': await api('/auth/logout', { method:'POST' }); userId = ''; S.users = []; view.quote = null; view.checkoutVoucher='';view.shippingVoucher='';view.shopVoucher={};view.chat='';view.authTab = 'Sign in'; await refresh(); go('home'); return;
         case 'auth-tab': view.authTab = data.tab; render(); return;
-        case 'password-visibility': { const input = document.getElementById(data.target); input.type = input.type === 'password' ? 'text' : 'password'; element.setAttribute('aria-label', input.type === 'password' ? 'Show password' : 'Hide password'); return; }
+        case 'registration-back': setRegistrationStep($('#auth-form'), 1); return;
+        case 'password-visibility': {
+            const input = document.getElementById(data.target);
+            const revealed = input.type === 'password';
+            input.type = revealed ? 'text' : 'password';
+            const label = `${revealed ? 'Hide' : 'Show'} ${data.label || 'password'}`;
+            element.setAttribute('aria-label', label); element.title = label;
+            element.setAttribute('aria-pressed', String(revealed));
+            element.innerHTML = revealed ? uiIcon('eye').replace('</svg>', '<path d="M3 3l18 18"/></svg>') : uiIcon('eye');
+            return;
+        }
         case 'hero-shop': view.category = 'All'; view.shop = ''; go('shop'); return;
         case 'banner': view.hero = Number(data.index); render(); return;
         case 'hot-search': view.search = data.value; view.category = 'All'; go('shop'); return;
@@ -186,6 +197,7 @@ async function act(action, element) {
             return;
         }
         case 'account-tab': view.accountTab = data.tab; render(); return;
+        case 'favorites': view.accountTab = 'Saved'; view.savedSubtab = 'Products'; if (!requireCustomer()) { view.afterLogin = 'account'; return; } go('account'); return;
         case 'saved-subtab': view.savedSubtab = data.tab; render(); return;
         case 'voucher-tab': view.voucherTab = data.tab; render(); return;
         case 'profile-edit': openModal('Edit profile', field('name','Full name','text',getUser().name,'required maxlength="100"'), 'Save profile', async input => { await api('/profile', { method:'PATCH', body:{ name:input.name } }); await loadPrivate(); toast('Profile saved'); }); return;
@@ -194,14 +206,14 @@ async function act(action, element) {
             await api(`/addresses/${data.id}`, { method:'PATCH', body:{ is_default:true } }); await loadPrivate(); render(); return;
         }
         case 'address-delete': choice('Delete address', 'Remove this saved delivery address?', async () => { await api(`/addresses/${data.id}`, { method:'DELETE' }); await loadPrivate(); toast('Address deleted'); }); return;
-        case 'checkout-address': openModal('Choose delivery address', select('address','Address',getUser().addresses.map(address => [address.id,`${address.label} · ${address.line}`]),checkoutAddress()?.id), 'Use this address', input => { view.addressId = input.address; }); return;
+        case 'checkout-address': chooseDeliveryAddress(); return;
         case 'resend-verification': await api('/auth/resend-verification', { method:'POST' }); toast('Verification email queued.'); return;
         case 'order-tab': view.orderTab = data.tab; render(); return;
         case 'retry-pay': await startPayment(getO(data.id)); return;
         case 'refresh-payment': await api(`/orders/${getO(data.id).backendId}/refresh-payment`, { method:'POST' }); await refresh(); render(); toast('Payment status refreshed'); return;
         case 'cancel-order': choice('Cancel order', 'Cancel this unpaid order and release its reserved stock?', async () => { await api(`/orders/${getO(data.id).backendId}/cancel`, { method:'POST' }); await refresh(); toast('Order cancelled'); }); return;
         case 'track': { const order = getO(data.id); openModal(`Order ${order.id}`, order.shipments.map(shipment => `<h3>${esc(getStore(shipment.storeId)?.name)}</h3><div class="timeline">${shipment.history.map(event => `<div class="event"><b>${esc(event.status)}</b><p>${dateTime(event.time)}</p></div>`).join('')}</div>`).join(''), 'Close', () => {}, true); return; }
-        case 'invoice': openModal('Order record', invoiceHTML(getO(data.id)), 'Close', () => {}, true); return;
+        case 'invoice': viewInvoice(getO(data.id)); return;
         case 'buy-again': for (const item of getO(data.id).items) await addProduct(item.id,item.variantId,item.qty); go('cart'); return;
         case 'notification-filter': view.notificationType = data.type; render(); return;
         case 'notification-unread': view.notificationsUnread = !view.notificationsUnread; render(); return;
@@ -221,7 +233,13 @@ async function act(action, element) {
         case 'shop-collection': Object.assign(view.storeBrowse[data.id], { category:data.category, tab:'All Products' }); render(); return;
         case 'shop-reset': Object.assign(view.storeBrowse[data.id], { category:'', query:'', inStock:false }); render(); return;
         case 'compare-toggle': if (isCompared(data.id)) view.comparisons = view.comparisons.filter(id => id !== data.id); else { guard(compareIds().length < 4, 'Compare up to four products.'); view.comparisons.push(data.id); } render(); return;
-        case 'compare-remove': view.comparisons = view.comparisons.filter(id => id !== data.id); render(); return;
+        case 'compare-remove': {
+            const sharedIds = route().startsWith('compare/') ? route().split('/')[1].split(',').slice(0, 4) : null;
+            view.comparisons = (sharedIds || view.comparisons).filter(id => id !== data.id && getP(id));
+            if (sharedIds) go(view.comparisons.length ? `compare/${view.comparisons.join(',')}` : 'compare');
+            else render();
+            return;
+        }
         case 'compare-clear': view.comparisons = []; render(); return;
         case 'compare-open': go('compare'); return;
         case 'compare-collapse': view.compareCollapsed = !view.compareCollapsed; render(); return;
@@ -264,17 +282,29 @@ document.addEventListener('submit', async event => {
         try {
             const data = Object.fromEntries(new FormData(event.target));
             if (view.authTab === 'Register') {
+                if (!validateRegistrationFields(event.target, 1)) return;
+                if (data.password !== data.confirmPassword) setRegistrationStep(event.target, 1, false);
                 guard(data.password === data.confirmPassword, 'Passwords do not match.');
-                guard(data.province && data.city && data.barangay, 'Select your province/region, city/municipality and barangay.');
                 const age = registrationAge(data.birth_date);
+                if (age === null || age < S.minimumCustomerAge) setRegistrationStep(event.target, 1, false);
                 guard(age !== null && age >= S.minimumCustomerAge, `You must be at least ${S.minimumCustomerAge} years old to register.`);
+                if (event.target.dataset.registrationStep === '1') {
+                    setRegistrationStep(event.target, 2);
+                    return;
+                }
+                if (!validateRegistrationFields(event.target, 2)) return;
+                guard(data.province && data.city && data.barangay, 'Select your province/region, city/municipality and barangay.');
             }
             const result = await api(view.authTab === 'Register' ? '/auth/register' : '/auth/login', { method:'POST', body:data });
             await refresh();
             const target = view.authTab === 'Register' ? 'account' : view.afterLogin || 'home'; view.afterLogin = '';
             if (target === 'checkout') { await checkout(); } else { go(target); }
             toast(result.verification_delivery === 'unavailable' ? 'Account created. Email delivery is unavailable; try resending later.' : view.authTab === 'Register' ? 'Account created. Please verify your email.' : 'Signed in');
-        } catch (error) { const message = $('#auth-error'); if (message) { message.textContent = error.message; message.className = 'modal-error'; } }
+        } catch (error) {
+            if (view.authTab === 'Register' && error.fields && Object.keys(error.fields).some(key => ['name','email','password','phone','birth_date'].includes(key))) setRegistrationStep(event.target, 1, false);
+            const message = $('#auth-error');
+            if (message) { message.textContent = error.message; message.className = 'modal-error'; message.focus({ preventScroll:true }); }
+        }
         finally { view.busy = false; if (submit.isConnected) submit.disabled = false; }
         return;
     }
@@ -287,6 +317,7 @@ document.addEventListener('submit', async event => {
 });
 document.addEventListener('change', event => {
     const target = event.target;
+    if (target.name === 'address' && target.closest('.customer-address-picker')) updateAddressChoice(target);
     if(target.dataset.preference) {
         const key=target.dataset.preference,value=target.checked;target.disabled=true;
         void api('/preferences',{method:'PATCH',body:{[key]:value}}).then(p=>{getUser().notificationPrefs=p;toast('Email preference saved');}).catch(error=>{target.checked=!value;toast(error.message,true);}).finally(()=>{target.disabled=false;});return;
@@ -304,6 +335,7 @@ document.addEventListener('change', event => {
     }
 });
 document.addEventListener('input', event => {
+    if (event.target.name === 'phone') event.target.value = event.target.value.replace(/[^0-9]/g, '').slice(0, 11);
     if (event.target.name === 'birth_date' && event.target.closest('#auth-form')) showRegistrationAge(event.target.value);
 });
 document.addEventListener('keydown', event => {
@@ -330,6 +362,8 @@ async function routeChanged() {
 }
 window.addEventListener('hashchange', routeChanged);
 document.addEventListener('visibilitychange', async () => {
+    // Keep an unfinished sign-in/registration form intact when returning to the tab.
+    if (!userId && $('#auth-form')) return;
     if (!document.hidden && SaleSync.ready && !view.busy) {
         try { await refresh(); await routeChanged(); } catch (error) { toast(error.message, true); }
     }

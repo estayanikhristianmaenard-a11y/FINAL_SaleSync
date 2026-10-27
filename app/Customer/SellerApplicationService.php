@@ -26,8 +26,7 @@ final class SellerApplicationService
             $values=[];
             foreach (['store_name'=>100,'business_name'=>150,'business_type'=>80,'contact_name'=>100,'address_text'=>500,'description'=>2000] as $key=>$max) $values[]=Input::text($input,$key,$max);
             $email=Input::email(['email'=>$input['contact_email']??null]);
-            $phone=Input::text($input,'phone',30);
-            if (!preg_match('/^(?:09[0-9]{9}|\+639[0-9]{9})$/',$phone)) throw new ApiError(422,'Enter a Philippine mobile number.');
+            $phone=\SaleSync\Auth\RegistrationDetails::phone($input);
             $ids=$input['document_ids']??[];
             if (!is_array($ids)) throw new ApiError(422,'Invalid documents.');
             $files=$this->uploads->owned($userId,$ids,'application');

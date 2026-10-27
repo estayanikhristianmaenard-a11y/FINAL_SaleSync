@@ -1,5 +1,6 @@
 import { api } from './api.js';
 import { loadPrivate, loadConversations, attachmentUrl, selection } from './customer-data.js';
+import { passwordField, viewInvoice } from './customer-controls.js';
 
 export const voucherIds=()=>[view.checkoutVoucher,view.shippingVoucher,...Object.values(view.shopVoucher||{})].filter(Boolean).map(Number);
 export const quote=()=>api('/checkout/quote',{method:'POST',body:{items:selection(),voucher_ids:voucherIds()}});
@@ -49,9 +50,9 @@ export async function featureAction(action,data) {
         }
         case 'saved-remove': await api(`/saved-products/${data.id}`,{method:'DELETE'});await loadPrivate();render();break;
         case 'password-change':
-            openModal('Change password',field('current_password','Current password','password','','required autocomplete="current-password"')+
-                field('new_password','New password','password','','required minlength="10" maxlength="72" autocomplete="new-password"')+
-                field('confirm_password','Confirm new password','password','','required minlength="10" maxlength="72" autocomplete="new-password"'),
+            openModal('Change password',passwordField('current_password','Current password','current-password')+
+                passwordField('new_password','New password','new-password','minlength="10" maxlength="72"')+
+                passwordField('confirm_password','Confirm new password','new-password','minlength="10" maxlength="72"'),
                 'Update password',async input=>{await api('/auth/password',{method:'POST',body:input});await loadPrivate();toast('Password updated. Other sessions have been signed out.');});break;
         case 'claim': await api(`/vouchers/${Number(data.id)}/claim`,{method:'POST'});await loadPrivate();render();toast('Voucher collected');break;
         case 'voucher-pick': {
@@ -79,7 +80,7 @@ export async function featureAction(action,data) {
             chat.hasOlder=result.has_older;render();break;
         }
         case 'inbox-filter': view.messageUnread=data.unread==='true';view.chat='';render();break;
-        case 'message-order': openModal('Order record',invoiceHTML(getO(data.id)),'Close',()=>{},true);break;
+        case 'message-order': viewInvoice(getO(data.id));break;
         case 'return': {
             const order=getO(data.id),key=crypto.randomUUID();
             openModal('Request return / refund',select('order_item_id','Purchased item',order.items.map(i=>[i.orderItemId,`${i.name} · ${i.variantName} (purchased ${i.qty})`]))+
@@ -99,8 +100,8 @@ export async function featureAction(action,data) {
                 'Submit appeal',async input=>{const evidence_ids=await upload('return');await api(`/returns/${Number(data.id)}/appeal`,{method:'POST',body:{explanation:input.explanation,evidence_ids}});await loadPrivate();toast('Appeal submitted for management review');},true);break;
         case 'apply-seller': {
             const last=S.applications?.[0],old=last?.status==='needs_information'?last:{};
-            const fields=[['store_name','Store name',100],['business_name','Business / legal name',150],['business_type','Business type',80],['contact_name','Contact name',100],['contact_email','Contact email',255],['phone','Mobile number',30],['address_text','Business address',500],['description','Describe your business',2000]];
-            openModal('Apply to sell',fields.map(([key,label,max])=>field(key,label,key==='contact_email'?'email':key==='phone'?'tel':'text',old[key]|| (key==='contact_name'?getUser().name:key==='contact_email'?getUser().email:key==='phone'?getUser().phone:''),`required maxlength="${max}"`)).join('')+filesField('application'),
+            const fields=[['store_name','Store name',100],['business_name','Business / legal name',150],['business_type','Business type',80],['contact_name','Contact name',100],['contact_email','Contact email',255],['phone','Mobile number',11],['address_text','Business address',500],['description','Describe your business',2000]];
+            openModal('Apply to sell',fields.map(([key,label,max])=>field(key,label,key==='contact_email'?'email':key==='phone'?'tel':'text',old[key]|| (key==='contact_name'?getUser().name:key==='contact_email'?getUser().email:key==='phone'?getUser().phone:''),`required maxlength="${max}" ${key==='phone'?'minlength="11" pattern="[0-9]{11}" inputmode="numeric"':''}`)).join('')+filesField('application'),
                 'Submit for review',async input=>{const document_ids=await upload('application');await api('/seller-applications',{method:'POST',body:{...input,document_ids}});await loadPrivate();toast('Application submitted for management review');},true);break;
         }
     }

@@ -74,7 +74,7 @@ try {
     check(ncrCities.length===17 && ncrCities.some(city=>city.code==='1381200000') && ncrCities.some(city=>city.name==='Pateros'), 'Metro Manila includes cities and Pateros without requiring a province');
     const pasigBarangays = await customer.request('/locations/barangays', { query:{city_code:'1381200000'} });
     check(pasigBarangays.some(barangay=>barangay.name==='Manggahan'), 'Pasig barangays include Manggahan');
-    const registrationDetails = { phone:'+63 917 123 4567', birth_date:'2000-05-14', house_number:'123', street:'Test Street', barangay:'1381200019', city:'1381200000', province:'1300000000', postal_code:'1605' };
+    const registrationDetails = { phone:'09171234567', birth_date:'2000-05-14', house_number:'123', street:'Test Street', barangay:'1381200019', city:'1381200000', province:'1300000000', postal_code:'1605' };
     const registration = { name:'HTTP Customer', email:'http@example.test', password, ...registrationDetails };
     await customer.request('/auth/register', { method:'POST', body:{...registration,province:'0402100000'},status:422 });
     await customer.request('/auth/register', { method:'POST', body:{...registration,city:'1381500000'},status:422 });
@@ -88,10 +88,10 @@ try {
     await customer.request('/auth/register', { method:'POST', body:{ ...registration, street:'' }, status:422 });
     const user = await customer.request('/auth/register', { method: 'POST', body: { ...registration, role: 'admin_management', email_verified_at: '2026-01-01' } });
     check(user.user.role === 'customer' && user.user.email_verified_at === null, 'Registration ignores role/verification injection');
-    check(user.user.birth_date==='2000-05-14' && user.user.phone==='+639171234567', 'Birthday and normalized phone saved on customer profile');
+    check(user.user.birth_date==='2000-05-14' && user.user.phone==='09171234567', 'Birthday and 11-digit phone saved on customer profile');
     const registrationAddresses = await customer.request('/addresses');
     check(registrationAddresses.length===1 && registrationAddresses[0].is_default===1 && registrationAddresses[0].label==='Home', 'Registration creates one default Home address');
-    check(registrationAddresses[0].recipient_name==='HTTP Customer' && registrationAddresses[0].phone==='+639171234567' && registrationAddresses[0].address_text==='123 Test Street, San Antonio, City of Pasig, Metro Manila (NCR) 1605', 'Canonical registration location names saved under My Addresses');
+    check(registrationAddresses[0].recipient_name==='HTTP Customer' && registrationAddresses[0].phone==='09171234567' && registrationAddresses[0].address_text==='123 Test Street, San Antonio, City of Pasig, Metro Manila (NCR) 1605', 'Canonical registration location names saved under My Addresses');
     check(user.csrf_token !== initial.csrf_token, 'Registration rotates session token');
     const addressInput = {...registrationDetails,label:'Home',recipient_name:'Customer',phone:'09123456789',is_default:true};
     await customer.request('/addresses', { method:'POST',body:{...addressInput,province:'0402100000'},status:422 });

@@ -24,12 +24,11 @@ final class RegistrationDetails
 
     public static function phone(array $input): string
     {
-        $phone = Input::text($input, 'phone', 25, 7);
-        $digits = preg_replace('/\D/', '', $phone);
-        if (!preg_match('/^\+?[0-9][0-9 ()-]*$/', $phone) || strlen($digits) < 7 || strlen($digits) > 15) {
-            throw new ApiError(422, 'Enter a valid phone number.', ['phone' => 'Use 7–15 digits, with an optional leading +, spaces, parentheses or hyphens.']);
+        $phone = $input['phone'] ?? null;
+        if (!is_string($phone) || !preg_match('/^[0-9]{11}$/D', $phone)) {
+            throw new ApiError(422, 'Enter an 11-digit phone number.', ['phone' => 'Use exactly 11 digits, for example 09171234567.']);
         }
-        return str_starts_with($phone, '+') ? '+' . $digits : $digits;
+        return $phone;
     }
 
 }

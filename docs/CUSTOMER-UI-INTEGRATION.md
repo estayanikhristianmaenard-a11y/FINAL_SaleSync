@@ -22,12 +22,17 @@ Customer JavaScript is grouped under `public/assets/js/customer/`; relative API 
 | `customer-render.js` | Customer-only single-page routing and capability states |
 | `customer.js` | Async form/button handlers; all business changes go through the PHP API |
 | `customer-features.js` | Password, saved products, voucher selection, conversations, evidence, applications and appeals |
+| `customer-controls.js` | Account password visibility toggles, wrapped delivery-address picker and view-only invoice dialog |
 
 The renderer works with pesos for display because that is the supplied template convention. API prices, quotes and database money remain integer centavos. Checkout uses the server quote and the server recalculates again when creating the order. Client record edits cannot authenticate a user, update inventory, verify payment or save an order.
 
 Only checkout retry metadata is saved in `sessionStorage`; authentication and business records do not use the prototype's localStorage keys. Compare choices, search/filter selections and cart checkboxes are temporary presentation state. An unresolved checkout preserves its original body/key and offers an explicit confirmation retry; it never silently creates a second payment.
 
 ## Working flows
+
+Registration uses two compact steps inside the existing authentication card: account/contact details, then delivery address. Desktop pairs related inputs; narrow screens stack longer fields. Continue validates account details and the 18+ rule without creating an account. Back preserves all inputs and selected locations. Final submission sends the same complete registration object and creates the default Home address. Returning to an unfinished guest authentication tab preserves the form.
+
+The top header includes a Favorites heart with a count of the customer's saved products; it opens Account → Favorites using the existing saved-products API. Account Settings → Change password provides an independent show/hide control on each password input, masked by default. Checkout's address chooser uses a contained, scrollable dropdown of wrapping radio options; selection is applied only after Use this address, and Cancel retains the previous destination. View Invoice is a view-only dialog with Close and no HTML download control.
 
 - Register/sign in/out using server sessions; registration collects phone, birthday and structured delivery address, enforces minimum age 18 on the server, and saves a default Home address. One-hour email verification links and resend cooldown remain in place.
 - Browse/search/filter the server catalogue, product/gallery/options, public stores and store collections derived from published products.

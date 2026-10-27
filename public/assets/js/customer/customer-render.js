@@ -3,17 +3,6 @@ const customerPrivateRoutes = new Set(['cart','checkout','orders','account','not
 function unavailablePanel(title, message) {
     return `<section class="panel empty"><h1 class="h2">${esc(title)}</h1><p>${esc(message)}</p>${btn('route','Continue shopping','data-to="shop"','primary')}</section>`;
 }
-function registrationFields() {
-    return field('phone','Phone number','tel','','required autocomplete="tel" inputmode="tel" minlength="7" maxlength="25" placeholder="09171234567"') +
-        field('birth_date','Birthday','date','',`required autocomplete="bday" max="${esc(S.registrationDate || '')}"`) +
-        `<p id="registration-age-hint" class="small muted" aria-live="polite">${S.minimumCustomerAge === null ? 'Enter your birthday.' : `You must be at least ${S.minimumCustomerAge} years old to register.`}</p>` +
-        '<h3>Delivery address</h3>' +
-        field('house_number','House / building / unit number','text','','required autocomplete="address-line1" maxlength="100" placeholder="123 / Unit 4B"') +
-        field('street','Street','text','','required autocomplete="address-line2" maxlength="150"') +
-        window.customerLocations.fields() +
-        field('postal_code','Postal code','text','','required autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{4}" maxlength="4"') +
-        '<p class="small muted">This address and phone number will be saved as your default Home address in My Addresses.</p>';
-}
 function render() {
     const path = route(), [page, parameter] = path.split('/');
     document.body.className = 'portal-customer';
@@ -33,9 +22,11 @@ function render() {
     document.title = 'SaleSync Online · ' + (page === 'account' ? 'My Account' : page[0].toUpperCase() + page.slice(1));
     const registrationForm = app.querySelector('#auth-form');
     if (registrationForm && view.authTab === 'Register') {
-        registrationForm.querySelector('button[type="submit"]').insertAdjacentHTML('beforebegin', registrationFields());
-        void window.customerLocations?.mount(registrationForm);
+        mountRegistration(registrationForm);
     }
+    const favoritesCount = S.wishlist.filter(item => item.userId === userId).length;
+    app.querySelector('.header-actions')?.insertAdjacentHTML('afterbegin',
+        `<button class="icon-btn" data-action="favorites" aria-label="Favorites" title="Favorites" ${page === 'account' && view.accountTab === 'Saved' ? 'aria-current="page"' : ''}>${uiIcon('heart')}${favoritesCount ? `<span class="count-bubble">${favoritesCount}</span>` : ''}</button>`);
     app.querySelectorAll('a[href^="customer.html"]').forEach(link => { link.href = '#/home'; });
     app.querySelectorAll('[data-action]').forEach(button => {
         if (window.customerDisabledActions?.has(button.dataset.action)) {
@@ -45,13 +36,16 @@ function render() {
     });
     app.querySelectorAll('[data-action="wishlist"]').forEach(button=>{
         const saved=S.wishlist.some(w=>w.productId===button.dataset.id);
-        button.setAttribute('aria-pressed',String(saved));button.title=saved?'Remove saved product':'Save product';
-        if(button.closest('.detail-info'))button.innerHTML=uiIcon('heart')+(saved?' Saved · Remove':' Save');
+        button.setAttribute('aria-pressed',String(saved));button.title=saved?'Remove from favorites':'Add to favorites';
+        if(button.closest('.detail-info'))button.innerHTML=uiIcon('heart')+(saved?' Favorited · Remove':' Favorite');
     });
     if (page === 'account') {
         const content=app.querySelector('.account-content');
+        const favoritesTab=app.querySelector('[data-action="account-tab"][data-tab="Saved"]');
+        if (favoritesTab) favoritesTab.textContent='Favorites';
         if(view.accountTab==='Preferences') content?.insertAdjacentHTML('beforeend','<p class="small muted">These switches control optional email notices. Your in-app inbox keeps order and security records. Security email notices remain enabled.</p>');
         if(view.accountTab==='Saved') {
+            const heading=content?.querySelector('h2');if(heading)heading.textContent='Favorites';
             content?.insertAdjacentHTML('beforeend',`<div class="top-gap">${(S.savedRows||[]).map(r=>`<article class="simple-row"><span>${esc(r.name)}${r.available?'':' · Currently unavailable'}</span>${btn('saved-remove','Remove',`data-id="${r.product_id}"`,'ghost sm')}</article>`).join('')}</div>`);
         }
         if(view.accountTab==='Seller Application'&&S.applications?.length) {

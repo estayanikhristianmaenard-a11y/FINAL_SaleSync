@@ -25,6 +25,7 @@ let target;
 let sequence = 0;
 const pending = new Map(), exceptions = [], failedResources = [];
 let checks = 0;
+let adversarialFindings = [];
 const check = (value,message) => { assert.ok(value,message); checks++; };
 function fixture(code) {
     const result=spawnSync(php,['-r',`$config=require 'app/bootstrap.php';$db=new SaleSync\\Core\\Database($config['database']);${code}`],{cwd:root,env,encoding:'utf8'});
@@ -75,6 +76,9 @@ async function form(id,data) {
         await wait(`!document.querySelector('#${id} [name="barangay"]').disabled&&Boolean(document.querySelector('#${id} [name="barangay"] option[value="${data.barangay}"]'))`);
     }
     await evaluate(`(()=>{const f=document.getElementById(${JSON.stringify(id)});for(const [name,value]of Object.entries(${JSON.stringify(data)})){f.elements[name].value=value}f.requestSubmit()})()`);
+    if (id==='auth-form'&&data.province&&await evaluate('document.querySelector("#auth-form")?.dataset.registrationStep==="2"')) {
+        await evaluate('document.getElementById("auth-form").requestSubmit()');
+    }
 }
 try {
     for(let attempt=0;attempt<80;attempt++) { try { await fetch(base); break; } catch { await new Promise(resolve=>setTimeout(resolve,60)); } }
@@ -93,16 +97,40 @@ try {
     await wait('window.SaleSync?.ready');
     check(await evaluate('S.products.length===141'),'141 coworker catalogue products loaded from backend');
     check(await evaluate('S.users.length===0&&S.orders.length===0'),'No prototype accounts or historical fake orders imported');
+    for (const width of [320,768,940]) {
+        await send('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:width<769});
+        check(await evaluate('document.documentElement.scrollWidth<=innerWidth+2'),'Guest home fits viewport width '+width);
+        const searchWidth=await evaluate('document.querySelector("#global-search").getBoundingClientRect().width');
+        check(searchWidth>=70,`Search input remains usable at ${width}px (actual ${searchWidth}px)`);
+        check(await evaluate('document.querySelectorAll(".header-actions .icon-btn").length===4'),'Four customer header shortcuts remain visible at '+width);
+    }
+    await send('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
+    await click('.header-actions [data-action="favorites"]');
+    await wait('Boolean(document.querySelector("#auth-form"))');
+    check(await evaluate('!getUser()&&S.wishlist.length===0'),'Guest Favorites requires sign-in and exposes no customer records');
+    await evaluate('view.accountTab="Profile";view.afterLogin="";go("home")');
     for(const name of ['home','shop','stores','product/p1','store/tech','compare','help']) {
         await route(name);
         check(await evaluate('Boolean(document.querySelector("#app h1"))'),'Customer route has a heading: '+name);
     }
+    await route('compare/p1,p2,p3');
+    await click('[data-action="compare-remove"][data-id="p3"]');
+    await wait('!view.busy');
+    check(await evaluate('document.querySelectorAll(".compare-table thead th").length===3'),'Removing a product from a shared comparison updates the displayed columns');
+    await click('[data-action="compare-diffs"]');
+    check(await evaluate('view.diffOnly&&[...document.querySelectorAll(".compare-table tbody tr")].every(row=>row.classList.contains("different"))'),'Comparison difference filter shows only differing attributes');
+    await click('[data-action="compare-diffs"]');
+    await evaluate('view.comparisons=[]');
     await route('home');
     const desktop = await send('Page.captureScreenshot',{format:'png'});
     await fs.writeFile(path.join(directory,'home-desktop.png'),Buffer.from(desktop.data,'base64'));
     await route('cart');
     check(await evaluate('Boolean(document.querySelector("#auth-form"))'),'Guest cart prompts sign-in');
     await click('[data-action="auth-tab"][data-tab="Register"]');
+    check(await evaluate('document.querySelector("[name=phone]").maxLength===11&&document.querySelector("[name=phone]").minLength===11'),'Phone field requires exactly 11 digits');
+    await evaluate(`(()=>{const p=document.querySelector('[name="phone"]');p.value='0917123456789abc';p.dispatchEvent(new Event('input',{bubbles:true}))})()`);
+    check(await evaluate('document.querySelector("[name=phone]").value==="09171234567"'),'Pasted phone input is limited to 11 digits');
+    check(await evaluate('document.querySelector("#auth-form").dataset.registrationStep==="1"&&document.querySelector("[data-registration-step=\\"2\\"]").hidden'),'Registration opens with account details and hides the address step');
     check(await evaluate('["phone","birth_date","house_number","street","barangay","city","province","postal_code"].every(name=>document.querySelector(`#auth-form [name="${name}"]`)?.required)'),'Registration includes all required contact, birthday and address fields');
     await wait('!document.querySelector("[name=province]").disabled');
     check(await evaluate('document.querySelectorAll("[name=province] option").length===101'),'Registration lists all 100 provinces/regions');
@@ -116,6 +144,32 @@ try {
     await fs.writeFile(path.join(directory,'registration-mobile.png'),Buffer.from(registrationMobile.data,'base64'));
     await send('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
     const registration = {name:'Customer UI Test',email:'ui-customer@example.test',password:'CustomerTest123!',confirmPassword:'CustomerTest123!',phone:'09171234567',birth_date:'2000-05-14',house_number:'123',street:'Registration Street',barangay:'1381200011',city:'1381200000',province:'1300000000',postal_code:'1611'};
+    await evaluate(`(()=>{const f=document.getElementById('auth-form');for(const [name,value]of Object.entries(${JSON.stringify({...registration,confirmPassword:'Mismatch123!'})})){if(!['province','city','barangay'].includes(name))f.elements[name].value=value}f.requestSubmit()})()`);
+    await wait('document.querySelector("#auth-error").textContent.includes("match")');
+    check(await evaluate('document.querySelector("#auth-form").dataset.registrationStep==="1"&&!getUser()'),'Mismatched passwords block advancement and do not create an account');
+    await evaluate(`(()=>{const f=document.getElementById('auth-form');f.elements.confirmPassword.value=${JSON.stringify(registration.password)};f.requestSubmit()})()`);
+    await wait('document.querySelector("#auth-form").dataset.registrationStep==="2"');
+    check(await evaluate('!getUser()'),'Continuing to the address step does not submit registration to the server');
+    const deliveryShot=await send('Page.captureScreenshot',{format:'png'});
+    await fs.writeFile(path.join(directory,'registration-address-desktop.png'),Buffer.from(deliveryShot.data,'base64'));
+    check(await evaluate('document.querySelector(".auth-form-card").getBoundingClientRect().height<760'),'Delivery step stays compact on desktop');
+    await send('Emulation.setDeviceMetricsOverride',{width:940,height:900,deviceScaleFactor:1,mobile:false});
+    check(await evaluate('document.documentElement.scrollWidth<=innerWidth+2'),'Two-step layout fits a smaller desktop window');
+    const compactShot=await send('Page.captureScreenshot',{format:'png'});
+    await fs.writeFile(path.join(directory,'registration-address-940.png'),Buffer.from(compactShot.data,'base64'));
+    await send('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
+    check(await evaluate('document.documentElement.scrollWidth<=innerWidth+2'),'Delivery step has no horizontal overflow on mobile');
+    const mobileDeliveryShot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:true});
+    await fs.writeFile(path.join(directory,'registration-address-mobile.png'),Buffer.from(mobileDeliveryShot.data,'base64'));
+    await send('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
+    await evaluate(`(()=>{const p=document.querySelector('[name="province"]');p.value='1300000000';p.dispatchEvent(new Event('change',{bubbles:true}))})()`);
+    await wait('!document.querySelector("[name=city]").disabled');
+    await evaluate(`(()=>{const c=document.querySelector('[name="city"]');c.value='1381200000';c.dispatchEvent(new Event('change',{bubbles:true}))})()`);
+    await wait('!document.querySelector("[name=barangay]").disabled');
+    await evaluate(`document.querySelector('[name="barangay"]').value='1381200011'`);
+    await click('[data-action="registration-back"]');
+    check(await evaluate('document.querySelector("#auth-form").dataset.registrationStep==="1"&&document.querySelector("[name=email]").value==="ui-customer@example.test"&&document.querySelector("[name=street]").value==="Registration Street"'),'Going back preserves account and delivery inputs');
+    check(await evaluate('document.querySelector("[name=province]").value==="1300000000"&&document.querySelector("[name=city]").value==="1381200000"&&document.querySelector("[name=barangay]").value==="1381200011"'),'Going back preserves all linked address selections');
     await evaluate(`(()=>{const input=document.querySelector('[name="birth_date"]');input.value=S.registrationDate;input.dispatchEvent(new Event('input',{bubbles:true}))})()`);
     check(await evaluate('document.getElementById("registration-age-hint").textContent.includes("not eligible")'),'Registration displays underage eligibility');
     await form('auth-form',{...registration,birth_date:await evaluate('S.registrationDate')});
@@ -174,9 +228,22 @@ try {
     await wait('route()==="checkout"&&Boolean(view.quote)');
     check(await evaluate('view.quote.items.length===1'),'Server quote contains selected cart items only');
     await click('[data-action="address"]');
-    await form('modal-form',{...addressInput,label:'Checkout',house_number:'99',street:'Checkout Street',province:'0402100000',city:'0402101000',barangay:'0402101001',postal_code:'4123'});
+    await form('modal-form',{...addressInput,label:'Checkout',house_number:'99',street:'Checkout Street '.repeat(8).trim(),province:'0402100000',city:'0402101000',barangay:'0402101001',postal_code:'4123'});
     await wait('getUser().addresses.some(address=>address.label==="Checkout")&&!document.getElementById("dialog").open&&Boolean(view.quote)');
     check(await evaluate('view.quote.items.length===1'),'Adding an address during checkout preserves selected cart quote');
+    await click('[data-action="checkout-address"]');
+    await click('.customer-address-picker summary');
+    await send('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
+    check(await evaluate('(()=>{const d=document.getElementById("dialog"),o=document.querySelector(".customer-address-options");return d.scrollWidth<=d.clientWidth+1&&o.scrollWidth<=o.clientWidth+1&&document.documentElement.scrollWidth<=innerWidth+2})()'),'Long delivery address options wrap within the mobile dialog');
+    const addressPickerShot=await send('Page.captureScreenshot',{format:'png'});
+    await fs.writeFile(path.join(directory,'checkout-address-picker-mobile.png'),Buffer.from(addressPickerShot.data,'base64'));
+    const checkoutAddressId=await evaluate('getUser().addresses.find(address=>address.label==="Checkout").id');
+    const originalCheckoutAddressId=await evaluate('checkoutAddress().id');
+    await click(`.customer-address-option [value="${checkoutAddressId}"]`);
+    check(await evaluate('!document.querySelector(".customer-address-picker").open&&document.querySelector(".customer-address-picker summary").textContent.includes("Checkout")'),'Choosing a delivery option updates and closes the dropdown');
+    await click('#cancel-modal');
+    check(await evaluate(`checkoutAddress().id===${JSON.stringify(originalCheckoutAddressId)}`),'Cancelling the address chooser preserves the current delivery address');
+    await send('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
     await click('[data-action="checkout-address"]');
     await form('modal-form',{address:await evaluate('getUser().addresses.find(address=>address.label==="Checkout").id')});
     await wait('!document.getElementById("dialog").open');
@@ -191,6 +258,7 @@ try {
     check(await evaluate('Boolean(getUser())&&S.cart.length===1'),'Account, cart and order survive reload from server');
     await route('orders'); await click('[data-action="invoice"]');
     check(await evaluate('document.querySelector(".invoice-document").textContent.includes(S.orders[0].id)'),'Order document uses saved order');
+    check(await evaluate('document.getElementById("dialog").dataset.readonly==="true"&&!document.querySelector("#dialog [download]")&&!/download html/i.test(document.getElementById("dialog").textContent)'),'View Invoice has no HTML download option');
     await click('#close-modal');
     await click('[data-action="cancel-order"]'); await form('modal-form',{});
     await wait('S.orders[0].status==="cancelled"&&!document.getElementById("dialog").open');
@@ -217,9 +285,13 @@ try {
     await route('product/p1');await click('[data-action="wishlist"]');
     await wait('S.wishlist.length===1&&!view.busy');
     await reload();await wait('S.wishlist.length===1');
-    await route('account');await click('[data-action="account-tab"][data-tab="Saved"]');
+    check(await evaluate('document.querySelector(".header-actions [data-action=favorites] .count-bubble").textContent==="1"'),'Header Favorites badge reflects persisted products');
+    await click('.header-actions [data-action="favorites"]');
+    await wait('view.renderedRoute==="account"&&view.accountTab==="Saved"&&Boolean(document.querySelector(".account-content"))');
+    check(await evaluate('document.querySelector(".account-content h2").textContent==="Favorites"'),'Top Favorites icon opens the customer favorite products');
     check(await evaluate('document.querySelector(".account-content").textContent.includes("Wireless Noise-Cancelling Headphones")'),'Saved products loaded across browser reload');
     await click('[data-action="saved-remove"]');await wait('S.wishlist.length===0&&!view.busy');
+    check(await evaluate('!document.querySelector(".header-actions [data-action=favorites] .count-bubble")'),'Removing a favorite updates the top icon badge');
     await click('[data-action="account-tab"][data-tab="Preferences"]');
     await click('[data-preference="messages"]');
     await wait('getUser().notificationPrefs.messages===false');
@@ -267,6 +339,12 @@ try {
     await wait('S.returns[0].status==="Escalated"&&!document.getElementById("dialog").open');
     check(await evaluate('document.querySelector(".order-card").parentElement.textContent.includes("Escalated")'),'Appeal submitted and status updated');
     await route('account');await click('[data-action="account-tab"][data-tab="Security"]');await click('[data-action="password-change"]');
+    for (const name of ['current_password','new_password','confirm_password']) {
+        await click(`[data-action="password-visibility"][data-target="account-${name}"]`);
+        check(await evaluate(`document.querySelector('[name="${name}"]').type==='text'&&document.querySelector('[data-target="account-${name}"]').getAttribute('aria-pressed')==='true'`),'Account password visibility can be enabled: '+name);
+        await click(`[data-action="password-visibility"][data-target="account-${name}"]`);
+        check(await evaluate(`document.querySelector('[name="${name}"]').type==='password'`),'Account password visibility can be disabled: '+name);
+    }
     await form('modal-form',{current_password:'CustomerTest123!',new_password:'UpdatedCustomer123!',confirm_password:'UpdatedCustomer123!'});
     await wait('!document.getElementById("dialog").open');
     await click('[data-action="logout"]');await wait('!getUser()&&!view.busy');await route('login');
@@ -274,11 +352,17 @@ try {
     check(await evaluate('getUser().name==="Updated UI Customer"'),'Changed password signs in successfully');
     await send('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
     for(const name of ['messages','orders','account']){await route(name);check(await evaluate('document.documentElement.scrollWidth<=innerWidth+2'),'New customer features fit at 390px: '+name);}
+    if(process.env.SALESYNC_ADVERSARIAL_QA==='1') {
+        const {auditCustomer}=await import('./customer-audit.mjs');
+        adversarialFindings = await auditCustomer({evaluate,fixture,route,click,wait,directory});
+    }
     check(exceptions.length===0,'No browser exceptions: '+exceptions.join('\n'));
     check(failedResources.length===0,'No missing scripts/styles/images: '+failedResources.join('\n'));
-    const report={checks,exceptions,failedResources,screenshots:directory};
+    const report={checks,exceptions,failedResources,screenshots:directory,adversarialFindings};
     await fs.writeFile(path.join(directory,'results.json'),JSON.stringify(report,null,2));
-    console.log(`PASS: ${checks} customer browser checks. Screenshots: ${directory}`);
+    const failures=adversarialFindings.filter(f=>f.passed===false).length;
+    if(failures) process.exitCode=1;
+    console.log(`${failures?'AUDIT FAILED':'PASS'}: ${checks} UI checks; ${failures} adversarial failures. Screenshots: ${directory}`);
 } catch (error) {
     console.error(JSON.stringify({exceptions,failedResources,body:ws ? await evaluate('document.body.innerText.slice(0,2200)').catch(()=> '') : ''},null,2));
     throw error;
