@@ -1,6 +1,6 @@
 # SaleSync Management Admin API
 
-Backend foundation for the SaleSync Management Admin. This service uses Node.js 20+, TypeScript, Express, and PostgreSQL. It contains the initial relational schema, health endpoints, database migration runner, and a fail-closed admin JWT guard. Business module handlers are added in subsequent implementation steps.
+SaleSync Management Admin API using Node.js 20+, TypeScript, Express, and PostgreSQL. It provides admin endpoints for dashboard, users, seller applications, product moderation, order oversight, PayMongo payment events, sales reports/CSV, System Settings, and the audit log.
 
 ## Local setup
 
@@ -11,6 +11,8 @@ Backend foundation for the SaleSync Management Admin. This service uses Node.js 
 5. Apply pending database migrations with `npm run db:migrate`.
 6. Start the API with `npm run dev`.
 
+For local demo data, run `npm run db:seed` after migrations. It creates exactly 200 deterministic orders and payments spanning the preceding year with related customer, seller, store, and product records. Never run the demo seed against a shared or production database.
+
 The liveness endpoint is `GET /health/live`; readiness (including a database connection check) is `GET /health/ready`. Admin endpoints are mounted under `/api/admin` and require an HS256 JWT with the configured issuer, audience, a string subject, and `role: "admin"`. Integrate this guard with the deployment's trusted identity provider before production.
 
 ## Database changes
@@ -19,4 +21,4 @@ Put ordered SQL migrations under `src/migrations` using names such as `0002_add_
 
 ## Current implementation boundary
 
-The first code increment establishes app startup, configuration validation, PostgreSQL pooling, initial schema application, basic health checks, and admin-route protection. Dashboard, user, seller, product, order, payment, report, settings, activity-log, and seed handlers remain to be implemented in their respective modules.
+Admin actions and audit entries commit in a single transaction. PayMongo webhook signature validation uses the raw request body and a server-side `PAYMONGO_WEBHOOK_SECRET`; no provider secret is returned by admin APIs. The supplied UI archive is a separate local-first bundle. See `docs/backend-architecture.md` for Management-only script binding notes.

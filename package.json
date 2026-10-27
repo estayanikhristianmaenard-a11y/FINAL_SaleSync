@@ -8,7 +8,8 @@
     "dev": "tsx watch src/app/server.ts",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/app/server.js",
-    "db:migrate": "tsx src/shared/db/migrate.ts"
+    "db:migrate": "tsx src/shared/db/migrate.ts",
+    "db:seed": "tsx src/seeds/management-demo.ts"
   },
   "dependencies": {
     "dotenv": "^16.4.7",

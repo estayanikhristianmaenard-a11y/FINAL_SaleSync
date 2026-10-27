@@ -4,10 +4,13 @@ import { env } from '../shared/config/env.js';
 import { pool } from '../shared/db/pool.js';
 import { errorHandler } from '../shared/http/errors.js';
 import { adminRouter } from './v1/admin-router.js';
+import { paymongoWebhook } from '../modules/payments/webhook.js';
 
 const app = express();
 app.disable('x-powered-by');
 app.use(helmet());
+// PayMongo signs the exact raw bytes; register this before express.json().
+app.post('/api/webhooks/paymongo', express.raw({ type: 'application/json', limit: '256kb' }), paymongoWebhook);
 app.use(express.json({ limit: '1mb' }));
 
 app.get('/health/live', (_req, res) => res.status(200).json({ status: 'ok' }));

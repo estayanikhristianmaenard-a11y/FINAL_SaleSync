@@ -85,7 +85,13 @@ The executable PostgreSQL baseline is [0001_initial_schema.sql](../src/migration
 5. Do not cascade-delete orders, payments, audit rows, or status history. Use foreign keys and explicit retention policies.
 6. Write notification jobs to `notification_outbox` in the same transaction as decisions and deliver them asynchronously after commit.
 
-## Decisions to confirm before implementation
+## Implementation and Management portal binding
+
+The API router is implemented under `src/app/v1/admin-router.ts`; transactional audit writes are shared in `src/shared/audit/audit.ts`. The Management browser binding is `management/admin-api.js`. The supplied ZIP's UI source is separate from this backend workspace; its Management page currently reads local `S` state. To wire it, register `management/admin-api.js` in `build.py` immediately before `management/management.js` and replace those Management-only local selectors/actions with `SaleSyncManagementApi` calls. Keep the existing `CORE_JS` order and leave the other portal bundles untouched. The Management HTML does not belong to this backend project tree.
+
+Run `npm run db:migrate` and `npm run db:seed` against a disposable development database. The seed is deterministic and writes exactly 200 demo order/payment pairs across a rolling 365-day interval, plus related customers, sellers, products, and categories. Re-running it is safe for the same fixture IDs.
+
+## Decisions to confirm before production
 
 - Existing identity/authentication provider. The baseline admin guard currently validates signed HS256 JWTs using configured issuer/audience and an environment secret; production should use the existing identity provider and managed secret storage.
 - Whether one order may contain items from multiple sellers (the schema supports this).

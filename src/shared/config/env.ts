@@ -8,7 +8,9 @@ const envSchema = z.object({
   DATABASE_SSL: z.enum(['true', 'false']).default('false'),
   ADMIN_JWT_SECRET: z.string().min(32),
   ADMIN_JWT_ISSUER: z.string().min(1),
-  ADMIN_JWT_AUDIENCE: z.string().min(1)
+  ADMIN_JWT_AUDIENCE: z.string().min(1),
+  PAYMONGO_WEBHOOK_SECRET: z.string().optional(),
+  PAYMONGO_SECRET_KEY: z.string().optional()
 });
 
 const parsed = envSchema.safeParse(process.env);
