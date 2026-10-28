@@ -1,0 +1,2 @@
+/* Technical theme; shared structure lives in core/workspace.css. */
+body.portal-maintenance{--workspace-accent:#187566;--workspace-soft:#e9f5f1;}

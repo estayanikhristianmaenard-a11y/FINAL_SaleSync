@@ -1,0 +1,12 @@
+{
+  "type": "dress",
+  "file": "assets/products/dress.webp",
+  "title": "Linen dress on hanger",
+  "source": "https://unsplash.com/photos/black-scoop-neck-top-on-white-textile-TMZHoaUprk8",
+  "download": "https://images.unsplash.com/photo-1519645506310-4ea0d66491f3?auto=format&fit=max&w=700&q=85",
+  "artist": "Annie Spratt",
+  "license": "Unsplash License",
+  "licenseUrl": "https://unsplash.com/license",
+  "modifications": "Resized and converted to WebP",
+  "retrieved": "2026-10-26"
+}

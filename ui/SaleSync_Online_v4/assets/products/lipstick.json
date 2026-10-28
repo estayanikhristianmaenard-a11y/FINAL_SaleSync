@@ -1,0 +1,12 @@
+{
+  "type": "lipstick",
+  "file": "assets/products/lipstick.webp",
+  "title": "Close-up of lipstick",
+  "source": "https://unsplash.com/photos/a-close-up-of-a-lipstick-VyMJNAjZhVU",
+  "download": "https://images.unsplash.com/photo-1662560184588-58a1eaee6d3a?auto=format&fit=max&w=700&q=85",
+  "artist": "Ian Talmacs",
+  "license": "Unsplash License",
+  "licenseUrl": "https://unsplash.com/license",
+  "modifications": "Resized and converted to WebP",
+  "retrieved": "2026-10-26"
+}

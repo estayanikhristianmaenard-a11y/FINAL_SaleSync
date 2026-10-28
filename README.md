@@ -11,6 +11,10 @@ SaleSync Management Admin API using Node.js 20+, TypeScript, Express, and Postgr
 5. Apply pending database migrations with `npm run db:migrate`.
 6. Start the API with `npm run dev`.
 
+## SaleSync UI
+
+The supplied browser UI is in `ui/SaleSync_Online_v4`. Serve that folder as static files (for example, `python -m http.server 8000` from that directory) and open `http://127.0.0.1:8000/`. The frontend is a separate local-first application; the Management API binding is included at `ui/SaleSync_Online_v4/management/admin-api.js`. The UI still needs Management selectors/actions converted to call that API before its data is backed by this server.
+
 For local demo data, run `npm run db:seed` after migrations. It creates exactly 200 deterministic orders and payments spanning the preceding year with related customer, seller, store, and product records. Never run the demo seed against a shared or production database.
 
 The liveness endpoint is `GET /health/live`; readiness (including a database connection check) is `GET /health/ready`. Admin endpoints are mounted under `/api/admin` and require an HS256 JWT with the configured issuer, audience, a string subject, and `role: "admin"`. Integrate this guard with the deployment's trusted identity provider before production.

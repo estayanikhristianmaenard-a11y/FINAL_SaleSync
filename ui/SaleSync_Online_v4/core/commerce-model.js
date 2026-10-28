@@ -1,0 +1,69 @@
+/* Shared commerce schema. Monetary calculations use integer centavos. */
+const COMMERCE_CATEGORIES={Electronics:[['Audio','headphones','earbuds','speaker'],['Computers & peripherals','keyboard','mouse','webcam','deskpad'],['Charging & connectivity','powerbank','charger','wallcharger','router'],['Wearables & accessories','watch','phonecase','camera','stand']],Fashion:[['Tops','tee','shirt'],['Jackets & hoodies','jacket','hoodie','sportjacket'],['Dresses & bottoms','dress','pants','shorts','leggings'],['Footwear & accessories','sneakers','sandals','cap']],Accessories:[['Jewelry','necklace','earrings','bracelet','ring'],['Bags & wallets','bag','backpack','wallet','pouch'],['Eyewear','sunglasses'],['Collectibles','blindbox'],['Bottles','bottle']],Home:[['Kitchen & dining','mug','jars','lunchbox','ricecooker','airfryer','fryingpan','bottle'],['Bedroom','mattress','pillow','towel'],['Lighting & decor','lamp','plant','candle'],['Storage & workspace','storage','shelf','notebook']],Beauty:[['Skin care','skincare','cleanser','serum'],['Makeup','lipstick','foundation','mascara','compact'],['Tools & essentials','brush','cottonpads','dryer']],Sports:[['Fitness equipment','mat','dumbbell','roller'],['Activewear','leggings','shorts','sportjacket','tee'],['Sports footwear','sportsshoe','sneakers'],['Accessories','bottle','towel']],Groceries:[['Coffee','coffee'],['Snacks','snack']],Toys:[['Building & puzzles','bricks','puzzle'],['Figures & plush','robot','teddy','blindbox']]};
+const cents=n=>Math.round(Number(n||0)*100),peso=n=>Math.round(n)/100;
+function categoryGroup(p){return (COMMERCE_CATEGORIES[p.category]||[]).find(g=>g.slice(1).includes(p.type))?.[0]||p.category}
+function upgradeCommerceData(state){
+ if(state.commerceRevision===3)return;
+ state.moderationCases??=[];state.accountDecisions??=[];state.reportHistory??=[];state.settingsHistory??=[];
+ state.settings={pickupEnabled:true,shippingVoucherCap:120,sellerResponseDays:2,returnShipDays:5,orderExpiryMinutes:30,...state.settings};
+ for(const u of state.users){u.addresses.forEach((a,i)=>{a.label=a.label?.trim()||('Address '+(i+1));a.region??='Metro Manila';a.city??='Pasig City';a.barangay??='San Antonio'});if(u.hash==='e8a83c5be27f08a9540820794c45232fcef7be8aa1d8977b621747d22bddebab')u.hash=DP;u.notificationPrefs??={orders:true,messages:true,promotions:true};}
+ for(const store of state.stores){store.name=store.name.replace(/\bD[e]mo\s+/gi,'');store.badge=store.badge?.replace(/D[e]mo\s*/gi,'');store.pickup??={enabled:true,address:'Collection desk, '+(store.location||'Metro Manila'),hours:'Mon–Sat, 9:00 AM–6:00 PM'};store.application??={businessName:store.name,businessType:'Sole proprietorship',contactName:state.users.find(u=>u.id===store.ownerUserId)?.name||store.name,contactEmail:state.users.find(u=>u.id===store.ownerUserId)?.email||'',phone:'09171234567',address:store.location||'Metro Manila',description:store.description,submitted:store.joined,documents:[],reviews:[]};}
+ for(const p of state.products){
+  if(/^p\d+-(everyday|select|studio)$/.test(p.id)){p.archivedDuplicate=true;p.canonicalId=p.id.split('-')[0];p.published=false;}
+  p.comparisonGroup=categoryGroup(p);p.specs??={};
+  if(p.variants?.length===1||p.variants?.some(v=>/Standard|Alternate color|Sample option/.test(v.name))){
+   const clothing=['tee','shirt','hoodie','jacket','dress','sportjacket','leggings','pants','shorts'].includes(p.type),shoes=['sneakers','sandals','sportsshoe'].includes(p.type);
+   const choices=clothing?['S','M','L','XL']:shoes?['EU 38','EU 39','EU 40','EU 41','EU 42']:['As pictured'];
+   p.variants=choices.map((name,i)=>({id:i===0?'std':i===1?'alt':'opt-'+i,name:clothing?'Size '+name:shoes?name:'Original design · '+name,attributes:{...(clothing||shoes?{Size:name}:{Design:'Original'}),Color:'As pictured'},add:0,imageIndex:0}));
+  }
+  if(p.brandReference){p.name=p.name.replace(/\s*[—·]\s*Sample (style|selection)/gi,'');}
+  const imported=typeof PRODUCT_OPTIONS!=='undefined'?PRODUCT_OPTIONS[p.id]:null;
+  if(imported&&p.images?.every(i=>!i.userProvided)){
+   if(imported.gallery.length)p.images=imported.gallery.map((image,n)=>({...image,src:'assets/products/'+p.id+'-view-'+n+'.webp'}));
+   if(imported.options.length&&!p.optionsEdited)p.variants=imported.options.map((v,i)=>({...v,id:i===0?'std':i===1?'alt':'opt-'+i}));
+  }
+  const refresh=typeof CATALOG_REFRESH!=='undefined'?CATALOG_REFRESH[p.id]:null;
+  if(refresh&&p.images?.every(i=>!i.userProvided)){const original=TYPES[Number(p.id.slice(1))-1]?.[0];if(p.name===original||p.name===refresh.title)p.name=refresh.title;p.brand=displayBrandText(refresh.owner);p.specs={...refresh.specs,Brand:p.brand};p.sourceUrl=refresh.source;p.productPhotoId=p.id;p.images=[{src:'assets/products/'+p.id+'.webp',alt:p.name+' product photograph',productPhoto:true,source:refresh.source}]}
+  for(const v of p.variants){v.attributes??={Design:v.name,Color:'As pictured'};v.imageIndex??=0;}
+  for(const c of state.cart.filter(c=>c.productId===p.id))if(!p.variants.some(v=>v.id===c.variantId))c.variantId='std';
+ }
+ // One photographed item is merchandised once; preserve the other record for historical invoices.
+ const repeats=new Map();for(const p of state.products.filter(p=>!p.archivedDuplicate&&p.brandReference)){const photo=PRODUCT_PHOTOS[p.id];if(!photo)continue;const key=photo.download;if(repeats.has(key)){p.archivedDuplicate=true;p.canonicalId=repeats.get(key);p.published=false}else repeats.set(key,p.id)}
+ if(!state.vouchers.some(v=>v.id==='shipping-120'))state.vouchers.push({id:'shipping-120',code:'SHIP120',name:'Shipping discount up to ₱120',scope:'shipping',kind:'fixed',value:120,max:120,min:499,active:true,expires:localDay(ago(-365)),usageLimit:500});
+ for(const v of state.vouchers){v.code??=v.id.toUpperCase();v.usageLimit??=500;v.start??='2026-01-01';}
+ // Retain merchant/contact history, with only the four handoff accounts enabled for sign-in.
+ for(const u of state.users)u.loginEnabled=['c1','s1','ma1','it1'].includes(u.id);
+ for(const o of state.orders)for(const sh of o.shipments)if(sh.storeName)sh.storeName=sh.storeName.replace(/\bD[e]mo\s+/gi,'');state.commerceRevision=3;
+}
+function optionPrice(p,vid='std'){return p.price+Number(p.variants.find(v=>v.id===vid)?.add||0)}
+function checkoutAddress(){return getUser()?.addresses.find(a=>a.id===view.checkoutAddressId)||getUser()?.addresses.find(a=>a.default)||getUser()?.addresses[0]}
+function deliveryFor(sid){return view.deliveryChoices?.[sid]||'delivery'}
+function voucherIssue(v,amount,shipping=0){
+ if(!v?.active)return 'Not available';if(v.start&&v.start>localDay(now()))return 'Not started';if(v.expires<localDay(now()))return 'Expired';if(amount<v.min)return 'Spend '+money(v.min-amount)+' more';
+ if(S.claims.some(c=>c.voucherId===v.id&&c.userId===userId&&c.usedOrderId))return 'Already used';
+ if(S.claims.filter(c=>c.voucherId===v.id&&c.usedOrderId).length>=v.usageLimit)return 'Fully redeemed';
+ if(v.scope==='shipping'&&shipping<=0)return 'Delivery orders only';return '';
+}
+function potentialDiscount(v,amount,shipping=0){if(voucherIssue(v,amount,shipping))return 0;return Math.min(cents(v.scope==='shipping'?shipping:amount),v.kind==='percent'?Math.min(cents(v.max||Infinity),Math.round(cents(amount)*v.value/100)):Math.min(cents(v.value),cents(v.max||Infinity)));}
+function discountCentavos(v,amount,shipping=0){return usableVoucher(v)?potentialDiscount(v,amount,shipping):0;}
+function splitCentavos(total,weights){let remaining=total,weight=weights.reduce((n,w)=>n+w,0);return weights.map((w,i)=>{const part=i===weights.length-1?remaining:weight?Math.floor(total*w/weight):0;remaining-=part;return part})}
+function cartSummary(){const items=selectedCart(),total=peso(items.reduce((n,c)=>n+cents(optionPrice(getP(c.productId),c.variantId))*c.qty,0));return {items,total,shipping:[...new Set(items.map(c=>getP(c.productId).storeId))].reduce((n,sid)=>n+(deliveryFor(sid)==='pickup'?0:S.settings.shipping),0)}}
+function buildQuote(){
+ const {items,total}=cartSummary(),shops={},shopOff={},shippingByShop={};for(const c of items)(shops[getP(c.productId).storeId]??=[]).push(c);
+ for(const [sid,its] of Object.entries(shops)){const amount=peso(its.reduce((n,c)=>n+cents(optionPrice(getP(c.productId),c.variantId))*c.qty,0)),v=S.vouchers.find(v=>v.id===view.shopVoucher?.[sid]);shopOff[sid]=v?.scope==='shop'&&v.storeId===sid?peso(discountCentavos(v,amount)):0;shippingByShop[sid]=deliveryFor(sid)==='pickup'?0:S.settings.shipping;}
+ const discountShop=peso(Object.values(shopOff).reduce((n,a)=>n+cents(a),0)),shipping=peso(Object.values(shippingByShop).reduce((n,a)=>n+cents(a),0)),v=S.vouchers.find(v=>v.id===view.checkoutVoucher),discountPlatform=v?.scope==='platform'?peso(discountCentavos(v,total-discountShop)):0,sv=S.vouchers.find(v=>v.id===view.shippingVoucher),discountShipping=sv?.scope==='shipping'?peso(discountCentavos(sv,total-discountShop,shipping)):0;
+ const allocations=splitCentavos(cents(discountShipping),Object.values(shippingByShop).map(cents));const shippingDiscounts=Object.fromEntries(Object.keys(shops).map((sid,i)=>[sid,peso(allocations[i])]));
+ return {items,total,shops,shopOff,shipping,shippingByShop,shippingDiscounts,discountShop,discountPlatform,discountShipping,due:peso(cents(total)+cents(shipping)-cents(discountShop)-cents(discountPlatform)-cents(discountShipping))};
+}
+function consumeVouchers(q,orderId){const ids=[...(q.discountPlatform?[view.checkoutVoucher]:[]),...(q.discountShipping?[view.shippingVoucher]:[]),...Object.keys(q.shopOff).filter(s=>q.shopOff[s]>0).map(s=>view.shopVoucher[s])];for(const voucherId of new Set(ids)){const claim=S.claims.find(c=>c.userId===userId&&c.voucherId===voucherId&&!c.usedOrderId);guard(claim,'Voucher is no longer available');claim.usedOrderId=orderId;claim.usedAt=now()}}
+function placeOrder(){
+ authenticate();guard(getUser().status==='Active','Account unavailable');const q=buildQuote(),addr=checkoutAddress();guard(q.items.length,'Select at least one item');guard(addr&&addr.name.trim().length>=3&&/^09\d{9}$/.test(addr.phone)&&/^\d{4}$/.test(addr.zip),'Choose a valid contact address');
+ const quantities={};for(const c of q.items){const p=getP(c.productId);guard(visible(p)&&p.variants.some(v=>v.id===c.variantId)&&Number.isInteger(c.qty)&&c.qty>0,'An item or option is unavailable');quantities[p.id]=(quantities[p.id]||0)+c.qty;guard(quantities[p.id]<=available(p.id),'Insufficient stock: '+p.name);if(p.flash)guard(flashUsed(p.id)+quantities[p.id]<=(p.flashCap||999999),'Flash purchase limit reached');}
+ for(const sid of Object.keys(q.shops))if(deliveryFor(sid)==='pickup')guard(S.settings.pickupEnabled&&getStore(sid)?.pickup?.enabled,'Pickup unavailable for this shop');
+ const selected=[view.checkoutVoucher,view.shippingVoucher,...Object.values(view.shopVoucher||{})].filter(Boolean);for(const vid of selected){const v=S.vouchers.find(x=>x.id===vid),amount=v?.scope==='shop'?q.shops[v.storeId]?.reduce((n,c)=>n+optionPrice(getP(c.productId),c.variantId)*c.qty,0):q.total-q.discountShop;guard(v&&usableVoucher(v)&&!voucherIssue(v,amount||0,q.shipping),'Remove or replace an ineligible voucher');}
+ const oid='SS-'+(++S.seq),sids=Object.keys(q.shops),items=q.items.map(c=>{const p=getP(c.productId),v=p.variants.find(v=>v.id===c.variantId);return {id:p.id,variantId:v.id,variantName:v.name,optionAttributes:{...v.attributes},name:p.name,sku:p.sku,storeId:p.storeId,qty:c.qty,price:optionPrice(p,v.id),commissionRate:S.settings.commission,image:p.images?.[v.imageIndex||0]?.src||p.images?.[0]?.src}}),alloc=splitCentavos(cents(q.discountPlatform),sids.map(sid=>cents(items.filter(i=>i.storeId===sid).reduce((n,i)=>n+i.price*i.qty,0))));
+ const shipments=sids.map(sid=>({id:id('SHIP'),storeId:sid,storeName:getStore(sid).name,status:'Awaiting Payment',method:deliveryFor(sid),shipping:q.shippingByShop[sid],shippingDiscount:q.shippingDiscounts[sid],pickup:deliveryFor(sid)==='pickup'?{...getStore(sid).pickup,code:id('PICK').slice(-6)}:null,courier:'',tracking:'',history:[]}));
+ const o={id:oid,customerId:userId,items,shipments,created:now(),amount:q.due,itemTotal:q.total,shipping:q.shipping,shippingDiscount:q.discountShipping,shippingVoucher:view.shippingVoucher||'',discount:q.discountShop+q.discountPlatform,platformDiscount:q.discountPlatform,platformAllocation:Object.fromEntries(sids.map((sid,i)=>[sid,peso(alloc[i])])),shopDiscounts:q.shopOff,paymentStatus:'Pending',completed:false,recipientName:addr.name,recipientPhone:addr.phone,addressLabel:addr.label,address:addr.line+', '+addr.zip,addressSnapshot:{...addr},voucher:view.checkoutVoucher,refundAmount:0,synthetic:false};
+ consumeVouchers(q,oid);items.forEach(i=>ledger(i.id,'reserve',i.qty,oid));S.orders.push(o);S.payments.push({id:id('PAY'),orderId:oid,amount:q.due,status:'Pending',provider:'Payment adapter',attempts:[{id:id('AT'),created:now(),method:view.paymentMethod,status:'Pending'}],events:[]});if(!view.buyNowItem)S.cart=S.cart.filter(c=>!(c.userId===userId&&c.selected!==false));audit('Checkout created',oid+' · '+money(o.amount));commit('order.created',{id:oid});view.buyNowItem=null;view.checkoutVoucher='';view.shopVoucher={};view.shippingVoucher='';view.deliveryChoices={};view.sellerNotes={};go('payment/'+oid);
+}
+function returnLimit(r){const o=getO(r.orderId),i=o?.items.find(i=>i.id===r.itemId&&(!r.variantId||i.variantId===r.variantId)),gross=o?.items.filter(x=>x.storeId===i?.storeId).reduce((n,x)=>n+x.price*x.qty,0)||1;const off=(o?.shopDiscounts?.[i?.storeId]||0)+(o?.platformAllocation?.[i?.storeId]||0),unit=i?i.price*(1-off/gross):0,used=S.returns.filter(x=>x.id!==r.id&&x.orderId===r.orderId&&x.itemId===r.itemId&&(!r.variantId||!x.variantId||x.variantId===r.variantId)&&x.status==='Refunded').reduce((n,x)=>n+x.refund,0);return Math.max(0,peso(Math.min(cents(unit*(i?.qty||0)-used),cents(unit*r.qty),cents((o?.amount||0)-(o?.refundAmount||0)))))}

@@ -1,0 +1,3110 @@
+{
+  "brand-anker-1": {
+    "source": "https://www.anker.com.ph/products/anker-zolo-10000mah-30w-power-bank",
+    "gallery": [
+      {
+        "src": "assets/products/brand-anker-1-view-0.webp",
+        "alt": "Anker Zolo 10,000mAh 30W Power Bank — product view 1",
+        "source": "https://www.anker.com.ph/products/anker-zolo-10000mah-30w-power-bank",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0045/9266/4649/files/Anker_Zolo_Power_Bank_10_000mAh_30W_with_Built-in_USB-C_Cable_White.png?v=1776159849"
+      },
+      {
+        "src": "assets/products/brand-anker-1-view-1.webp",
+        "alt": "Anker Zolo 10,000mAh 30W Power Bank — product view 2",
+        "source": "https://www.anker.com.ph/products/anker-zolo-10000mah-30w-power-bank",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0045/9266/4649/files/Anker_Zolo_Power_Bank_10_000mAh_30W_with_Built-in_USB-C_Cable_Coral_Pink.png?v=1776159849"
+      },
+      {
+        "src": "assets/products/brand-anker-1-view-2.webp",
+        "alt": "Anker Zolo 10,000mAh 30W Power Bank — product view 3",
+        "source": "https://www.anker.com.ph/products/anker-zolo-10000mah-30w-power-bank",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0045/9266/4649/files/Anker_Zolo_Power_Bank_10_000mAh_30W_with_Built-in_USB-C_Cable_Misty_Blue..png?v=1776159949"
+      }
+    ],
+    "options": [
+      {
+        "name": "Color: Pink",
+        "attributes": {
+          "Color": "Pink"
+        },
+        "imageIndex": 1,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-anker-2": {
+    "source": "https://www.anker.com.ph/products/anker-zolo-20000mah-30w-power-bank",
+    "gallery": [
+      {
+        "src": "assets/products/brand-anker-2-view-0.webp",
+        "alt": "Anker Zolo 20,000mAh 30W Power Bank — product view 1",
+        "source": "https://www.anker.com.ph/products/anker-zolo-20000mah-30w-power-bank",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0045/9266/4649/files/A1689H31.png?v=1757476425"
+      },
+      {
+        "src": "assets/products/brand-anker-2-view-1.webp",
+        "alt": "Anker Zolo 20,000mAh 30W Power Bank — product view 2",
+        "source": "https://www.anker.com.ph/products/anker-zolo-20000mah-30w-power-bank",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0045/9266/4649/files/A1689051.png?v=1757476433"
+      },
+      {
+        "src": "assets/products/brand-anker-2-view-2.webp",
+        "alt": "Anker Zolo 20,000mAh 30W Power Bank — product view 3",
+        "source": "https://www.anker.com.ph/products/anker-zolo-20000mah-30w-power-bank",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0045/9266/4649/files/A1689H21.png?v=1757476441"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-anker-3": {
+    "source": "https://www.anker.com.ph/products/anker-nano-10000mah-45w-power-bank",
+    "gallery": [
+      {
+        "src": "assets/products/brand-anker-3-view-0.webp",
+        "alt": "Anker Nano 10,000mAh 45W Power Bank — product view 1",
+        "source": "https://www.anker.com.ph/products/anker-nano-10000mah-45w-power-bank",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0045/9266/4649/files/Anker_Nano_Power_Bank_10_000mAh_45W_Black..png?v=1776227555"
+      },
+      {
+        "src": "assets/products/brand-anker-3-view-1.webp",
+        "alt": "Anker Nano 10,000mAh 45W Power Bank — product view 2",
+        "source": "https://www.anker.com.ph/products/anker-nano-10000mah-45w-power-bank",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0045/9266/4649/files/Anker_Nano_Power_Bank_10_000mAh_45W_Aurora_White.png?v=1776227555"
+      },
+      {
+        "src": "assets/products/brand-anker-3-view-2.webp",
+        "alt": "Anker Nano 10,000mAh 45W Power Bank — product view 3",
+        "source": "https://www.anker.com.ph/products/anker-nano-10000mah-45w-power-bank",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0045/9266/4649/files/Anker_Nano_Power_Bank_10_000mAh_45W_Teal_Oasis.png?v=1776227555"
+      }
+    ],
+    "options": [
+      {
+        "name": "Color: Black",
+        "attributes": {
+          "Color": "Black"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: White",
+        "attributes": {
+          "Color": "White"
+        },
+        "imageIndex": 1,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-anker-4": {
+    "source": "https://www.anker.com.ph/products/anker-nano-70w-3-port-wall-charger",
+    "gallery": [
+      {
+        "src": "assets/products/brand-anker-4-view-0.webp",
+        "alt": "Anker Nano 70W 3-Port Wall Charger — product view 1",
+        "source": "https://www.anker.com.ph/products/anker-nano-70w-3-port-wall-charger",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0045/9266/4649/files/Anker_Nano_Charger_3_Ports_70W_Wall_Charger_Black..png?v=1777874403"
+      },
+      {
+        "src": "assets/products/brand-anker-4-view-1.webp",
+        "alt": "Anker Nano 70W 3-Port Wall Charger — product view 2",
+        "source": "https://www.anker.com.ph/products/anker-nano-70w-3-port-wall-charger",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0045/9266/4649/files/Anker_Nano_Charger_3_Ports_70W_Wall_Charger_White..png?v=1777874419"
+      }
+    ],
+    "options": [
+      {
+        "name": "Color: Black",
+        "attributes": {
+          "Color": "Black"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: White",
+        "attributes": {
+          "Color": "White"
+        },
+        "imageIndex": 1,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-bench-1": {
+    "source": "https://shop.bench.com.ph/products/bod0177-mens-round-neck-logo-t-shirt",
+    "gallery": [
+      {
+        "src": "assets/products/brand-bench-1-view-0.webp",
+        "alt": "Bench Men's Logo T-Shirt — product view 1",
+        "source": "https://shop.bench.com.ph/products/bod0177-mens-round-neck-logo-t-shirt",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0602/2355/3670/files/BOD0177KH4_MD_S1_ZA.jpg?v=1782271234"
+      },
+      {
+        "src": "assets/products/brand-bench-1-view-1.webp",
+        "alt": "Bench Men's Logo T-Shirt — product view 2",
+        "source": "https://shop.bench.com.ph/products/bod0177-mens-round-neck-logo-t-shirt",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0602/2355/3670/files/BOD0177KH4_MD_F_ZA.jpg?v=1782271234"
+      },
+      {
+        "src": "assets/products/brand-bench-1-view-2.webp",
+        "alt": "Bench Men's Logo T-Shirt — product view 3",
+        "source": "https://shop.bench.com.ph/products/bod0177-mens-round-neck-logo-t-shirt",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0602/2355/3670/files/BOD0177KH4_MD_45_ZA.jpg?v=1782271234"
+      }
+    ],
+    "options": [
+      {
+        "name": "Color: Khaki · Size: XXL",
+        "attributes": {
+          "Color": "Khaki",
+          "Size": "XXL"
+        },
+        "imageIndex": 1,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-bench-2": {
+    "source": "https://shop.bench.com.ph/products/itj0378-mens-knitted-hoodie-jacket",
+    "gallery": [
+      {
+        "src": "assets/products/brand-bench-2-view-0.webp",
+        "alt": "Bench Men's Knitted Hoodie Jacket — product view 1",
+        "source": "https://shop.bench.com.ph/products/itj0378-mens-knitted-hoodie-jacket",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0602/2355/3670/files/ITJ0378BK3_MD_45_ZA.jpg?v=1765935597"
+      },
+      {
+        "src": "assets/products/brand-bench-2-view-1.webp",
+        "alt": "Bench Men's Knitted Hoodie Jacket — product view 2",
+        "source": "https://shop.bench.com.ph/products/itj0378-mens-knitted-hoodie-jacket",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0602/2355/3670/files/ITJ0378BK3_MD_B_ZA.jpg?v=1765935597"
+      },
+      {
+        "src": "assets/products/brand-bench-2-view-2.webp",
+        "alt": "Bench Men's Knitted Hoodie Jacket — product view 3",
+        "source": "https://shop.bench.com.ph/products/itj0378-mens-knitted-hoodie-jacket",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0602/2355/3670/files/ITJ0378BK3_MD_F_ZA.jpg?v=1765935597"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-bench-3": {
+    "source": "https://shop.bench.com.ph/products/iac1069-baseball-cap",
+    "gallery": [
+      {
+        "src": "assets/products/brand-bench-3-view-0.webp",
+        "alt": "Bench Baseball Cap — Sample style — product view 1",
+        "source": "https://shop.bench.com.ph/products/iac1069-baseball-cap",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0602/2355/3670/files/IAC1069BR3_FL_45_ZA.jpg?v=1792047746"
+      },
+      {
+        "src": "assets/products/brand-bench-3-view-1.webp",
+        "alt": "Bench Baseball Cap — Sample style — product view 2",
+        "source": "https://shop.bench.com.ph/products/iac1069-baseball-cap",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0602/2355/3670/files/IAC1069BR3_FL_F_ZA.jpg?v=1792047746"
+      },
+      {
+        "src": "assets/products/brand-bench-3-view-2.webp",
+        "alt": "Bench Baseball Cap — Sample style — product view 3",
+        "source": "https://shop.bench.com.ph/products/iac1069-baseball-cap",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0602/2355/3670/files/IAC1069BR3_FL_S1_ZA.jpg?v=1792047746"
+      }
+    ],
+    "options": [
+      {
+        "name": "Color: Brown",
+        "attributes": {
+          "Color": "Brown"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-bench-4": {
+    "source": "https://shop.bench.com.ph/products/bwl0037-mens-denim-jacket",
+    "gallery": [
+      {
+        "src": "assets/products/brand-bench-4-view-0.webp",
+        "alt": "Bench Denim Jacket — Sample style — product view 1",
+        "source": "https://shop.bench.com.ph/products/bwl0037-mens-denim-jacket",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0602/2355/3670/files/BWL0037BK3_MD_F_ZA.jpg?v=1792465735"
+      },
+      {
+        "src": "assets/products/brand-bench-4-view-1.webp",
+        "alt": "Bench Denim Jacket — Sample style — product view 2",
+        "source": "https://shop.bench.com.ph/products/bwl0037-mens-denim-jacket",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0602/2355/3670/files/BWL0037BK3_MD_45_ZA.jpg?v=1792465735"
+      },
+      {
+        "src": "assets/products/brand-bench-4-view-2.webp",
+        "alt": "Bench Denim Jacket — Sample style — product view 3",
+        "source": "https://shop.bench.com.ph/products/bwl0037-mens-denim-jacket",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0602/2355/3670/files/BWL0037BK3_MD_B_ZA.jpg?v=1792465735"
+      }
+    ],
+    "options": [
+      {
+        "name": "Option 1: Black · Size: S",
+        "attributes": {
+          "Option 1": "Black",
+          "Size": "S"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Option 1: Black · Size: M",
+        "attributes": {
+          "Option 1": "Black",
+          "Size": "M"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Option 1: Black · Size: L",
+        "attributes": {
+          "Option 1": "Black",
+          "Size": "L"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Option 1: Black · Size: XL",
+        "attributes": {
+          "Option 1": "Black",
+          "Size": "XL"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-penshoppe-1": {
+    "source": "https://www.penshoppe.com/products/dress-code-textured-t-shirt-998590-dark-gray",
+    "gallery": [
+      {
+        "src": "assets/products/brand-penshoppe-1-view-0.webp",
+        "alt": "Penshoppe Dress Code Textured T-Shirt — product view 1",
+        "source": "https://www.penshoppe.com/products/dress-code-textured-t-shirt-998590-dark-gray",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/2282/7539/files/998590-Dark_Gray_4.jpg?v=1792551942"
+      },
+      {
+        "src": "assets/products/brand-penshoppe-1-view-1.webp",
+        "alt": "Penshoppe Dress Code Textured T-Shirt — product view 2",
+        "source": "https://www.penshoppe.com/products/dress-code-textured-t-shirt-998590-dark-gray",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/2282/7539/files/998590-Dark_Gray_2.jpg?v=1792551942"
+      },
+      {
+        "src": "assets/products/brand-penshoppe-1-view-2.webp",
+        "alt": "Penshoppe Dress Code Textured T-Shirt — product view 3",
+        "source": "https://www.penshoppe.com/products/dress-code-textured-t-shirt-998590-dark-gray",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/2282/7539/files/998590-Dark_Gray_3.jpg?v=1792551942"
+      }
+    ],
+    "options": [
+      {
+        "name": "Color: Dark Gray · Size (INT): XS",
+        "attributes": {
+          "Color": "Dark Gray",
+          "Size (INT)": "XS"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Dark Gray · Size (INT): S",
+        "attributes": {
+          "Color": "Dark Gray",
+          "Size (INT)": "S"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Dark Gray · Size (INT): M",
+        "attributes": {
+          "Color": "Dark Gray",
+          "Size (INT)": "M"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Dark Gray · Size (INT): L",
+        "attributes": {
+          "Color": "Dark Gray",
+          "Size (INT)": "L"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Dark Gray · Size (INT): XL",
+        "attributes": {
+          "Color": "Dark Gray",
+          "Size (INT)": "XL"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-penshoppe-2": {
+    "source": "https://www.penshoppe.com/products/relaxed-graphic-hoodie-997072-black",
+    "gallery": [
+      {
+        "src": "assets/products/brand-penshoppe-2-view-0.webp",
+        "alt": "Penshoppe Relaxed Graphic Hoodie — product view 1",
+        "source": "https://www.penshoppe.com/products/relaxed-graphic-hoodie-997072-black",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/2282/7539/files/997072-Black_4.jpg?v=1792457380"
+      },
+      {
+        "src": "assets/products/brand-penshoppe-2-view-1.webp",
+        "alt": "Penshoppe Relaxed Graphic Hoodie — product view 2",
+        "source": "https://www.penshoppe.com/products/relaxed-graphic-hoodie-997072-black",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/2282/7539/files/997072-Black_3.jpg?v=1792457380"
+      },
+      {
+        "src": "assets/products/brand-penshoppe-2-view-2.webp",
+        "alt": "Penshoppe Relaxed Graphic Hoodie — product view 3",
+        "source": "https://www.penshoppe.com/products/relaxed-graphic-hoodie-997072-black",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/2282/7539/files/997072-Black_1.jpg?v=1792457380"
+      }
+    ],
+    "options": [
+      {
+        "name": "Color: Black · Size (INT): XS",
+        "attributes": {
+          "Color": "Black",
+          "Size (INT)": "XS"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size (INT): S",
+        "attributes": {
+          "Color": "Black",
+          "Size (INT)": "S"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size (INT): M",
+        "attributes": {
+          "Color": "Black",
+          "Size (INT)": "M"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size (INT): L",
+        "attributes": {
+          "Color": "Black",
+          "Size (INT)": "L"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size (INT): XL",
+        "attributes": {
+          "Color": "Black",
+          "Size (INT)": "XL"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-penshoppe-3": {
+    "source": "https://www.penshoppe.com/products/essentials-boxy-t-shirt-998418-black",
+    "gallery": [
+      {
+        "src": "assets/products/brand-penshoppe-3-view-0.webp",
+        "alt": "Penshoppe Essentials T-Shirt — product view 1",
+        "source": "https://www.penshoppe.com/products/essentials-boxy-t-shirt-998418-black",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/2282/7539/files/998418-Black_2.jpg?v=1788232870"
+      },
+      {
+        "src": "assets/products/brand-penshoppe-3-view-1.webp",
+        "alt": "Penshoppe Essentials T-Shirt — product view 2",
+        "source": "https://www.penshoppe.com/products/essentials-boxy-t-shirt-998418-black",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/2282/7539/files/998418-Black_1.jpg?v=1788232870"
+      },
+      {
+        "src": "assets/products/brand-penshoppe-3-view-2.webp",
+        "alt": "Penshoppe Essentials T-Shirt — product view 3",
+        "source": "https://www.penshoppe.com/products/essentials-boxy-t-shirt-998418-black",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/2282/7539/files/998418-Black_3.jpg?v=1788232870"
+      }
+    ],
+    "options": [
+      {
+        "name": "Color: Black · Size (INT): XS",
+        "attributes": {
+          "Color": "Black",
+          "Size (INT)": "XS"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size (INT): S",
+        "attributes": {
+          "Color": "Black",
+          "Size (INT)": "S"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size (INT): M",
+        "attributes": {
+          "Color": "Black",
+          "Size (INT)": "M"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size (INT): L",
+        "attributes": {
+          "Color": "Black",
+          "Size (INT)": "L"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size (INT): XL",
+        "attributes": {
+          "Color": "Black",
+          "Size (INT)": "XL"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size (INT): XXL",
+        "attributes": {
+          "Color": "Black",
+          "Size (INT)": "XXL"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-penshoppe-4": {
+    "source": "https://www.penshoppe.com/products/essentials-classic-straight-fit-jeans-994612-light-blue",
+    "gallery": [
+      {
+        "src": "assets/products/brand-penshoppe-4-view-0.webp",
+        "alt": "Penshoppe Essentials Classic Straight Fit Jeans — product view 1",
+        "source": "https://www.penshoppe.com/products/essentials-classic-straight-fit-jeans-994612-light-blue",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/2282/7539/files/994612-Light_Blue_4.jpg?v=1788746687"
+      },
+      {
+        "src": "assets/products/brand-penshoppe-4-view-1.webp",
+        "alt": "Penshoppe Essentials Classic Straight Fit Jeans — product view 2",
+        "source": "https://www.penshoppe.com/products/essentials-classic-straight-fit-jeans-994612-light-blue",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/2282/7539/files/994612-Light_Blue_2.jpg?v=1788746687"
+      },
+      {
+        "src": "assets/products/brand-penshoppe-4-view-2.webp",
+        "alt": "Penshoppe Essentials Classic Straight Fit Jeans — product view 3",
+        "source": "https://www.penshoppe.com/products/essentials-classic-straight-fit-jeans-994612-light-blue",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/2282/7539/files/994612-Light_Blue_1.jpg?v=1788746687"
+      }
+    ],
+    "options": [
+      {
+        "name": "Color: Light Blue · Size (INT): SIZE 26",
+        "attributes": {
+          "Color": "Light Blue",
+          "Size (INT)": "SIZE 26"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Light Blue · Size (INT): SIZE 28",
+        "attributes": {
+          "Color": "Light Blue",
+          "Size (INT)": "SIZE 28"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Light Blue · Size (INT): SIZE 30",
+        "attributes": {
+          "Color": "Light Blue",
+          "Size (INT)": "SIZE 30"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Light Blue · Size (INT): SIZE 32",
+        "attributes": {
+          "Color": "Light Blue",
+          "Size (INT)": "SIZE 32"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Light Blue · Size (INT): SIZE 34",
+        "attributes": {
+          "Color": "Light Blue",
+          "Size (INT)": "SIZE 34"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Light Blue · Size (INT): SIZE 36",
+        "attributes": {
+          "Color": "Light Blue",
+          "Size (INT)": "SIZE 36"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-incerun-1": {
+    "source": "https://www.incerunmen.com/products/mens-avant-garde-runway-ultra-cropped-hanging-streamer-long-sleeve-lapel-collar-crop-jacket-skul83120",
+    "gallery": [
+      {
+        "src": "assets/products/brand-incerun-1-view-0.webp",
+        "alt": "Incerun Avant-Garde Crop Jacket SKUL83120 — product view 1",
+        "source": "https://www.incerunmen.com/products/mens-avant-garde-runway-ultra-cropped-hanging-streamer-long-sleeve-lapel-collar-crop-jacket-skul83120",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0516/6350/3509/files/a04f02ad-d6ca-40b7-9da1-95c0b9e74ea0.jpg?v=1789722014"
+      },
+      {
+        "src": "assets/products/brand-incerun-1-view-1.webp",
+        "alt": "Incerun Avant-Garde Crop Jacket SKUL83120 — product view 2",
+        "source": "https://www.incerunmen.com/products/mens-avant-garde-runway-ultra-cropped-hanging-streamer-long-sleeve-lapel-collar-crop-jacket-skul83120",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0516/6350/3509/files/24d0857f-bf99-4fe3-bbc5-6e807ef93acb.jpg?v=1789722023"
+      },
+      {
+        "src": "assets/products/brand-incerun-1-view-2.webp",
+        "alt": "Incerun Avant-Garde Crop Jacket SKUL83120 — product view 3",
+        "source": "https://www.incerunmen.com/products/mens-avant-garde-runway-ultra-cropped-hanging-streamer-long-sleeve-lapel-collar-crop-jacket-skul83120",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0516/6350/3509/files/934e5d77-8ebb-4017-ad80-d7e058d3c7dc.jpg?v=1789722031"
+      }
+    ],
+    "options": [
+      {
+        "name": "Color: Black · Size: M",
+        "attributes": {
+          "Color": "Black",
+          "Size": "M"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size: 2XL",
+        "attributes": {
+          "Color": "Black",
+          "Size": "2XL"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Wine Red · Size: L",
+        "attributes": {
+          "Color": "Wine Red",
+          "Size": "L"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Wine Red · Size: XL",
+        "attributes": {
+          "Color": "Wine Red",
+          "Size": "XL"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Wine Red · Size: 2XL",
+        "attributes": {
+          "Color": "Wine Red",
+          "Size": "2XL"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Brown · Size: L",
+        "attributes": {
+          "Color": "Brown",
+          "Size": "L"
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "Color: Brown · Size: XL",
+        "attributes": {
+          "Color": "Brown",
+          "Size": "XL"
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "Color: Brown · Size: 2XL",
+        "attributes": {
+          "Color": "Brown",
+          "Size": "2XL"
+        },
+        "imageIndex": 2,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-incerun-2": {
+    "source": "https://www.incerunmen.com/products/mens-avant-garde-high-street-ultra-high-side-slit-longline-fitted-long-sleeve-t-shirt-skul83123",
+    "gallery": [
+      {
+        "src": "assets/products/brand-incerun-2-view-0.webp",
+        "alt": "Incerun Longline Long Sleeve T-shirt SKUL83123 — product view 1",
+        "source": "https://www.incerunmen.com/products/mens-avant-garde-high-street-ultra-high-side-slit-longline-fitted-long-sleeve-t-shirt-skul83123",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0516/6350/3509/files/5eb4984e-069b-4bfa-a323-b6a110486ac0.jpg?v=1789376448"
+      },
+      {
+        "src": "assets/products/brand-incerun-2-view-1.webp",
+        "alt": "Incerun Longline Long Sleeve T-shirt SKUL83123 — product view 2",
+        "source": "https://www.incerunmen.com/products/mens-avant-garde-high-street-ultra-high-side-slit-longline-fitted-long-sleeve-t-shirt-skul83123",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0516/6350/3509/files/26fd872d-4896-44a0-a4a0-49580688e6c1.jpg?v=1789376458"
+      },
+      {
+        "src": "assets/products/brand-incerun-2-view-2.webp",
+        "alt": "Incerun Longline Long Sleeve T-shirt SKUL83123 — product view 3",
+        "source": "https://www.incerunmen.com/products/mens-avant-garde-high-street-ultra-high-side-slit-longline-fitted-long-sleeve-t-shirt-skul83123",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0516/6350/3509/files/8e845e89-5656-4581-85f2-9da6aef00b47.jpg?v=1789376466"
+      }
+    ],
+    "options": [
+      {
+        "name": "Color: Black · Size: S",
+        "attributes": {
+          "Color": "Black",
+          "Size": "S"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size: M",
+        "attributes": {
+          "Color": "Black",
+          "Size": "M"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size: L",
+        "attributes": {
+          "Color": "Black",
+          "Size": "L"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size: XL",
+        "attributes": {
+          "Color": "Black",
+          "Size": "XL"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size: 2XL",
+        "attributes": {
+          "Color": "Black",
+          "Size": "2XL"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Gray · Size: S",
+        "attributes": {
+          "Color": "Gray",
+          "Size": "S"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Gray · Size: M",
+        "attributes": {
+          "Color": "Gray",
+          "Size": "M"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Gray · Size: L",
+        "attributes": {
+          "Color": "Gray",
+          "Size": "L"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Gray · Size: XL",
+        "attributes": {
+          "Color": "Gray",
+          "Size": "XL"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Gray · Size: 2XL",
+        "attributes": {
+          "Color": "Gray",
+          "Size": "2XL"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Army Green · Size: S",
+        "attributes": {
+          "Color": "Army Green",
+          "Size": "S"
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "Color: Army Green · Size: M",
+        "attributes": {
+          "Color": "Army Green",
+          "Size": "M"
+        },
+        "imageIndex": 2,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-incerun-3": {
+    "source": "https://www.incerunmen.com/products/mens-early-autumn-cross-front-flowy-crepe-loose-long-sleeve-hooded-shirt-skul82413",
+    "gallery": [
+      {
+        "src": "assets/products/brand-incerun-3-view-0.webp",
+        "alt": "Incerun Relaxed Shirt — Sample style — product view 1",
+        "source": "https://www.incerunmen.com/products/mens-early-autumn-cross-front-flowy-crepe-loose-long-sleeve-hooded-shirt-skul82413",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0516/6350/3509/files/36c5aaed-5733-447d-a4cd-6bb34934f992.jpg?v=1789106418"
+      },
+      {
+        "src": "assets/products/brand-incerun-3-view-1.webp",
+        "alt": "Incerun Relaxed Shirt — Sample style — product view 2",
+        "source": "https://www.incerunmen.com/products/mens-early-autumn-cross-front-flowy-crepe-loose-long-sleeve-hooded-shirt-skul82413",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0516/6350/3509/files/cdc8ec1d-14c8-4604-91b2-b1231e35134c.jpg?v=1789106426"
+      },
+      {
+        "src": "assets/products/brand-incerun-3-view-2.webp",
+        "alt": "Incerun Relaxed Shirt — Sample style — product view 3",
+        "source": "https://www.incerunmen.com/products/mens-early-autumn-cross-front-flowy-crepe-loose-long-sleeve-hooded-shirt-skul82413",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0516/6350/3509/files/3b8b436d-bfed-4258-a257-fccb9a639595.jpg?v=1789106433"
+      }
+    ],
+    "options": [
+      {
+        "name": "Color: White · Size: S",
+        "attributes": {
+          "Color": "White",
+          "Size": "S"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: White · Size: M",
+        "attributes": {
+          "Color": "White",
+          "Size": "M"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: White · Size: L",
+        "attributes": {
+          "Color": "White",
+          "Size": "L"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: White · Size: XL",
+        "attributes": {
+          "Color": "White",
+          "Size": "XL"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: White · Size: 2XL",
+        "attributes": {
+          "Color": "White",
+          "Size": "2XL"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size: S",
+        "attributes": {
+          "Color": "Black",
+          "Size": "S"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size: M",
+        "attributes": {
+          "Color": "Black",
+          "Size": "M"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size: L",
+        "attributes": {
+          "Color": "Black",
+          "Size": "L"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size: XL",
+        "attributes": {
+          "Color": "Black",
+          "Size": "XL"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size: 2XL",
+        "attributes": {
+          "Color": "Black",
+          "Size": "2XL"
+        },
+        "imageIndex": 1,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-mikana-1": {
+    "source": "https://mikana.jp/products/cruise-atsuyo-pearl-choker-necklace",
+    "gallery": [
+      {
+        "src": "assets/products/brand-mikana-1-view-0.webp",
+        "alt": "Mikana Cruise Atsuyo Pearl Choker Necklace — product view 1",
+        "source": "https://mikana.jp/products/cruise-atsuyo-pearl-choker-necklace",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0075/0079/1898/files/SKU_ATSUYO_1.jpg?v=1790667302"
+      },
+      {
+        "src": "assets/products/brand-mikana-1-view-1.webp",
+        "alt": "Mikana Cruise Atsuyo Pearl Choker Necklace — product view 2",
+        "source": "https://mikana.jp/products/cruise-atsuyo-pearl-choker-necklace",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0075/0079/1898/files/SKU_ATSUYO_4.jpg?v=1790667302"
+      },
+      {
+        "src": "assets/products/brand-mikana-1-view-2.webp",
+        "alt": "Mikana Cruise Atsuyo Pearl Choker Necklace — product view 3",
+        "source": "https://mikana.jp/products/cruise-atsuyo-pearl-choker-necklace",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0075/0079/1898/files/SKU_NECKLACE_b0f89384-3bfd-4fbc-94a9-8e71c12ac585.jpg?v=1787822868"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-mikana-2": {
+    "source": "https://mikana.jp/products/cruise-fuyume-stud-earrings",
+    "gallery": [
+      {
+        "src": "assets/products/brand-mikana-2-view-0.webp",
+        "alt": "Mikana Cruise Fuyume Stud Earrings — product view 1",
+        "source": "https://mikana.jp/products/cruise-fuyume-stud-earrings",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0075/0079/1898/files/SKU_FUYUME_1.jpg?v=1790667194"
+      },
+      {
+        "src": "assets/products/brand-mikana-2-view-1.webp",
+        "alt": "Mikana Cruise Fuyume Stud Earrings — product view 2",
+        "source": "https://mikana.jp/products/cruise-fuyume-stud-earrings",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0075/0079/1898/files/SKU_FUYUME_4.jpg?v=1790667194"
+      },
+      {
+        "src": "assets/products/brand-mikana-2-view-2.webp",
+        "alt": "Mikana Cruise Fuyume Stud Earrings — product view 3",
+        "source": "https://mikana.jp/products/cruise-fuyume-stud-earrings",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0075/0079/1898/files/SKU_EARRINGS_f0ed976d-6a2d-49c9-9a68-92aefe0a8767.jpg?v=1787822308"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-mikana-3": {
+    "source": "https://mikana.jp/products/cruise-arino-pearl-link-bracelet",
+    "gallery": [
+      {
+        "src": "assets/products/brand-mikana-3-view-0.webp",
+        "alt": "Mikana Cruise Arino Pearl Link Bracelet — product view 1",
+        "source": "https://mikana.jp/products/cruise-arino-pearl-link-bracelet",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0075/0079/1898/files/SKU_ARINO_1.jpg?v=1790667478"
+      },
+      {
+        "src": "assets/products/brand-mikana-3-view-1.webp",
+        "alt": "Mikana Cruise Arino Pearl Link Bracelet — product view 2",
+        "source": "https://mikana.jp/products/cruise-arino-pearl-link-bracelet",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0075/0079/1898/files/SKU_ARINO_4.jpg?v=1790667478"
+      },
+      {
+        "src": "assets/products/brand-mikana-3-view-2.webp",
+        "alt": "Mikana Cruise Arino Pearl Link Bracelet — product view 3",
+        "source": "https://mikana.jp/products/cruise-arino-pearl-link-bracelet",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0075/0079/1898/files/SKU_BRACELET_b583b6b4-a306-4930-becf-461ea3f0e3c0.jpg?v=1787823197"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-mikana-4": {
+    "source": "https://mikana.jp/products/cruise-guen-ring",
+    "gallery": [
+      {
+        "src": "assets/products/brand-mikana-4-view-0.webp",
+        "alt": "Mikana Cruise Guen Ring — product view 1",
+        "source": "https://mikana.jp/products/cruise-guen-ring",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0075/0079/1898/files/SKU_GUEN_1.jpg?v=1790667429"
+      },
+      {
+        "src": "assets/products/brand-mikana-4-view-1.webp",
+        "alt": "Mikana Cruise Guen Ring — product view 2",
+        "source": "https://mikana.jp/products/cruise-guen-ring",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0075/0079/1898/files/SKU_GUEN_4.jpg?v=1790667429"
+      },
+      {
+        "src": "assets/products/brand-mikana-4-view-2.webp",
+        "alt": "Mikana Cruise Guen Ring — product view 3",
+        "source": "https://mikana.jp/products/cruise-guen-ring",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0075/0079/1898/files/SKU_RINGS_5cc1e2bd-af29-4753-b038-4a0aa2838a81.jpg?v=1787823118"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-sunnies-1": {
+    "source": "https://ph.sunniesstudios.com/products/paloma",
+    "gallery": [
+      {
+        "src": "assets/products/brand-sunnies-1-view-0.webp",
+        "alt": "Sunnies Studios Paloma Sunglasses — product view 1",
+        "source": "https://ph.sunniesstudios.com/products/paloma",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0172/4383/2374/files/PALOMA_INK_FRONT.png?v=1792643187"
+      },
+      {
+        "src": "assets/products/brand-sunnies-1-view-1.webp",
+        "alt": "Sunnies Studios Paloma Sunglasses — product view 2",
+        "source": "https://ph.sunniesstudios.com/products/paloma",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0172/4383/2374/files/PALOMA_INK_FD.png?v=1792643186"
+      },
+      {
+        "src": "assets/products/brand-sunnies-1-view-2.webp",
+        "alt": "Sunnies Studios Paloma Sunglasses — product view 3",
+        "source": "https://ph.sunniesstudios.com/products/paloma",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0172/4383/2374/files/PALOMA_INK_SIDE.png?v=1792643186"
+      }
+    ],
+    "options": [
+      {
+        "name": "Product Color: Ink · Frame Color: Black · Lens Color: Black",
+        "attributes": {
+          "Product Color": "Ink",
+          "Frame Color": "Black",
+          "Lens Color": "Black"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-sunnies-2": {
+    "source": "https://ph.sunniesstudios.com/products/yara",
+    "gallery": [
+      {
+        "src": "assets/products/brand-sunnies-2-view-0.webp",
+        "alt": "Sunnies Studios Yara Sunglasses — product view 1",
+        "source": "https://ph.sunniesstudios.com/products/yara",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Cacao_Full_Yara_Front_copy_2.jpg?v=1792641880"
+      },
+      {
+        "src": "assets/products/brand-sunnies-2-view-1.webp",
+        "alt": "Sunnies Studios Yara Sunglasses — product view 2",
+        "source": "https://ph.sunniesstudios.com/products/yara",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Cacao_Full_Daria_Front_Diagonal_copy_2.jpg?v=1792641880"
+      },
+      {
+        "src": "assets/products/brand-sunnies-2-view-2.webp",
+        "alt": "Sunnies Studios Yara Sunglasses — product view 3",
+        "source": "https://ph.sunniesstudios.com/products/yara",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Cacao_Full_Daria_Side_copy_2.jpg?v=1792641880"
+      }
+    ],
+    "options": [
+      {
+        "name": "Product Color: Cacao · Frame Color: Brown · Lens Color: Blue",
+        "attributes": {
+          "Product Color": "Cacao",
+          "Frame Color": "Brown",
+          "Lens Color": "Blue"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-sunnies-3": {
+    "source": "https://ph.sunniesstudios.com/products/dumpling-pouch",
+    "gallery": [
+      {
+        "src": "assets/products/brand-sunnies-3-view-0.webp",
+        "alt": "Sunnies Studios Dumpling Pouch — product view 1",
+        "source": "https://ph.sunniesstudios.com/products/dumpling-pouch",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0172/4383/2374/files/DSC06122_copy.jpg?v=1792483589"
+      },
+      {
+        "src": "assets/products/brand-sunnies-3-view-1.webp",
+        "alt": "Sunnies Studios Dumpling Pouch — product view 2",
+        "source": "https://ph.sunniesstudios.com/products/dumpling-pouch",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Chilicopy.jpg?v=1733792461"
+      },
+      {
+        "src": "assets/products/brand-sunnies-3-view-2.webp",
+        "alt": "Sunnies Studios Dumpling Pouch — product view 3",
+        "source": "https://ph.sunniesstudios.com/products/dumpling-pouch",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Cocoacopy.jpg?v=1733792461"
+      }
+    ],
+    "options": [
+      {
+        "name": "Product Color: Leopard",
+        "attributes": {
+          "Product Color": "Leopard"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-sunnies-4": {
+    "source": "https://ph.sunniesstudios.com/products/40oz-bottle",
+    "gallery": [
+      {
+        "src": "assets/products/brand-sunnies-4-view-0.webp",
+        "alt": "Sunnies Flask 40oz — product view 1",
+        "source": "https://ph.sunniesstudios.com/products/40oz-bottle",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0172/4383/2374/files/CHROME_copy_52278ea6-9fd4-4e3e-ab4a-dc363e61d95e.jpg?v=1768285074"
+      },
+      {
+        "src": "assets/products/brand-sunnies-4-view-1.webp",
+        "alt": "Sunnies Flask 40oz — product view 2",
+        "source": "https://ph.sunniesstudios.com/products/40oz-bottle",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Chrome_copy_e4f11eb5-b7ec-41a0-8645-b573db377830.jpg?v=1768801832"
+      },
+      {
+        "src": "assets/products/brand-sunnies-4-view-2.webp",
+        "alt": "Sunnies Flask 40oz — product view 3",
+        "source": "https://ph.sunniesstudios.com/products/40oz-bottle",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Bottle_Sizes_Local_5x4-1.jpg?v=1769755456"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-silverworks-1": {
+    "source": "https://www.silverworks.com/products/xn0012-stainless-steel-21-inches-twisted-chain-with-plain-28mm-cross-pendant-7-8g",
+    "gallery": [
+      {
+        "src": "assets/products/brand-silverworks-1-view-0.webp",
+        "alt": "SilverWorks Emman Silver Cross Pendant Necklace — product view 1",
+        "source": "https://www.silverworks.com/products/xn0012-stainless-steel-21-inches-twisted-chain-with-plain-28mm-cross-pendant-7-8g",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0274/8042/4471/files/XN00122.jpg?v=1781592588"
+      },
+      {
+        "src": "assets/products/brand-silverworks-1-view-1.webp",
+        "alt": "SilverWorks Emman Silver Cross Pendant Necklace — product view 2",
+        "source": "https://www.silverworks.com/products/xn0012-stainless-steel-21-inches-twisted-chain-with-plain-28mm-cross-pendant-7-8g",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0274/8042/4471/files/XN00122.1.jpg?v=1781592590"
+      },
+      {
+        "src": "assets/products/brand-silverworks-1-view-2.webp",
+        "alt": "SilverWorks Emman Silver Cross Pendant Necklace — product view 3",
+        "source": "https://www.silverworks.com/products/xn0012-stainless-steel-21-inches-twisted-chain-with-plain-28mm-cross-pendant-7-8g",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0274/8042/4471/files/XN0012_20b13ddc-d438-4592-b6b1-769f5af32338.jpg?v=1779177595"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-silverworks-2": {
+    "source": "https://www.silverworks.com/products/xn0019-stainles-steel-gold-plated-24-inches-chain-with-2-in-drop-necklace-6-4grams",
+    "gallery": [
+      {
+        "src": "assets/products/brand-silverworks-2-view-0.webp",
+        "alt": "SilverWorks Zia Drop Pendant Necklace — product view 1",
+        "source": "https://www.silverworks.com/products/xn0019-stainles-steel-gold-plated-24-inches-chain-with-2-in-drop-necklace-6-4grams",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0274/8042/4471/files/XN0019_6514a4cd-8bb0-49e3-9911-904be4c746da.jpg?v=1781596633"
+      },
+      {
+        "src": "assets/products/brand-silverworks-2-view-1.webp",
+        "alt": "SilverWorks Zia Drop Pendant Necklace — product view 2",
+        "source": "https://www.silverworks.com/products/xn0019-stainles-steel-gold-plated-24-inches-chain-with-2-in-drop-necklace-6-4grams",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0274/8042/4471/files/XN0019.1.jpg?v=1781596633"
+      },
+      {
+        "src": "assets/products/brand-silverworks-2-view-2.webp",
+        "alt": "SilverWorks Zia Drop Pendant Necklace — product view 3",
+        "source": "https://www.silverworks.com/products/xn0019-stainles-steel-gold-plated-24-inches-chain-with-2-in-drop-necklace-6-4grams",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0274/8042/4471/files/XN0019.jpg?v=1779161026"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-silverworks-3": {
+    "source": "https://www.silverworks.com/products/xn0020-stainless-steel-gold-plated-13in-15in-layered-chain-with-25mm-round-pendant-6g",
+    "gallery": [
+      {
+        "src": "assets/products/brand-silverworks-3-view-0.webp",
+        "alt": "SilverWorks Denize Layered Necklace — product view 1",
+        "source": "https://www.silverworks.com/products/xn0020-stainless-steel-gold-plated-13in-15in-layered-chain-with-25mm-round-pendant-6g",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0274/8042/4471/files/XN0020_945386ee-381a-4159-84fe-42ec74a95304.jpg?v=1781596704"
+      },
+      {
+        "src": "assets/products/brand-silverworks-3-view-1.webp",
+        "alt": "SilverWorks Denize Layered Necklace — product view 2",
+        "source": "https://www.silverworks.com/products/xn0020-stainless-steel-gold-plated-13in-15in-layered-chain-with-25mm-round-pendant-6g",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0274/8042/4471/files/XN0020.1.jpg?v=1781596704"
+      },
+      {
+        "src": "assets/products/brand-silverworks-3-view-2.webp",
+        "alt": "SilverWorks Denize Layered Necklace — product view 3",
+        "source": "https://www.silverworks.com/products/xn0020-stainless-steel-gold-plated-13in-15in-layered-chain-with-25mm-round-pendant-6g",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0274/8042/4471/files/XN0020.jpg?v=1779160024"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-silverworks-4": {
+    "source": "https://www.silverworks.com/products/n917-curb-necklace-20-3-9g-4-2g",
+    "gallery": [
+      {
+        "src": "assets/products/brand-silverworks-4-view-0.webp",
+        "alt": "SilverWorks 20-inch Curb Chain Necklace — product view 1",
+        "source": "https://www.silverworks.com/products/n917-curb-necklace-20-3-9g-4-2g",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0274/8042/4471/files/N917_1.jpg?v=1757308487"
+      },
+      {
+        "src": "assets/products/brand-silverworks-4-view-1.webp",
+        "alt": "SilverWorks 20-inch Curb Chain Necklace — product view 2",
+        "source": "https://www.silverworks.com/products/n917-curb-necklace-20-3-9g-4-2g",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0274/8042/4471/files/N917_2.jpg?v=1757308487"
+      },
+      {
+        "src": "assets/products/brand-silverworks-4-view-2.webp",
+        "alt": "SilverWorks 20-inch Curb Chain Necklace — product view 3",
+        "source": "https://www.silverworks.com/products/n917-curb-necklace-20-3-9g-4-2g",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0274/8042/4471/files/N917_3.jpg?v=1757308487"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-uratex-1": {
+    "source": "https://uratex.com.ph/products/uratex-polycotton",
+    "gallery": [
+      {
+        "src": "assets/products/brand-uratex-1-view-0.webp",
+        "alt": "Uratex Classic Mattress in Tricot Cover — product view 1",
+        "source": "https://uratex.com.ph/products/uratex-polycotton",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0505/8897/5259/files/UratexTricot_SlateGreen.jpg?v=1749545769"
+      },
+      {
+        "src": "assets/products/brand-uratex-1-view-1.webp",
+        "alt": "Uratex Classic Mattress in Tricot Cover — product view 2",
+        "source": "https://uratex.com.ph/products/uratex-polycotton",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0505/8897/5259/files/UratexTricot_TealGray.jpg?v=1749545769"
+      },
+      {
+        "src": "assets/products/brand-uratex-1-view-2.webp",
+        "alt": "Uratex Classic Mattress in Tricot Cover — product view 3",
+        "source": "https://uratex.com.ph/products/uratex-polycotton",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0505/8897/5259/files/UratexTricot_LightGary.jpg?v=1749545769"
+      }
+    ],
+    "options": [
+      {
+        "name": "Size: Single (36\" x 75\") · Thickness: 4\" · Style: Tricot - Slate Green",
+        "attributes": {
+          "Size": "Single (36\" x 75\")",
+          "Thickness": "4\"",
+          "Style": "Tricot - Slate Green"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size: Single (36\" x 75\") · Thickness: 6\" · Style: Tricot - Slate Green",
+        "attributes": {
+          "Size": "Single (36\" x 75\")",
+          "Thickness": "6\"",
+          "Style": "Tricot - Slate Green"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size: Double (48\" x 75\") · Thickness: 4\" · Style: Tricot - Slate Green",
+        "attributes": {
+          "Size": "Double (48\" x 75\")",
+          "Thickness": "4\"",
+          "Style": "Tricot - Slate Green"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size: Double (48\" x 75\") · Thickness: 6\" · Style: Tricot - Slate Green",
+        "attributes": {
+          "Size": "Double (48\" x 75\")",
+          "Thickness": "6\"",
+          "Style": "Tricot - Slate Green"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size: Full Double (54\" x 75\") · Thickness: 4\" · Style: Tricot - Slate Green",
+        "attributes": {
+          "Size": "Full Double (54\" x 75\")",
+          "Thickness": "4\"",
+          "Style": "Tricot - Slate Green"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size: Full Double (54\" x 75\") · Thickness: 6\" · Style: Tricot - Slate Green",
+        "attributes": {
+          "Size": "Full Double (54\" x 75\")",
+          "Thickness": "6\"",
+          "Style": "Tricot - Slate Green"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size: Queen (60\" x 75\") · Thickness: 4\" · Style: Tricot - Slate Green",
+        "attributes": {
+          "Size": "Queen (60\" x 75\")",
+          "Thickness": "4\"",
+          "Style": "Tricot - Slate Green"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size: Queen (60\" x 75\") · Thickness: 6\" · Style: Tricot - Slate Green",
+        "attributes": {
+          "Size": "Queen (60\" x 75\")",
+          "Thickness": "6\"",
+          "Style": "Tricot - Slate Green"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-uratex-2": {
+    "source": "https://uratex.com.ph/products/uratex-comfort-quilt-mattress",
+    "gallery": [
+      {
+        "src": "assets/products/brand-uratex-2-view-0.webp",
+        "alt": "Uratex Comfort Quilt Mattress — product view 1",
+        "source": "https://uratex.com.ph/products/uratex-comfort-quilt-mattress",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0505/8897/5259/files/ComfortQuilt.jpg?v=1746521172"
+      },
+      {
+        "src": "assets/products/brand-uratex-2-view-1.webp",
+        "alt": "Uratex Comfort Quilt Mattress — product view 2",
+        "source": "https://uratex.com.ph/products/uratex-comfort-quilt-mattress",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0505/8897/5259/files/ComfortQuiltFront.jpg?v=1773792565"
+      },
+      {
+        "src": "assets/products/brand-uratex-2-view-2.webp",
+        "alt": "Uratex Comfort Quilt Mattress — product view 3",
+        "source": "https://uratex.com.ph/products/uratex-comfort-quilt-mattress",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0505/8897/5259/files/ComfortQuilt.png?v=1773792565"
+      }
+    ],
+    "options": [
+      {
+        "name": "Size: Single (36\" x 75\") · Thickness: 4\"",
+        "attributes": {
+          "Size": "Single (36\" x 75\")",
+          "Thickness": "4\""
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "Size: Queen (60\" x 75\") · Thickness: 6\"",
+        "attributes": {
+          "Size": "Queen (60\" x 75\")",
+          "Thickness": "6\""
+        },
+        "imageIndex": 2,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-uratex-3": {
+    "source": "https://uratex.com.ph/products/wink-pure",
+    "gallery": [
+      {
+        "src": "assets/products/brand-uratex-3-view-0.webp",
+        "alt": "Uratex Wink Pure Pillow — product view 1",
+        "source": "https://uratex.com.ph/products/wink-pure",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0505/8897/5259/products/WinkPure1.jpg?v=1746521157"
+      },
+      {
+        "src": "assets/products/brand-uratex-3-view-1.webp",
+        "alt": "Uratex Wink Pure Pillow — product view 2",
+        "source": "https://uratex.com.ph/products/wink-pure",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0505/8897/5259/files/Artboard1_4.jpg?v=1746521157"
+      },
+      {
+        "src": "assets/products/brand-uratex-3-view-2.webp",
+        "alt": "Uratex Wink Pure Pillow — product view 3",
+        "source": "https://uratex.com.ph/products/wink-pure",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0505/8897/5259/files/Artboard1copy.jpg?v=1746521157"
+      }
+    ],
+    "options": [
+      {
+        "name": "Size: Standard (20\"x26\")",
+        "attributes": {
+          "Size": "Standard (20\"x26\")"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size: King (20\"x36\")",
+        "attributes": {
+          "Size": "King (20\"x36\")"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-uratex-4": {
+    "source": "https://uratex.com.ph/products/fibersoft-pillow",
+    "gallery": [
+      {
+        "src": "assets/products/brand-uratex-4-view-0.webp",
+        "alt": "Uratex Fibersoft Pillow — product view 1",
+        "source": "https://uratex.com.ph/products/fibersoft-pillow",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0505/8897/5259/products/FibersoftPillow2.jpg?v=1746521154"
+      },
+      {
+        "src": "assets/products/brand-uratex-4-view-1.webp",
+        "alt": "Uratex Fibersoft Pillow — product view 2",
+        "source": "https://uratex.com.ph/products/fibersoft-pillow",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0505/8897/5259/products/FibersoftPillow5.jpg?v=1746521155"
+      },
+      {
+        "src": "assets/products/brand-uratex-4-view-2.webp",
+        "alt": "Uratex Fibersoft Pillow — product view 3",
+        "source": "https://uratex.com.ph/products/fibersoft-pillow",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0505/8897/5259/products/FibersoftPillow4.jpg?v=1746521155"
+      }
+    ],
+    "options": [
+      {
+        "name": "Size: Travel (12\"x16\")",
+        "attributes": {
+          "Size": "Travel (12\"x16\")"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size: Standard (20\"x26\")",
+        "attributes": {
+          "Size": "Standard (20\"x26\")"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size: Queen (20\"x30\")",
+        "attributes": {
+          "Size": "Queen (20\"x30\")"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size: Euro (26\"x26\")",
+        "attributes": {
+          "Size": "Euro (26\"x26\")"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size: King (20\"x36\")",
+        "attributes": {
+          "Size": "King (20\"x36\")"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-cosrx-1": {
+    "source": "https://www.cosrx.com/products/advanced-snail-96-mucin-power-essence",
+    "gallery": [
+      {
+        "src": "assets/products/brand-cosrx-1-view-0.webp",
+        "alt": "COSRX Advanced Snail 96 Mucin Power Essence — product view 1",
+        "source": "https://www.cosrx.com/products/advanced-snail-96-mucin-power-essence",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0513/3775/6828/files/james_800x1067_1_1_4e9750cc-2cd6-4817-ace5-be2305a85806.jpg?v=1763111577"
+      },
+      {
+        "src": "assets/products/brand-cosrx-1-view-1.webp",
+        "alt": "COSRX Advanced Snail 96 Mucin Power Essence — product view 2",
+        "source": "https://www.cosrx.com/products/advanced-snail-96-mucin-power-essence",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0513/3775/6828/files/advanced-snail-96-mucin-power-essence-cosrx-official-4.jpg?v=1763111577"
+      },
+      {
+        "src": "assets/products/brand-cosrx-1-view-2.webp",
+        "alt": "COSRX Advanced Snail 96 Mucin Power Essence — product view 3",
+        "source": "https://www.cosrx.com/products/advanced-snail-96-mucin-power-essence",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0513/3775/6828/files/Snail96Essence_8.jpg?v=1763111577"
+      }
+    ],
+    "options": [
+      {
+        "name": "Size: 3.38 fl.oz / 100mL",
+        "attributes": {
+          "Size": "3.38 fl.oz / 100mL"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-cosrx-2": {
+    "source": "https://www.cosrx.com/products/advanced-snail-92-all-in-one-cream",
+    "gallery": [
+      {
+        "src": "assets/products/brand-cosrx-2-view-0.webp",
+        "alt": "COSRX Advanced Snail 92 All In One Cream — product view 1",
+        "source": "https://www.cosrx.com/products/advanced-snail-92-all-in-one-cream",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0513/3775/6828/files/snail_cream_thumbnail.png?v=1748420673"
+      },
+      {
+        "src": "assets/products/brand-cosrx-2-view-1.webp",
+        "alt": "COSRX Advanced Snail 92 All In One Cream — product view 2",
+        "source": "https://www.cosrx.com/products/advanced-snail-92-all-in-one-cream",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0513/3775/6828/files/advanced-snail-92-all-in-one-cream-cosrx-official-4.jpg?v=1762909943"
+      },
+      {
+        "src": "assets/products/brand-cosrx-2-view-2.webp",
+        "alt": "COSRX Advanced Snail 92 All In One Cream — product view 3",
+        "source": "https://www.cosrx.com/products/advanced-snail-92-all-in-one-cream",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0513/3775/6828/files/advanced-snail-92-all-in-one-cream-cosrx-official-2.jpg?v=1762909943"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-cosrx-3": {
+    "source": "https://www.cosrx.com/products/advanced-snail-mucin-gel-cleanser",
+    "gallery": [
+      {
+        "src": "assets/products/brand-cosrx-3-view-0.webp",
+        "alt": "COSRX Advanced Snail Mucin Gel Cleanser — product view 1",
+        "source": "https://www.cosrx.com/products/advanced-snail-mucin-gel-cleanser",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0513/3775/6828/files/advanced-snail-mucin-gel-cleanser-cosrx-official-1.png?v=1724835788"
+      },
+      {
+        "src": "assets/products/brand-cosrx-3-view-1.webp",
+        "alt": "COSRX Advanced Snail Mucin Gel Cleanser — product view 2",
+        "source": "https://www.cosrx.com/products/advanced-snail-mucin-gel-cleanser",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0513/3775/6828/files/01_25d36ef8-9a2e-4e01-bcbd-b2e6892d5c78.webp?v=1778476700"
+      },
+      {
+        "src": "assets/products/brand-cosrx-3-view-2.webp",
+        "alt": "COSRX Advanced Snail Mucin Gel Cleanser — product view 3",
+        "source": "https://www.cosrx.com/products/advanced-snail-mucin-gel-cleanser",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0513/3775/6828/files/02_c61cc26b-48c6-4a29-b4e3-d90e9f8dbdaf.webp?v=1778476700"
+      }
+    ],
+    "options": [
+      {
+        "name": "Size: 5.07 fl.oz / 150ml",
+        "attributes": {
+          "Size": "5.07 fl.oz / 150ml"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size: 1.69 fl.oz / 50ml",
+        "attributes": {
+          "Size": "1.69 fl.oz / 50ml"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-cosrx-4": {
+    "source": "https://www.cosrx.com/products/advanced-snail-peptide-eye-cream",
+    "gallery": [
+      {
+        "src": "assets/products/brand-cosrx-4-view-0.webp",
+        "alt": "COSRX Advanced Snail Peptide Eye Cream — product view 1",
+        "source": "https://www.cosrx.com/products/advanced-snail-peptide-eye-cream",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0513/3775/6828/files/advanced-snail-peptide-eye-cream-cosrx-official-1.png?v=1724835637"
+      },
+      {
+        "src": "assets/products/brand-cosrx-4-view-1.webp",
+        "alt": "COSRX Advanced Snail Peptide Eye Cream — product view 2",
+        "source": "https://www.cosrx.com/products/advanced-snail-peptide-eye-cream",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0513/3775/6828/files/SnailEyecream_01.webp?v=1778476464"
+      },
+      {
+        "src": "assets/products/brand-cosrx-4-view-2.webp",
+        "alt": "COSRX Advanced Snail Peptide Eye Cream — product view 3",
+        "source": "https://www.cosrx.com/products/advanced-snail-peptide-eye-cream",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0513/3775/6828/files/SnailEyecream_04.webp?v=1778476464"
+      }
+    ],
+    "options": [
+      {
+        "name": "Size: 0.85 fl.oz / 25ml",
+        "attributes": {
+          "Size": "0.85 fl.oz / 25ml"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-361-1": {
+    "source": "https://361sport.com/products/big3-4-0-quick-reverse",
+    "gallery": [
+      {
+        "src": "assets/products/brand-361-1-view-0.webp",
+        "alt": "361° BIG3 4.0 Quick Reverse — product view 1",
+        "source": "https://361sport.com/products/big3-4-0-quick-reverse",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0613/7489/0037/files/BIG34.0QuickReverse_3.jpg?v=1775555641"
+      },
+      {
+        "src": "assets/products/brand-361-1-view-1.webp",
+        "alt": "361° BIG3 4.0 Quick Reverse — product view 2",
+        "source": "https://361sport.com/products/big3-4-0-quick-reverse",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0613/7489/0037/files/BIG34.0QuickReverse_2.jpg?v=1775555552"
+      },
+      {
+        "src": "assets/products/brand-361-1-view-2.webp",
+        "alt": "361° BIG3 4.0 Quick Reverse — product view 3",
+        "source": "https://361sport.com/products/big3-4-0-quick-reverse",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0613/7489/0037/files/BIG34.0QuickReverse_4.jpg?v=1775555641"
+      }
+    ],
+    "options": [
+      {
+        "name": "Size US-M: M 4 / W 5",
+        "attributes": {
+          "Size US-M": "M 4 / W 5"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 5 / W 6",
+        "attributes": {
+          "Size US-M": "M 5 / W 6"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 5.5 / W 7",
+        "attributes": {
+          "Size US-M": "M 5.5 / W 7"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 6 / W 7.5",
+        "attributes": {
+          "Size US-M": "M 6 / W 7.5"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 6.5 / W 8",
+        "attributes": {
+          "Size US-M": "M 6.5 / W 8"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 7 / W 8.5",
+        "attributes": {
+          "Size US-M": "M 7 / W 8.5"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 8 / W 9",
+        "attributes": {
+          "Size US-M": "M 8 / W 9"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 8.5 / W 10",
+        "attributes": {
+          "Size US-M": "M 8.5 / W 10"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 9 / W 10.5",
+        "attributes": {
+          "Size US-M": "M 9 / W 10.5"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 10 / W 11.5",
+        "attributes": {
+          "Size US-M": "M 10 / W 11.5"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 10.5 / W 12",
+        "attributes": {
+          "Size US-M": "M 10.5 / W 12"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 11 / W 12.5",
+        "attributes": {
+          "Size US-M": "M 11 / W 12.5"
+        },
+        "imageIndex": 1,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-361-2": {
+    "source": "https://361sport.com/products/big3-5-0-quick-reverse-1",
+    "gallery": [
+      {
+        "src": "assets/products/brand-361-2-view-0.webp",
+        "alt": "361° BIG3 5.0 Quick Reverse — product view 1",
+        "source": "https://361sport.com/products/big3-5-0-quick-reverse-1",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0613/7489/0037/files/BIG35.0QuickReverse_1.png?v=1783567138"
+      },
+      {
+        "src": "assets/products/brand-361-2-view-1.webp",
+        "alt": "361° BIG3 5.0 Quick Reverse — product view 2",
+        "source": "https://361sport.com/products/big3-5-0-quick-reverse-1",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0613/7489/0037/files/BIG35.0QuickReverse_2.png?v=1783567138"
+      },
+      {
+        "src": "assets/products/brand-361-2-view-2.webp",
+        "alt": "361° BIG3 5.0 Quick Reverse — product view 3",
+        "source": "https://361sport.com/products/big3-5-0-quick-reverse-1",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0613/7489/0037/files/BIG35.0QuickReverse_3.png?v=1783567138"
+      }
+    ],
+    "options": [
+      {
+        "name": "Size US-M: M 4 / W 5.5",
+        "attributes": {
+          "Size US-M": "M 4 / W 5.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 5 / W 6.5",
+        "attributes": {
+          "Size US-M": "M 5 / W 6.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 6 / W 7.5",
+        "attributes": {
+          "Size US-M": "M 6 / W 7.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 6.5 / W 8",
+        "attributes": {
+          "Size US-M": "M 6.5 / W 8"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 7 / W 8.5",
+        "attributes": {
+          "Size US-M": "M 7 / W 8.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 8 / W 9.5",
+        "attributes": {
+          "Size US-M": "M 8 / W 9.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 8.5 / W 10",
+        "attributes": {
+          "Size US-M": "M 8.5 / W 10"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 9 / W 10.5",
+        "attributes": {
+          "Size US-M": "M 9 / W 10.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 10 / W 11.5",
+        "attributes": {
+          "Size US-M": "M 10 / W 11.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 10.5 / W 12",
+        "attributes": {
+          "Size US-M": "M 10.5 / W 12"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 11 / W 12.5",
+        "attributes": {
+          "Size US-M": "M 11 / W 12.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 11.5 / W 13",
+        "attributes": {
+          "Size US-M": "M 11.5 / W 13"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-361-3": {
+    "source": "https://361sport.com/products/joker-2-denver",
+    "gallery": [
+      {
+        "src": "assets/products/brand-361-3-view-0.webp",
+        "alt": "361° Joker 2 Denver — product view 1",
+        "source": "https://361sport.com/products/joker-2-denver",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0613/7489/0037/files/Joker_2_Denver_2_ea6e51d5-bdf0-4a07-a819-2acad73544fd.jpg?v=1772088679"
+      },
+      {
+        "src": "assets/products/brand-361-3-view-1.webp",
+        "alt": "361° Joker 2 Denver — product view 2",
+        "source": "https://361sport.com/products/joker-2-denver",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0613/7489/0037/files/Joker_2_Denver_4_e206d54b-6f63-42c1-9e8b-da26cc7b0bd3.jpg?v=1772088679"
+      },
+      {
+        "src": "assets/products/brand-361-3-view-2.webp",
+        "alt": "361° Joker 2 Denver — product view 3",
+        "source": "https://361sport.com/products/joker-2-denver",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0613/7489/0037/files/Joker_2_Denver_5_e486ab42-d35b-4081-aa72-4c9f09eaf939.jpg?v=1772088679"
+      }
+    ],
+    "options": [
+      {
+        "name": "Size US-M: M 6 / W 7.5",
+        "attributes": {
+          "Size US-M": "M 6 / W 7.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 7 / W 8.5",
+        "attributes": {
+          "Size US-M": "M 7 / W 8.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 7.5 / W 9",
+        "attributes": {
+          "Size US-M": "M 7.5 / W 9"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 8 / W 9.5",
+        "attributes": {
+          "Size US-M": "M 8 / W 9.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 8.5 / W 10",
+        "attributes": {
+          "Size US-M": "M 8.5 / W 10"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 9 / W 10.5",
+        "attributes": {
+          "Size US-M": "M 9 / W 10.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 9.5 / W 11",
+        "attributes": {
+          "Size US-M": "M 9.5 / W 11"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 10 / W 11.5",
+        "attributes": {
+          "Size US-M": "M 10 / W 11.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 10.5 / W 12",
+        "attributes": {
+          "Size US-M": "M 10.5 / W 12"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 11 / W 12.5",
+        "attributes": {
+          "Size US-M": "M 11 / W 12.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 11.5 / W 13",
+        "attributes": {
+          "Size US-M": "M 11.5 / W 13"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 12 / W 13.5",
+        "attributes": {
+          "Size US-M": "M 12 / W 13.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-361-4": {
+    "source": "https://361sport.com/products/mega3-pro-threshold",
+    "gallery": [
+      {
+        "src": "assets/products/brand-361-4-view-0.webp",
+        "alt": "361° MEGA3 Pro Threshold — product view 1",
+        "source": "https://361sport.com/products/mega3-pro-threshold",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0613/7489/0037/files/672632225F-10_1.png?v=1790237910"
+      },
+      {
+        "src": "assets/products/brand-361-4-view-1.webp",
+        "alt": "361° MEGA3 Pro Threshold — product view 2",
+        "source": "https://361sport.com/products/mega3-pro-threshold",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0613/7489/0037/files/672632225F-10_2.png?v=1790237910"
+      },
+      {
+        "src": "assets/products/brand-361-4-view-2.webp",
+        "alt": "361° MEGA3 Pro Threshold — product view 3",
+        "source": "https://361sport.com/products/mega3-pro-threshold",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0613/7489/0037/files/672632225F-10_3.png?v=1790237910"
+      }
+    ],
+    "options": [
+      {
+        "name": "Size US-M: M 4 / W 5.5",
+        "attributes": {
+          "Size US-M": "M 4 / W 5.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 5 / W 6.5",
+        "attributes": {
+          "Size US-M": "M 5 / W 6.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 6 / W 7.5",
+        "attributes": {
+          "Size US-M": "M 6 / W 7.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 6.5 / W 8",
+        "attributes": {
+          "Size US-M": "M 6.5 / W 8"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 7 / W 8.5",
+        "attributes": {
+          "Size US-M": "M 7 / W 8.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 7.5 / W 9",
+        "attributes": {
+          "Size US-M": "M 7.5 / W 9"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 8 / W 9.5",
+        "attributes": {
+          "Size US-M": "M 8 / W 9.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 8.5 / W 10",
+        "attributes": {
+          "Size US-M": "M 8.5 / W 10"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 9 / W 10.5",
+        "attributes": {
+          "Size US-M": "M 9 / W 10.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 9.5 / W 11",
+        "attributes": {
+          "Size US-M": "M 9.5 / W 11"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Size US-M: M 10 / W 11.5",
+        "attributes": {
+          "Size US-M": "M 10 / W 11.5"
+        },
+        "imageIndex": 0,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-movingpeach-1": {
+    "source": "https://movingpeach.com/products/moving-peach-women-sports-compression-leggings-high-waist-yoga-pilates-tights-with-side-drop-in-pockets-clq2",
+    "gallery": [
+      {
+        "src": "assets/products/brand-movingpeach-1-view-0.webp",
+        "alt": "Moving Peach Compression Leggings with Side Pockets CLQ2 — product view 1",
+        "source": "https://movingpeach.com/products/moving-peach-women-sports-compression-leggings-high-waist-yoga-pilates-tights-with-side-drop-in-pockets-clq2",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0674/3615/0955/files/8_9c7c0770-db29-4aeb-ac9a-0c5ea5fd244c.jpg?v=1784098782"
+      },
+      {
+        "src": "assets/products/brand-movingpeach-1-view-1.webp",
+        "alt": "Moving Peach Compression Leggings with Side Pockets CLQ2 — product view 2",
+        "source": "https://movingpeach.com/products/moving-peach-women-sports-compression-leggings-high-waist-yoga-pilates-tights-with-side-drop-in-pockets-clq2",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0674/3615/0955/files/12_398533d7-87b1-403f-9f2d-d7ba2d6f9b6a.jpg?v=1784098782"
+      },
+      {
+        "src": "assets/products/brand-movingpeach-1-view-2.webp",
+        "alt": "Moving Peach Compression Leggings with Side Pockets CLQ2 — product view 3",
+        "source": "https://movingpeach.com/products/moving-peach-women-sports-compression-leggings-high-waist-yoga-pilates-tights-with-side-drop-in-pockets-clq2",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0674/3615/0955/files/6_f8280ea3-5784-4285-ae88-e107ca8a70c6.jpg?v=1784099023"
+      }
+    ],
+    "options": [
+      {
+        "name": "颜色: Black · 尺寸: S",
+        "attributes": {
+          "颜色": "Black",
+          "尺寸": "S"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "颜色: Black · 尺寸: M",
+        "attributes": {
+          "颜色": "Black",
+          "尺寸": "M"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "颜色: Black · 尺寸: L",
+        "attributes": {
+          "颜色": "Black",
+          "尺寸": "L"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "颜色: Black · 尺寸: XL",
+        "attributes": {
+          "颜色": "Black",
+          "尺寸": "XL"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "颜色: Chestnut · 尺寸: S",
+        "attributes": {
+          "颜色": "Chestnut",
+          "尺寸": "S"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "颜色: Chestnut · 尺寸: M",
+        "attributes": {
+          "颜色": "Chestnut",
+          "尺寸": "M"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "颜色: Chestnut · 尺寸: L",
+        "attributes": {
+          "颜色": "Chestnut",
+          "尺寸": "L"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "颜色: Chestnut · 尺寸: XL",
+        "attributes": {
+          "颜色": "Chestnut",
+          "尺寸": "XL"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "颜色: Purple gray · 尺寸: S",
+        "attributes": {
+          "颜色": "Purple gray",
+          "尺寸": "S"
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "颜色: Purple gray · 尺寸: M",
+        "attributes": {
+          "颜色": "Purple gray",
+          "尺寸": "M"
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "颜色: Purple gray · 尺寸: L",
+        "attributes": {
+          "颜色": "Purple gray",
+          "尺寸": "L"
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "颜色: Purple gray · 尺寸: XL",
+        "attributes": {
+          "颜色": "Purple gray",
+          "尺寸": "XL"
+        },
+        "imageIndex": 2,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-movingpeach-3": {
+    "source": "https://movingpeach.com/products/moving-peach-sports-running-shorts-high-waist-mesh-training-cycling-shorts-with-pocket-apg",
+    "gallery": [
+      {
+        "src": "assets/products/brand-movingpeach-3-view-0.webp",
+        "alt": "Moving Peach High Waist Running Shorts APG — product view 1",
+        "source": "https://movingpeach.com/products/moving-peach-sports-running-shorts-high-waist-mesh-training-cycling-shorts-with-pocket-apg",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0674/3615/0955/files/21_926489de-d952-43da-acd3-c38fcacdd4df.jpg?v=1784007187"
+      },
+      {
+        "src": "assets/products/brand-movingpeach-3-view-1.webp",
+        "alt": "Moving Peach High Waist Running Shorts APG — product view 2",
+        "source": "https://movingpeach.com/products/moving-peach-sports-running-shorts-high-waist-mesh-training-cycling-shorts-with-pocket-apg",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0674/3615/0955/files/20_1ee5c285-a4b5-4221-99a6-582ef85ec257.jpg?v=1784007197"
+      },
+      {
+        "src": "assets/products/brand-movingpeach-3-view-2.webp",
+        "alt": "Moving Peach High Waist Running Shorts APG — product view 3",
+        "source": "https://movingpeach.com/products/moving-peach-sports-running-shorts-high-waist-mesh-training-cycling-shorts-with-pocket-apg",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0674/3615/0955/files/19_038aed0c-e339-48fa-8ed4-5141db40a0e3.jpg?v=1784007210"
+      }
+    ],
+    "options": [
+      {
+        "name": "颜色: Black · 尺寸: S",
+        "attributes": {
+          "颜色": "Black",
+          "尺寸": "S"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "颜色: Black · 尺寸: M",
+        "attributes": {
+          "颜色": "Black",
+          "尺寸": "M"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "颜色: Black · 尺寸: L",
+        "attributes": {
+          "颜色": "Black",
+          "尺寸": "L"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "颜色: Black · 尺寸: XL",
+        "attributes": {
+          "颜色": "Black",
+          "尺寸": "XL"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "颜色: Purple · 尺寸: S",
+        "attributes": {
+          "颜色": "Purple",
+          "尺寸": "S"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "颜色: Purple · 尺寸: M",
+        "attributes": {
+          "颜色": "Purple",
+          "尺寸": "M"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "颜色: Purple · 尺寸: L",
+        "attributes": {
+          "颜色": "Purple",
+          "尺寸": "L"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "颜色: Purple · 尺寸: XL",
+        "attributes": {
+          "颜色": "Purple",
+          "尺寸": "XL"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "颜色: Green · 尺寸: S",
+        "attributes": {
+          "颜色": "Green",
+          "尺寸": "S"
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "颜色: Green · 尺寸: M",
+        "attributes": {
+          "颜色": "Green",
+          "尺寸": "M"
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "颜色: Green · 尺寸: L",
+        "attributes": {
+          "颜色": "Green",
+          "尺寸": "L"
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "颜色: Green · 尺寸: XL",
+        "attributes": {
+          "颜色": "Green",
+          "尺寸": "XL"
+        },
+        "imageIndex": 2,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-movingpeach-4": {
+    "source": "https://movingpeach.com/products/moving-peach-women-sports-jackets-slim-fit-mock-neck-fitness-coat-full-zip-outdoor-running-daily-wear-ast",
+    "gallery": [
+      {
+        "src": "assets/products/brand-movingpeach-4-view-0.webp",
+        "alt": "Moving Peach Slim Fit Sports Jacket AST — product view 1",
+        "source": "https://movingpeach.com/products/moving-peach-women-sports-jackets-slim-fit-mock-neck-fitness-coat-full-zip-outdoor-running-daily-wear-ast",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0674/3615/0955/files/14_8ff74f8b-640f-48e3-b3f5-44feea9be460.jpg?v=1792041972"
+      },
+      {
+        "src": "assets/products/brand-movingpeach-4-view-1.webp",
+        "alt": "Moving Peach Slim Fit Sports Jacket AST — product view 2",
+        "source": "https://movingpeach.com/products/moving-peach-women-sports-jackets-slim-fit-mock-neck-fitness-coat-full-zip-outdoor-running-daily-wear-ast",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0674/3615/0955/files/18_6052918a-ffad-4e41-9bec-a932e5fee627.jpg?v=1792041972"
+      },
+      {
+        "src": "assets/products/brand-movingpeach-4-view-2.webp",
+        "alt": "Moving Peach Slim Fit Sports Jacket AST — product view 3",
+        "source": "https://movingpeach.com/products/moving-peach-women-sports-jackets-slim-fit-mock-neck-fitness-coat-full-zip-outdoor-running-daily-wear-ast",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0674/3615/0955/files/11_9c0863c6-9e23-440e-aae6-75a11a056d08.jpg?v=1792041972"
+      }
+    ],
+    "options": [
+      {
+        "name": "颜色: Albumin · 尺寸: S",
+        "attributes": {
+          "颜色": "Albumin",
+          "尺寸": "S"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "颜色: Albumin · 尺寸: M",
+        "attributes": {
+          "颜色": "Albumin",
+          "尺寸": "M"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "颜色: Albumin · 尺寸: L",
+        "attributes": {
+          "颜色": "Albumin",
+          "尺寸": "L"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "颜色: Albumin · 尺寸: XL",
+        "attributes": {
+          "颜色": "Albumin",
+          "尺寸": "XL"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "颜色: Navy blue · 尺寸: S",
+        "attributes": {
+          "颜色": "Navy blue",
+          "尺寸": "S"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "颜色: Navy blue · 尺寸: M",
+        "attributes": {
+          "颜色": "Navy blue",
+          "尺寸": "M"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "颜色: Navy blue · 尺寸: L",
+        "attributes": {
+          "颜色": "Navy blue",
+          "尺寸": "L"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "颜色: Navy blue · 尺寸: XL",
+        "attributes": {
+          "颜色": "Navy blue",
+          "尺寸": "XL"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "颜色: Black · 尺寸: S",
+        "attributes": {
+          "颜色": "Black",
+          "尺寸": "S"
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "颜色: Black · 尺寸: M",
+        "attributes": {
+          "颜色": "Black",
+          "尺寸": "M"
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "颜色: Black · 尺寸: L",
+        "attributes": {
+          "颜色": "Black",
+          "尺寸": "L"
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "颜色: Black · 尺寸: XL",
+        "attributes": {
+          "颜色": "Black",
+          "尺寸": "XL"
+        },
+        "imageIndex": 2,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-locaupin-1": {
+    "source": "https://locaupin.com/products/locaupin-white-desktop-organizer-makeup-organizer-with-brush-holder-clear-drawer-for-small-tools-storage-2",
+    "gallery": [
+      {
+        "src": "assets/products/brand-locaupin-1-view-0.webp",
+        "alt": "Locaupin Desktop Organizer with Clear Drawer — product view 1",
+        "source": "https://locaupin.com/products/locaupin-white-desktop-organizer-makeup-organizer-with-brush-holder-clear-drawer-for-small-tools-storage-2",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/sg-11134201-7ra22-mbgqzitq7b6e7f.jpg?v=1752400074"
+      },
+      {
+        "src": "assets/products/brand-locaupin-1-view-1.webp",
+        "alt": "Locaupin Desktop Organizer with Clear Drawer — product view 2",
+        "source": "https://locaupin.com/products/locaupin-white-desktop-organizer-makeup-organizer-with-brush-holder-clear-drawer-for-small-tools-storage-2",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/sg-11134201-7ra3k-mbgqzj49uoivd3.jpg?v=1752400074"
+      },
+      {
+        "src": "assets/products/brand-locaupin-1-view-2.webp",
+        "alt": "Locaupin Desktop Organizer with Clear Drawer — product view 3",
+        "source": "https://locaupin.com/products/locaupin-white-desktop-organizer-makeup-organizer-with-brush-holder-clear-drawer-for-small-tools-storage-2",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/sg-11134201-7ra3j-mbgqzjdffvoa7f.jpg?v=1752400074"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-locaupin-2": {
+    "source": "https://locaupin.com/products/locaupin-plastic-refrigerator-organizer-bins-fridge-organizers-storage-clear-bin-with-handle-for-kitchen-pantry",
+    "gallery": [
+      {
+        "src": "assets/products/brand-locaupin-2-view-0.webp",
+        "alt": "Locaupin Refrigerator Organizer Bin — product view 1",
+        "source": "https://locaupin.com/products/locaupin-plastic-refrigerator-organizer-bins-fridge-organizers-storage-clear-bin-with-handle-for-kitchen-pantry",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/2cca9df1e84f2d35eaece883ebdff4c9.jpg?v=1743396874"
+      },
+      {
+        "src": "assets/products/brand-locaupin-2-view-1.webp",
+        "alt": "Locaupin Refrigerator Organizer Bin — product view 2",
+        "source": "https://locaupin.com/products/locaupin-plastic-refrigerator-organizer-bins-fridge-organizers-storage-clear-bin-with-handle-for-kitchen-pantry",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/f6819c7650604f4c7e1ac23c2261d7f6.jpg?v=1743396874"
+      },
+      {
+        "src": "assets/products/brand-locaupin-2-view-2.webp",
+        "alt": "Locaupin Refrigerator Organizer Bin — product view 3",
+        "source": "https://locaupin.com/products/locaupin-plastic-refrigerator-organizer-bins-fridge-organizers-storage-clear-bin-with-handle-for-kitchen-pantry",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/73ae087645ee40d71b4c958b760b5052.jpg?v=1743396875"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-locaupin-3": {
+    "source": "https://locaupin.com/products/locaupin-foldable-plastic-shoe-rack-multi-tier-space-saving-shoe-organizer-for-entryway-closet-dorm-room",
+    "gallery": [
+      {
+        "src": "assets/products/brand-locaupin-3-view-0.webp",
+        "alt": "Locaupin Foldable Multi-Tier Shoe Rack — product view 1",
+        "source": "https://locaupin.com/products/locaupin-foldable-plastic-shoe-rack-multi-tier-space-saving-shoe-organizer-for-entryway-closet-dorm-room",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/sg-11134201-7ravq-ma9hadeyhe42a9.jpg?v=1752462299"
+      },
+      {
+        "src": "assets/products/brand-locaupin-3-view-1.webp",
+        "alt": "Locaupin Foldable Multi-Tier Shoe Rack — product view 2",
+        "source": "https://locaupin.com/products/locaupin-foldable-plastic-shoe-rack-multi-tier-space-saving-shoe-organizer-for-entryway-closet-dorm-room",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/sg-11134201-7rauw-ma9hadoy2qar51.jpg?v=1752462299"
+      },
+      {
+        "src": "assets/products/brand-locaupin-3-view-2.webp",
+        "alt": "Locaupin Foldable Multi-Tier Shoe Rack — product view 3",
+        "source": "https://locaupin.com/products/locaupin-foldable-plastic-shoe-rack-multi-tier-space-saving-shoe-organizer-for-entryway-closet-dorm-room",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/sg-11134201-7raum-ma9hadyxpijl9d.jpg?v=1752462299"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-locaupin-4": {
+    "source": "https://locaupin.com/products/locaupin-glass-water-bottles-with-silicone-sleeve-bpa-free-with-handle-and-filter-tea-bottle-portable-travel-tea-bottle",
+    "gallery": [
+      {
+        "src": "assets/products/brand-locaupin-4-view-0.webp",
+        "alt": "Locaupin Glass Water Bottle with Silicone Sleeve — product view 1",
+        "source": "https://locaupin.com/products/locaupin-glass-water-bottles-with-silicone-sleeve-bpa-free-with-handle-and-filter-tea-bottle-portable-travel-tea-bottle",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/my-11134207-7r992-lmswxqqphwwjc0.jpg?v=1743405092"
+      },
+      {
+        "src": "assets/products/brand-locaupin-4-view-1.webp",
+        "alt": "Locaupin Glass Water Bottle with Silicone Sleeve — product view 2",
+        "source": "https://locaupin.com/products/locaupin-glass-water-bottles-with-silicone-sleeve-bpa-free-with-handle-and-filter-tea-bottle-portable-travel-tea-bottle",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/my-11134207-7r98t-lmswxqqpkq1fb2.jpg?v=1743405091"
+      },
+      {
+        "src": "assets/products/brand-locaupin-4-view-2.webp",
+        "alt": "Locaupin Glass Water Bottle with Silicone Sleeve — product view 3",
+        "source": "https://locaupin.com/products/locaupin-glass-water-bottles-with-silicone-sleeve-bpa-free-with-handle-and-filter-tea-bottle-portable-travel-tea-bottle",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/my-11134207-7r98z-lmswxqqpm4lv49.jpg?v=1743405093"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-incerun-4": {
+    "source": "https://www.incerunmen.com/products/mens-vintage-dandy-art-exhibition-double-breasted-button-high-waist-wide-leg-pant-skul86024",
+    "gallery": [
+      {
+        "src": "assets/products/brand-incerun-4-view-0.webp",
+        "alt": "Incerun High-Waist Wide-Leg Trousers SKUL86024 — product view 1",
+        "source": "https://www.incerunmen.com/products/mens-vintage-dandy-art-exhibition-double-breasted-button-high-waist-wide-leg-pant-skul86024",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0516/6350/3509/files/f8ccb094-ec43-4e76-86d8-6687d85ce5a3.jpg?v=1793007015"
+      },
+      {
+        "src": "assets/products/brand-incerun-4-view-1.webp",
+        "alt": "Incerun High-Waist Wide-Leg Trousers SKUL86024 — product view 2",
+        "source": "https://www.incerunmen.com/products/mens-vintage-dandy-art-exhibition-double-breasted-button-high-waist-wide-leg-pant-skul86024",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0516/6350/3509/files/b6a518bc-abbc-4bd3-997a-4eaf0ecae899.jpg?v=1793007025"
+      },
+      {
+        "src": "assets/products/brand-incerun-4-view-2.webp",
+        "alt": "Incerun High-Waist Wide-Leg Trousers SKUL86024 — product view 3",
+        "source": "https://www.incerunmen.com/products/mens-vintage-dandy-art-exhibition-double-breasted-button-high-waist-wide-leg-pant-skul86024",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0516/6350/3509/files/38b3439d-df28-4b64-9612-1dc077bdee13.jpg?v=1793007034"
+      }
+    ],
+    "options": [
+      {
+        "name": "Color: Wine Red · Size: S",
+        "attributes": {
+          "Color": "Wine Red",
+          "Size": "S"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Wine Red · Size: M",
+        "attributes": {
+          "Color": "Wine Red",
+          "Size": "M"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Wine Red · Size: L",
+        "attributes": {
+          "Color": "Wine Red",
+          "Size": "L"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Wine Red · Size: XL",
+        "attributes": {
+          "Color": "Wine Red",
+          "Size": "XL"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Wine Red · Size: 2XL",
+        "attributes": {
+          "Color": "Wine Red",
+          "Size": "2XL"
+        },
+        "imageIndex": 0,
+        "add": 0
+      },
+      {
+        "name": "Color: Brown · Size: S",
+        "attributes": {
+          "Color": "Brown",
+          "Size": "S"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Brown · Size: M",
+        "attributes": {
+          "Color": "Brown",
+          "Size": "M"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Brown · Size: L",
+        "attributes": {
+          "Color": "Brown",
+          "Size": "L"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Brown · Size: XL",
+        "attributes": {
+          "Color": "Brown",
+          "Size": "XL"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Brown · Size: 2XL",
+        "attributes": {
+          "Color": "Brown",
+          "Size": "2XL"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size: S",
+        "attributes": {
+          "Color": "Black",
+          "Size": "S"
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "Color: Black · Size: M",
+        "attributes": {
+          "Color": "Black",
+          "Size": "M"
+        },
+        "imageIndex": 2,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-movingpeach-2": {
+    "source": "https://movingpeach.com/products/moving-peach-sports-leggings-high-waist-hip-up-seamless-training-pants-alg",
+    "gallery": [
+      {
+        "src": "assets/products/brand-movingpeach-2-view-0.webp",
+        "alt": "Moving Peach Seamless Sports Leggings ALG — product view 1",
+        "source": "https://movingpeach.com/products/moving-peach-sports-leggings-high-waist-hip-up-seamless-training-pants-alg",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0674/3615/0955/files/22_475e0c4c-40b4-4154-b4e9-dfde60ddcc58.jpg?v=1784093572"
+      },
+      {
+        "src": "assets/products/brand-movingpeach-2-view-1.webp",
+        "alt": "Moving Peach Seamless Sports Leggings ALG — product view 2",
+        "source": "https://movingpeach.com/products/moving-peach-sports-leggings-high-waist-hip-up-seamless-training-pants-alg",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0674/3615/0955/files/23_addb1b15-dfa8-4fac-b046-91e2582939c2.jpg?v=1784094249"
+      },
+      {
+        "src": "assets/products/brand-movingpeach-2-view-2.webp",
+        "alt": "Moving Peach Seamless Sports Leggings ALG — product view 3",
+        "source": "https://movingpeach.com/products/moving-peach-sports-leggings-high-waist-hip-up-seamless-training-pants-alg",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0674/3615/0955/files/7_5475e7e2-dba4-4f2e-97cb-d5225c59d2e8.jpg?v=1784094277"
+      }
+    ],
+    "options": [
+      {
+        "name": "颜色: Phantom Black · 尺寸: S",
+        "attributes": {
+          "颜色": "Phantom Black",
+          "尺寸": "S"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "颜色: Phantom Black · 尺寸: M",
+        "attributes": {
+          "颜色": "Phantom Black",
+          "尺寸": "M"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "颜色: Phantom Black · 尺寸: L",
+        "attributes": {
+          "颜色": "Phantom Black",
+          "尺寸": "L"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "颜色: Phantom Black · 尺寸: XL",
+        "attributes": {
+          "颜色": "Phantom Black",
+          "尺寸": "XL"
+        },
+        "imageIndex": 1,
+        "add": 0
+      },
+      {
+        "name": "颜色: Dark blue · 尺寸: S",
+        "attributes": {
+          "颜色": "Dark blue",
+          "尺寸": "S"
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "颜色: Dark blue · 尺寸: M",
+        "attributes": {
+          "颜色": "Dark blue",
+          "尺寸": "M"
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "颜色: Dark blue · 尺寸: L",
+        "attributes": {
+          "颜色": "Dark blue",
+          "尺寸": "L"
+        },
+        "imageIndex": 2,
+        "add": 0
+      },
+      {
+        "name": "颜色: Dark blue · 尺寸: XL",
+        "attributes": {
+          "颜色": "Dark blue",
+          "尺寸": "XL"
+        },
+        "imageIndex": 2,
+        "add": 0
+      }
+    ],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-homezania-2": {
+    "source": "https://locaupin.com/products/locaupin-storage-shelf-with-wheels-adjustable-4-tier-mesh-wire-shelvin",
+    "gallery": [
+      {
+        "src": "assets/products/brand-homezania-2-view-0.webp",
+        "alt": "Locaupin Adjustable 4-Tier Storage Shelf with Wheels — product view 1",
+        "source": "https://locaupin.com/products/locaupin-storage-shelf-with-wheels-adjustable-4-tier-mesh-wire-shelvin",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/20250807032959a42a66833bd68e7115d50f06a6ff7bcb.jpg?v=1754540449"
+      },
+      {
+        "src": "assets/products/brand-homezania-2-view-1.webp",
+        "alt": "Locaupin Adjustable 4-Tier Storage Shelf with Wheels — product view 2",
+        "source": "https://locaupin.com/products/locaupin-storage-shelf-with-wheels-adjustable-4-tier-mesh-wire-shelvin",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/2025080703383697fffda87b8bbc9bb3a4fc2d93f7392f.jpg?v=1754540449"
+      },
+      {
+        "src": "assets/products/brand-homezania-2-view-2.webp",
+        "alt": "Locaupin Adjustable 4-Tier Storage Shelf with Wheels — product view 3",
+        "source": "https://locaupin.com/products/locaupin-storage-shelf-with-wheels-adjustable-4-tier-mesh-wire-shelvin",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/20250807033735d866cd58d3289a9bd080cf182955dd80.jpg?v=1754540448"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-homezania-3": {
+    "source": "https://locaupin.com/products/locaupin-double-wall-glass-coffee-mugs-juice-mugs-teacups-heat-resistant-borosilicate-glass-cups-with-cover-4",
+    "gallery": [
+      {
+        "src": "assets/products/brand-homezania-3-view-0.webp",
+        "alt": "Locaupin Double-Wall Glass Coffee Mug with Cover — product view 1",
+        "source": "https://locaupin.com/products/locaupin-double-wall-glass-coffee-mugs-juice-mugs-teacups-heat-resistant-borosilicate-glass-cups-with-cover-4",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/sg-11134201-7rdvq-mbuqbm0k7hp21f.jpg?v=1752459604"
+      },
+      {
+        "src": "assets/products/brand-homezania-3-view-1.webp",
+        "alt": "Locaupin Double-Wall Glass Coffee Mug with Cover — product view 2",
+        "source": "https://locaupin.com/products/locaupin-double-wall-glass-coffee-mugs-juice-mugs-teacups-heat-resistant-borosilicate-glass-cups-with-cover-4",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/sg-11134201-7rdyv-mbuqbm63zbl1dd.jpg?v=1752459603"
+      },
+      {
+        "src": "assets/products/brand-homezania-3-view-2.webp",
+        "alt": "Locaupin Double-Wall Glass Coffee Mug with Cover — product view 3",
+        "source": "https://locaupin.com/products/locaupin-double-wall-glass-coffee-mugs-juice-mugs-teacups-heat-resistant-borosilicate-glass-cups-with-cover-4",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/sg-11134201-7rdve-mbuqbmchpzcp9d.jpg?v=1752459603"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  },
+  "brand-homezania-1": {
+    "source": "https://locaupin.com/products/locaupin-dimmable-round-shaped-wall-lamp-mount-single-farmhouse-light-fixture-indoor-outdoor-vintage-style",
+    "gallery": [
+      {
+        "src": "assets/products/brand-homezania-1-view-0.webp",
+        "alt": "Locaupin Dimmable Round Shaped Wall Lamp Mount Single Farmhouse Light Fixture Indoor Outdoor Vintage Style — product view 1",
+        "source": "https://locaupin.com/products/locaupin-dimmable-round-shaped-wall-lamp-mount-single-farmhouse-light-fixture-indoor-outdoor-vintage-style",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/d52e0851d52f0f7682a609303f110a64.jpg?v=1743402768"
+      },
+      {
+        "src": "assets/products/brand-homezania-1-view-1.webp",
+        "alt": "Locaupin Dimmable Round Shaped Wall Lamp Mount Single Farmhouse Light Fixture Indoor Outdoor Vintage Style — product view 2",
+        "source": "https://locaupin.com/products/locaupin-dimmable-round-shaped-wall-lamp-mount-single-farmhouse-light-fixture-indoor-outdoor-vintage-style",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/b48e1f1fee7fb08c4647ca347d853f6a.jpg?v=1743402768"
+      },
+      {
+        "src": "assets/products/brand-homezania-1-view-2.webp",
+        "alt": "Locaupin Dimmable Round Shaped Wall Lamp Mount Single Farmhouse Light Fixture Indoor Outdoor Vintage Style — product view 3",
+        "source": "https://locaupin.com/products/locaupin-dimmable-round-shaped-wall-lamp-mount-single-farmhouse-light-fixture-indoor-outdoor-vintage-style",
+        "productPhoto": true,
+        "download": "https://cdn.shopify.com/s/files/1/0884/2890/4743/files/b28d57a15687ba661296b66d99e3e30d.jpg?v=1743402768"
+      }
+    ],
+    "options": [],
+    "note": "Photographed options from public catalog metadata. Local availability and prices remain configured in SaleSync."
+  }
+}

@@ -1,0 +1,1 @@
+(()=>({ready:SaleSync.ready,enhanced:typeof enhancedWorkspace,commerce:S.commerceRevision,activeProducts:S.products.filter(visible).length,users:S.users.filter(u=>u.loginEnabled).map(u=>u.email),photos:Object.keys(PRODUCT_OPTION_ASSETS).length,heading:document.querySelector('h1')?.textContent,errors:document.querySelector('#toasts')?.textContent}))()

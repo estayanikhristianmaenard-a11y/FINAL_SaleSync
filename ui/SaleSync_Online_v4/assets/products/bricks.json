@@ -1,0 +1,12 @@
+{
+  "type": "bricks",
+  "file": "assets/products/bricks.webp",
+  "title": "Colorful building bricks",
+  "source": "https://unsplash.com/photos/a-pile-of-colorful-lego-bricks--YFh5WKV6ao",
+  "download": "https://images.unsplash.com/photo-1752322069850-f92b5ce0e961?auto=format&fit=max&w=700&q=85",
+  "artist": "Declan Sun",
+  "license": "Unsplash License",
+  "licenseUrl": "https://unsplash.com/license",
+  "modifications": "Resized and converted to WebP",
+  "retrieved": "2026-10-26"
+}

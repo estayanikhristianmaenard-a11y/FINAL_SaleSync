@@ -1,0 +1,23 @@
+{
+  "ready": true,
+  "buyNow": {
+    "selected": 0,
+    "cart": [
+      {
+        "userId": "c1",
+        "productId": "p7",
+        "variantId": "std",
+        "qty": 2,
+        "selected": false
+      }
+    ]
+  },
+  "fixture": {
+    "held": -1,
+    "issues": [
+      "Negative reservation for p7"
+    ]
+  },
+  "portalAuth": "Registration is available from the customer storefront only",
+  "errors": []
+}

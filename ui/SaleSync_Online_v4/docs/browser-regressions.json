@@ -1,0 +1,1299 @@
+[
+  {
+    "name": "Expanded catalog has 280 unique products and correct categories",
+    "status": "PASS"
+  },
+  {
+    "name": "Buy Now existing cart row preserves cart selections and quantity",
+    "status": "PASS"
+  },
+  {
+    "name": "Checkout consumes voucher, stores delivery snapshot and clears seller notes",
+    "status": "PASS"
+  },
+  {
+    "name": "Payment commits reservations once and duplicate event is ignored",
+    "status": "PASS"
+  },
+  {
+    "name": "Paid customer cancellation refunds before shipment and restores inventory",
+    "status": "PASS"
+  },
+  {
+    "name": "Pending seed cancellation balances inventory",
+    "status": "PASS"
+  },
+  {
+    "name": "Pending seed payment balances inventory",
+    "status": "PASS"
+  },
+  {
+    "name": "Portal switch from Register supports Seller sign in",
+    "status": "PASS"
+  },
+  {
+    "name": "Signed in login route redirects to dashboard",
+    "status": "PASS"
+  },
+  {
+    "name": "Seller notification bell stays within seller portal",
+    "status": "PASS"
+  },
+  {
+    "name": "Chat reading clears unread messages",
+    "status": "PASS"
+  },
+  {
+    "name": "Every active voucher is discoverable on home and shop vouchers on store",
+    "status": "PASS"
+  },
+  {
+    "name": "Review reporting reaches Management and clears reporting date filters",
+    "status": "PASS"
+  },
+  {
+    "name": "Management dashboard ignores report date filters",
+    "status": "PASS"
+  },
+  {
+    "name": "Report date buckets use Manila",
+    "status": "PASS"
+  },
+  {
+    "name": "Full merchandise refund after voucher becomes Refunded",
+    "status": "PASS"
+  },
+  {
+    "name": "Compare counts are deduplicated across add/remove cycles",
+    "status": "PASS"
+  },
+  {
+    "name": "Hidden, draft and suspended-store products cannot load by URL",
+    "status": "PASS"
+  },
+  {
+    "name": "Unknown customer and console routes display a visible 404",
+    "status": "PASS"
+  },
+  {
+    "name": "Backup export/import requires Maintenance and RESTORE; v4 round trip works",
+    "status": "PASS"
+  },
+  {
+    "name": "Housekeeping expires reservations, completes delivery, sends mail and ends flash prices",
+    "status": "PASS"
+  },
+  {
+    "name": "Address add/edit/default/delete and password change work",
+    "status": "PASS"
+  },
+  {
+    "name": "Rejected seller can reapply",
+    "status": "PASS"
+  },
+  {
+    "name": "Record pagination includes all 200 historical orders",
+    "status": "PASS"
+  },
+  {
+    "name": "Store follower count and ratings update",
+    "status": "PASS"
+  },
+  {
+    "name": "Guest wishlist, collect and follow redirect to login",
+    "status": "PASS"
+  },
+  {
+    "name": "No login quick accounts or public data transfer tools remain",
+    "status": "PASS"
+  },
+  {
+    "name": "Focus and scroll survive same-page actions",
+    "status": "PASS"
+  },
+  {
+    "name": "All 24 requested stores retain four linked product records and unique storefront items",
+    "status": "PASS"
+  },
+  {
+    "name": "Store directory displays every approved store and searches brands",
+    "status": "PASS"
+  },
+  {
+    "name": "Product details keep source credits without repeated testing banners",
+    "status": "PASS"
+  },
+  {
+    "name": "Every product type has a local photo or original SVG illustration",
+    "status": "PASS"
+  },
+  {
+    "name": "Brand-reference order snapshots store identity and remains fulfillable",
+    "status": "PASS"
+  },
+  {
+    "name": "All 96 reference listings use product-specific photographs and fictional display brands",
+    "status": "PASS"
+  },
+  {
+    "name": "Existing saved category photos migrate without touching inventory or transactions",
+    "status": "PASS"
+  },
+  {
+    "name": "Photo migration preserves seller uploads and customized listing titles",
+    "status": "PASS"
+  },
+  {
+    "name": "Product detail renders the matching photograph and original source credit",
+    "status": "PASS"
+  },
+  {
+    "name": "Catalog migration retains all 280 products and 24 requested brands",
+    "status": "PASS"
+  },
+  {
+    "name": "Primary workspace navigation has exactly 6 / 9 / 7 modules",
+    "status": "PASS"
+  },
+  {
+    "name": "Legacy order and shipping links resolve into one Seller Orders module",
+    "status": "PASS"
+  },
+  {
+    "name": "Seller product tabs preserve listing, request and inventory access",
+    "status": "PASS"
+  },
+  {
+    "name": "Management product creation is available only through System Settings registry",
+    "status": "PASS"
+  },
+  {
+    "name": "Store collection filtering and search stay inside the owning store",
+    "status": "PASS"
+  },
+  {
+    "name": "Store products support scoped price sorting and stock filtering",
+    "status": "PASS"
+  },
+  {
+    "name": "Seller collection changes preserve ownership and product assignments",
+    "status": "PASS"
+  },
+  {
+    "name": "Global categories can be created, renamed, reordered and safely archived",
+    "status": "PASS"
+  },
+  {
+    "name": "Store identity editing preserves custom colors and headline after migration",
+    "status": "PASS"
+  },
+  {
+    "name": "Seller gallery saves distinct uploaded images and real thumbnail selection",
+    "status": "PASS"
+  },
+  {
+    "name": "Order drawer limits Seller to their own shipment and provides a simulated slip",
+    "status": "PASS"
+  },
+  {
+    "name": "A multi-seller order crosses payment, both sellers, courier and buyer receipt",
+    "status": "PASS"
+  },
+  {
+    "name": "Category and gallery data survive a guarded backup round trip",
+    "status": "PASS"
+  },
+  {
+    "name": "Release has four enabled testing accounts with updated passwords",
+    "status": "PASS"
+  },
+  {
+    "name": "Active catalog removes artificial duplicate editions and preserves historical records",
+    "status": "PASS"
+  },
+  {
+    "name": "Photographed manufacturer galleries provide color, size and design options",
+    "status": "PASS"
+  },
+  {
+    "name": "Homepage uses category SVGs, better hero photo and manual rotation without pause button",
+    "status": "PASS"
+  },
+  {
+    "name": "Selected category sidebar filters within the selected category",
+    "status": "PASS"
+  },
+  {
+    "name": "Comparison hides its launch tray and supports like-for-like grouping",
+    "status": "PASS"
+  },
+  {
+    "name": "Checkout stacks seller, platform and free-shipping discounts in centavos",
+    "status": "PASS"
+  },
+  {
+    "name": "Vouchers explain minimum spend, expiry, usage and pickup exclusions",
+    "status": "PASS"
+  },
+  {
+    "name": "Address choice uses labels and does not change the saved default",
+    "status": "PASS"
+  },
+  {
+    "name": "Shared product inventory cannot be oversold through different options",
+    "status": "PASS"
+  },
+  {
+    "name": "Pickup runs payment, packing, ready, code verification and buyer receipt",
+    "status": "PASS"
+  },
+  {
+    "name": "Invoice includes line items, selected option, address, discounts and total",
+    "status": "PASS"
+  },
+  {
+    "name": "Refund-only case passes seller review and Management authorization without restocking",
+    "status": "PASS"
+  },
+  {
+    "name": "Return-and-refund records dispatch tracking and inspection before refund",
+    "status": "PASS"
+  },
+  {
+    "name": "Seller application approval requires reviewing the application and a recorded decision",
+    "status": "PASS"
+  },
+  {
+    "name": "Account suspension records category, duration and before/after audit",
+    "status": "PASS"
+  },
+  {
+    "name": "Product moderation requests a seller explanation before hiding a listing",
+    "status": "PASS"
+  },
+  {
+    "name": "Overall inbox supports search, unread filters and sending a scoped message",
+    "status": "PASS"
+  },
+  {
+    "name": "Management generates a printable HTML report with shop peso earnings",
+    "status": "PASS"
+  },
+  {
+    "name": "Business settings validation and activity inspection retain reasons and snapshots",
+    "status": "PASS"
+  },
+  {
+    "name": "Nested modal commands are clickable without submitting the enclosing form",
+    "status": "PASS"
+  },
+  {
+    "name": "Return quantities and refunds are scoped to the purchased option",
+    "status": "PASS"
+  },
+  {
+    "name": "customer.html home",
+    "status": "PASS"
+  },
+  {
+    "name": "customer.html shop",
+    "status": "PASS"
+  },
+  {
+    "name": "customer.html stores",
+    "status": "PASS"
+  },
+  {
+    "name": "customer.html product/p1",
+    "status": "PASS"
+  },
+  {
+    "name": "customer.html store/brand-anker",
+    "status": "PASS"
+  },
+  {
+    "name": "customer.html compare/p1,p2",
+    "status": "PASS"
+  },
+  {
+    "name": "customer.html cart",
+    "status": "PASS"
+  },
+  {
+    "name": "customer.html orders",
+    "status": "PASS"
+  },
+  {
+    "name": "customer.html account",
+    "status": "PASS"
+  },
+  {
+    "name": "customer.html messages",
+    "status": "PASS"
+  },
+  {
+    "name": "customer.html notifications",
+    "status": "PASS"
+  },
+  {
+    "name": "customer.html help",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Dashboard",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Messages",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Products",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/My Products",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Product Requests",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Stock & POS",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Orders",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/My Orders",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Returns & Refunds",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Shipping",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Sales Summary",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Sales Overview",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Payout Statements",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Business Insights",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/My Income",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Store Settings",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Store Collections",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Shop Vouchers",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Flash Deals",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Reviews",
+    "status": "PASS"
+  },
+  {
+    "name": "seller.html seller/Notifications",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Dashboard",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Users",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Seller Applications",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Product Moderation",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Product Requests",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Reviews & Reports",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Order Oversight",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Returns & Refunds",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Payment Status",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Payouts",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Sales Reports",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/System Settings",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Product Registry",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Global Categories",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Homepage & Banners",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Business Rules",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Flash Deals & Vouchers",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Reference Data",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Categories & Banners",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Activity Log",
+    "status": "PASS"
+  },
+  {
+    "name": "management.html management/Notifications",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/System Overview",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/Dashboard",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/Monitoring",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/Database & Backups",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/Integrity Check",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/Integrations",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/Integrations & Simulator",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/Background Jobs",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/Scheduled Jobs",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/Email Outbox",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/Webhook Events",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/Webhook Inbox",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/Security & Logs",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/Security & System Logs",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/Incident Management",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/Incidents",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance.html maintenance/Notifications",
+    "status": "PASS"
+  },
+  {
+    "name": "seller unified workspace at 360px",
+    "status": "PASS",
+    "geometry": {
+      "width": 360,
+      "overflow": false,
+      "sidebarWidth": 260,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "Products"
+    }
+  },
+  {
+    "name": "management unified workspace at 360px",
+    "status": "PASS",
+    "geometry": {
+      "width": 360,
+      "overflow": false,
+      "sidebarWidth": 260,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "Product Moderation"
+    }
+  },
+  {
+    "name": "maintenance unified workspace at 360px",
+    "status": "PASS",
+    "geometry": {
+      "width": 360,
+      "overflow": false,
+      "sidebarWidth": 260,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "System Overview"
+    }
+  },
+  {
+    "name": "Storefront scoped shopping at 360px",
+    "status": "PASS",
+    "geometry": {
+      "overflow": false,
+      "tabs": 4,
+      "categoryRail": true,
+      "brokenImages": 0
+    }
+  },
+  {
+    "name": "seller unified workspace at 390px",
+    "status": "PASS",
+    "geometry": {
+      "width": 390,
+      "overflow": false,
+      "sidebarWidth": 260,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "Products"
+    }
+  },
+  {
+    "name": "management unified workspace at 390px",
+    "status": "PASS",
+    "geometry": {
+      "width": 390,
+      "overflow": false,
+      "sidebarWidth": 260,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "Product Moderation"
+    }
+  },
+  {
+    "name": "maintenance unified workspace at 390px",
+    "status": "PASS",
+    "geometry": {
+      "width": 390,
+      "overflow": false,
+      "sidebarWidth": 260,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "System Overview"
+    }
+  },
+  {
+    "name": "Storefront scoped shopping at 390px",
+    "status": "PASS",
+    "geometry": {
+      "overflow": false,
+      "tabs": 4,
+      "categoryRail": true,
+      "brokenImages": 0
+    }
+  },
+  {
+    "name": "seller unified workspace at 768px",
+    "status": "PASS",
+    "geometry": {
+      "width": 768,
+      "overflow": false,
+      "sidebarWidth": 260,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "Products"
+    }
+  },
+  {
+    "name": "management unified workspace at 768px",
+    "status": "PASS",
+    "geometry": {
+      "width": 768,
+      "overflow": false,
+      "sidebarWidth": 260,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "Product Moderation"
+    }
+  },
+  {
+    "name": "maintenance unified workspace at 768px",
+    "status": "PASS",
+    "geometry": {
+      "width": 768,
+      "overflow": false,
+      "sidebarWidth": 260,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "System Overview"
+    }
+  },
+  {
+    "name": "Storefront scoped shopping at 768px",
+    "status": "PASS",
+    "geometry": {
+      "overflow": false,
+      "tabs": 4,
+      "categoryRail": true,
+      "brokenImages": 0
+    }
+  },
+  {
+    "name": "seller unified workspace at 1024px",
+    "status": "PASS",
+    "geometry": {
+      "width": 1024,
+      "overflow": false,
+      "sidebarWidth": 244,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "Products"
+    }
+  },
+  {
+    "name": "management unified workspace at 1024px",
+    "status": "PASS",
+    "geometry": {
+      "width": 1024,
+      "overflow": false,
+      "sidebarWidth": 244,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "Product Moderation"
+    }
+  },
+  {
+    "name": "maintenance unified workspace at 1024px",
+    "status": "PASS",
+    "geometry": {
+      "width": 1024,
+      "overflow": false,
+      "sidebarWidth": 244,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "System Overview"
+    }
+  },
+  {
+    "name": "Storefront scoped shopping at 1024px",
+    "status": "PASS",
+    "geometry": {
+      "overflow": false,
+      "tabs": 4,
+      "categoryRail": true,
+      "brokenImages": 0
+    }
+  },
+  {
+    "name": "seller unified workspace at 1366px",
+    "status": "PASS",
+    "geometry": {
+      "width": 1366,
+      "overflow": false,
+      "sidebarWidth": 244,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "Products"
+    }
+  },
+  {
+    "name": "management unified workspace at 1366px",
+    "status": "PASS",
+    "geometry": {
+      "width": 1366,
+      "overflow": false,
+      "sidebarWidth": 244,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "Product Moderation"
+    }
+  },
+  {
+    "name": "maintenance unified workspace at 1366px",
+    "status": "PASS",
+    "geometry": {
+      "width": 1366,
+      "overflow": false,
+      "sidebarWidth": 244,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "System Overview"
+    }
+  },
+  {
+    "name": "Storefront scoped shopping at 1366px",
+    "status": "PASS",
+    "geometry": {
+      "overflow": false,
+      "tabs": 4,
+      "categoryRail": true,
+      "brokenImages": 0
+    }
+  },
+  {
+    "name": "seller unified workspace at 1920px",
+    "status": "PASS",
+    "geometry": {
+      "width": 1920,
+      "overflow": false,
+      "sidebarWidth": 244,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "Products"
+    }
+  },
+  {
+    "name": "management unified workspace at 1920px",
+    "status": "PASS",
+    "geometry": {
+      "width": 1920,
+      "overflow": false,
+      "sidebarWidth": 244,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "Product Moderation"
+    }
+  },
+  {
+    "name": "maintenance unified workspace at 1920px",
+    "status": "PASS",
+    "geometry": {
+      "width": 1920,
+      "overflow": false,
+      "sidebarWidth": 244,
+      "labeled": true,
+      "mobileToggle": true,
+      "headings": 1,
+      "title": "System Overview"
+    }
+  },
+  {
+    "name": "Storefront scoped shopping at 1920px",
+    "status": "PASS",
+    "geometry": {
+      "overflow": false,
+      "tabs": 4,
+      "categoryRail": true,
+      "brokenImages": 0
+    }
+  },
+  {
+    "name": "seller 200% reflow equivalent (683 CSS px / 1366 physical px)",
+    "status": "PASS"
+  },
+  {
+    "name": "management 200% reflow equivalent (683 CSS px / 1366 physical px)",
+    "status": "PASS"
+  },
+  {
+    "name": "maintenance 200% reflow equivalent (683 CSS px / 1366 physical px)",
+    "status": "PASS"
+  },
+  {
+    "name": "customer 200% reflow equivalent (683 CSS px / 1366 physical px)",
+    "status": "PASS"
+  },
+  {
+    "name": "Listing edit dialog at 200% reflow equivalent",
+    "status": "PASS",
+    "geometry": {
+      "width": 642.015625,
+      "viewport": 683,
+      "overflow": false
+    }
+  },
+  {
+    "name": "Cart/compare layout at 1440px",
+    "status": "PASS",
+    "geometry": {
+      "checkoutAboveTray": true,
+      "trayAboveTabs": true,
+      "width": 1440,
+      "overflow": false,
+      "trayTop": 843.5,
+      "checkoutBottom": 282.390625
+    }
+  },
+  {
+    "name": "Product/compare layout at 1440px",
+    "status": "PASS",
+    "geometry": {
+      "separate": true,
+      "overflow": false
+    }
+  },
+  {
+    "name": "Cart/compare layout at 768px",
+    "status": "PASS",
+    "geometry": {
+      "checkoutAboveTray": true,
+      "trayAboveTabs": true,
+      "width": 768,
+      "overflow": false,
+      "trayTop": 731.5,
+      "checkoutBottom": 165.390625
+    }
+  },
+  {
+    "name": "Product/compare layout at 768px",
+    "status": "PASS",
+    "geometry": {
+      "separate": true,
+      "overflow": false
+    }
+  },
+  {
+    "name": "Cart/compare layout at 640px",
+    "status": "PASS",
+    "geometry": {
+      "checkoutAboveTray": true,
+      "trayAboveTabs": true,
+      "width": 640,
+      "overflow": false,
+      "trayTop": 731.5,
+      "checkoutBottom": 165.390625
+    }
+  },
+  {
+    "name": "Product/compare layout at 640px",
+    "status": "PASS",
+    "geometry": {
+      "separate": true,
+      "overflow": false
+    }
+  },
+  {
+    "name": "Cart/compare layout at 390px",
+    "status": "PASS",
+    "geometry": {
+      "checkoutAboveTray": true,
+      "trayAboveTabs": true,
+      "width": 390,
+      "overflow": false,
+      "trayTop": 731.5,
+      "checkoutBottom": 213.59375
+    }
+  },
+  {
+    "name": "Product/compare layout at 390px",
+    "status": "PASS",
+    "geometry": {
+      "separate": true,
+      "overflow": false
+    }
+  },
+  {
+    "name": "Cart/compare layout at 320px",
+    "status": "PASS",
+    "geometry": {
+      "checkoutAboveTray": true,
+      "trayAboveTabs": true,
+      "width": 320,
+      "overflow": false,
+      "trayTop": 689.5,
+      "checkoutBottom": 130.09375
+    }
+  },
+  {
+    "name": "Product/compare layout at 320px",
+    "status": "PASS",
+    "geometry": {
+      "separate": true,
+      "overflow": false
+    }
+  },
+  {
+    "name": "home revised flow at 320px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "account revised flow at 320px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "messages revised flow at 320px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "login revised flow at 320px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "register revised flow at 320px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "checkout revised flow at 320px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "comparison revised flow at 320px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "invoice revised flow at 320px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "home revised flow at 390px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "account revised flow at 390px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "messages revised flow at 390px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "login revised flow at 390px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "register revised flow at 390px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "checkout revised flow at 390px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "comparison revised flow at 390px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "invoice revised flow at 390px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "home revised flow at 768px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "account revised flow at 768px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "messages revised flow at 768px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "login revised flow at 768px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "register revised flow at 768px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "checkout revised flow at 768px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "comparison revised flow at 768px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "invoice revised flow at 768px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "home revised flow at 1440px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "account revised flow at 1440px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "messages revised flow at 1440px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "login revised flow at 1440px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "register revised flow at 1440px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "checkout revised flow at 1440px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "comparison revised flow at 1440px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "invoice revised flow at 1440px",
+    "status": "PASS",
+    "overflow": false,
+    "broken": 0,
+    "retiredLabel": false,
+    "headings": 1,
+    "dialog": true
+  },
+  {
+    "name": "All local image assets decode in browser",
+    "status": "PASS",
+    "total": 326,
+    "failed": 0
+  },
+  {
+    "name": "Standalone file opens offline with embedded product photos",
+    "status": "PASS",
+    "ready": true,
+    "products": 280,
+    "photo": true,
+    "issues": []
+  }
+]

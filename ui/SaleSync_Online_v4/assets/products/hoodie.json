@@ -1,0 +1,12 @@
+{
+  "type": "hoodie",
+  "file": "assets/products/hoodie.webp",
+  "title": "Pink pullover hoodie",
+  "source": "https://unsplash.com/photos/pink-pullover-hoodie-on-black-clothes-hanger-SUaR-Uqdmko",
+  "download": "https://images.unsplash.com/photo-1630269470848-337134b23b06?auto=format&fit=max&w=700&q=85",
+  "artist": "Erik Mclean",
+  "license": "Unsplash License",
+  "licenseUrl": "https://unsplash.com/license",
+  "modifications": "Resized and converted to WebP",
+  "retrieved": "2026-10-26"
+}

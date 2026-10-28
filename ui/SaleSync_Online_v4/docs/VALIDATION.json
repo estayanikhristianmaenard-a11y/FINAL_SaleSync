@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-26",
+  "browserChecks": 217,
+  "failed": 0,
+  "browserExceptions": 0,
+  "syntaxCheckedFiles": 40,
+  "retainedProducts": 280,
+  "visibleProducts": 141,
+  "archivedDuplicateProducts": 139,
+  "enabledTestingAccounts": 4,
+  "requestedBrandStores": 24,
+  "catalogPhotos": 46,
+  "productSpecificPhotos": 101,
+  "additionalGalleryViews": 152,
+  "originalSVGIllustrations": 27,
+  "decodedImageAssets": 326,
+  "workspaceModules": {
+    "seller": 6,
+    "management": 9,
+    "maintenance": 7
+  },
+  "workspaceViewportWidths": [
+    360,
+    390,
+    768,
+    1024,
+    1366,
+    1920
+  ],
+  "revisedFlowViewportWidths": [
+    320,
+    390,
+    768,
+    1440
+  ],
+  "reflowCheck": "200% equivalent: 683 CSS px / 1366 physical px",
+  "standaloneSHA256": "4b54a762c60d831408f4b8cc4b15da1ca00dd63242e4d68ad7d7961a4ed8b56c",
+  "deterministicRebuild": true,
+  "editedInPlace": true,
+  "scope": "Browser-local frontend flows and offline bundle. Backend integrations remain documented integration work."
+}

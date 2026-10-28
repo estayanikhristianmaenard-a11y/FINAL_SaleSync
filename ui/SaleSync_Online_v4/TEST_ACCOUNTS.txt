@@ -1,0 +1,44 @@
+SaleSync - local testing accounts
+Updated: 26 October 2026
+
+Password for all four accounts: SaleSync2026!
+
+CUSTOMER
+Email: alex.customer@salesync.test
+Portal: customer.html
+Review: shopping, product options, comparisons, messages, addresses,
+vouchers, checkout, payment, purchases, invoices, returns and refunds.
+
+SELLER
+Email: seller.tech@salesync.test
+Portal: seller.html
+Shop: TechHive Digital
+Review: products and options, inventory, order packing, pickup collection,
+messages, returns, shop settings, vouchers, sales and payouts.
+
+MANAGEMENT ADMINISTRATOR
+Email: management@salesync.test
+Portal: management.html
+Review: account decisions, seller applications, listing explanations,
+orders, payment reconciliation, returns, reports, settings and audit events.
+
+MAINTENANCE ADMINISTRATOR
+Email: maintenance@salesync.test
+Portal: maintenance.html
+Review: integration adapters, courier events, scheduled jobs, email outbox,
+integrity checks, backups, security logs and incidents.
+
+Open SaleSync_Online_ALL.html to use all four portals in the same file.
+Select the correct portal before signing in. Each portal has its own session.
+
+Only these four seeded accounts are enabled for sign-in. Other retained
+merchant/customer records support historical orders and application examples;
+they are not additional testing logins. The enabled seller manages TechHive.
+
+New customer registration remains available. Existing custom passwords are
+preserved; the previous shared fixture password migrates to the value above.
+Use a fresh browser profile to test the shipped initial state.
+
+These are local fixture credentials, not deployment secrets. Payments,
+shipping events and email delivery use local adapters until connected to the
+backend. See docs/BACKEND_HANDOFF.md for the integration boundaries.
