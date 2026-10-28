@@ -23,7 +23,7 @@ final class CartService
         return ['items' => $items, 'subtotal' => $subtotal, 'shipping_fee' => $items ? $this->shippingFee : 0, 'total' => $subtotal + ($items ? $this->shippingFee : 0), 'currency' => 'PHP'];
     }
 
-    public function quote(int $userId, ?array $selection = null, array $vouchers = []): array
+    public function quote(int $userId, ?array $selection = null, array $vouchers = [], bool $issueToken = true): array
     {
         $items = $this->get($userId)['items'];
         if ($selection !== null) {
@@ -45,7 +45,8 @@ final class CartService
             if (!$item['available'] || $quantities[$item['product_id']] > $item['stock_qty']) { throw new ApiError(409, 'A selected product is unavailable or has insufficient stock.'); }
         }
         $subtotal = array_sum(array_column($items, 'line_total'));
-        return (new VoucherService($this->db))->apply($userId,['items' => $items, 'subtotal' => $subtotal, 'shipping_fee' => $this->shippingFee, 'total' => $subtotal + $this->shippingFee, 'currency' => 'PHP'],$vouchers);
+        $quote = (new VoucherService($this->db))->apply($userId,['items' => $items, 'subtotal' => $subtotal, 'shipping_fee' => $this->shippingFee, 'total' => $subtotal + $this->shippingFee, 'currency' => 'PHP'],$vouchers);
+        return $issueToken ? (new CheckoutQuote($this->db))->issue($userId, $quote) : $quote;
     }
 
     public function set(int $userId, int $productId, int $quantity, string $variantId = 'std'): array

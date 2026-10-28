@@ -249,6 +249,12 @@ try {
     await wait('!document.getElementById("dialog").open');
     const checkoutShot=await send('Page.captureScreenshot',{format:'png'});
     await fs.writeFile(path.join(directory,'checkout-desktop.png'),Buffer.from(checkoutShot.data,'base64'));
+    const reviewedTotal=await evaluate('view.quote.total');
+    fixture("$db->run('UPDATE products SET price=price+100 WHERE product_id=1');");
+    await click('[data-action="place-order"]');
+    await wait(`!view.busy&&view.quote?.total===${reviewedTotal+100}&&!document.querySelector('[data-action="place-order"]').disabled`);
+    check(await evaluate('route()==="checkout"&&S.orders.length===0&&!sessionStorage.getItem(`salesync-checkout:${userId}`)'),'Price-change rejection returns an updated review without creating an order');
+    check(fixture("echo $db->one('SELECT COUNT(*) AS n FROM orders')['n'];")==='0','Changed price does not reserve an order before reconfirmation');
     await click('[data-action="place-order"]');
     await wait('route()==="orders"&&S.orders.length===1&&!view.busy');
     check(await evaluate('S.orders[0].items.length===1&&S.orders[0].paymentStatus==="Pending"'),'Real order created without fake paid event');

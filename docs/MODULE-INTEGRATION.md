@@ -4,6 +4,8 @@ This is the customer component of a **single PHP application with one shared SQL
 
 Contract version: **1**. This contract describes this branch's integration surface. The other module owners still need to adopt it; their code has not been supplied or tested here.
 
+Checkout extension (`006_checkout_quotes.sql`): quote responses issue a customer-bound token; new order submissions require the reviewed token. Recompute and validate inside the checkout transaction. Host frontends must handle a changed/expired quote by displaying the current total and requesting confirmation. Existing order retries remain idempotent. See [the fixes and contract](CUSTOMER-DEFECT-FIXES.md).
+
 Contract extension: [customer features and shared records](CUSTOMER-FEATURES.md), schema `005_customer_features.sql`. Read this before connecting seller messages, offer definitions, return decisions/refunds or application review. Shared authentication must adopt `users.auth_version`; migrations use `Database::migrate()` to check rebuilt table references before commit.
 
 The user's [final role plan](FINAL-ROLE-PLAN.md) is authoritative for ownership and required features. The module boundaries below describe the existing foundation; the final plan extends the remaining customer, seller and admin workflows. Owners finish their respective modules on their own branches before the team combines and tests them.

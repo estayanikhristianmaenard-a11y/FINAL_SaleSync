@@ -1,10 +1,12 @@
 # Customer readiness audit — October 28, 2026
 
+**Resolution update:** all five reproduced defects below are now fixed and pass the targeted audit. See [the five-defect fix report](CUSTOMER-DEFECT-FIXES.md) for implementation, tests and the required quote-token API change. The original findings are retained as historical evidence; the missing integration capabilities remain open.
+
 **Verdict: incomplete; the current customer module is not ready for real customer operation.** The earlier passing-suite result was too broad a basis for readiness language. This audit adds negative tests and exposes open defects. No completion percentage is supported by the plan.
 
 Scope: local `customer` branch, source/schema/configuration review and isolated executable service/browser scenarios. The separate seller/admin development branches were not merged, audited or changed. Building those modules separately remains the team's workflow; compatibility with them is unverified. Existing personal accounts and purchases were not changed by these tests.
 
-## Confirmed defects still open
+## Original reproduced defects — now resolved
 
 | Priority | Defect and reproduction | Actual result | Required behavior |
 | --- | --- | --- | --- |
@@ -68,4 +70,4 @@ These ignored artifacts contain isolated fixture data, not changes to the person
 3. Real mail and PayMongo sandbox acceptance, merchant invoice issuance rules, profile/recovery policies and actual cross-role flows.
 4. Paginated/lazy UI loading and explicit concurrency, load, accessibility and failure-recovery exercises. Those broader audits have not been completed by the existing small isolated suites.
 
-This turn adds audit code and findings. The five reproduced application defects are **open**, and this report does not certify deployment readiness.
+The original audit added code and findings without resolving the defects. The subsequent [fix implementation](CUSTOMER-DEFECT-FIXES.md) resolves all five; it does not certify the unfinished external-service and cross-role integrations.

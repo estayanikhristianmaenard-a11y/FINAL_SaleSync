@@ -29,10 +29,20 @@ $module->cart->set(1,1,1);
 $quote=$module->cart->quote(1);
 $db->run('UPDATE products SET price=20000 WHERE product_id=1');
 try {
-    $order=$module->orders->checkout(1,['address_id'=>1],'adversarial-price-checkout');
+    $order=$module->orders->checkout(1,['address_id'=>1,'quote_token'=>$quote['quote_token']],'adversarial-price-checkout');
     $record('price-changed-after-review','A higher total requires another customer review before creating/redirecting payment',['reviewed_total'=>$quote['total'],'accepted_total'=>$order['total'],'rejected_for_reconfirmation'=>false],false);
 } catch(ApiError $error) {
-    $record('price-changed-after-review','Higher total is rejected for reconfirmation',['status'=>$error->status],in_array($error->status,[409,422],true));
+    $actual=['status'=>$error->status,'reason'=>$error->fields['quote']??null,
+        'orders_created'=>$db->one('SELECT COUNT(*) AS n FROM orders')['n'],
+        'stock_remaining'=>$db->one('SELECT stock_qty FROM products WHERE product_id=1')['stock_qty']];
+    $record('price-changed-after-review','Higher total is rejected for reconfirmation without creating an order or reserving stock',
+        $actual,$error->status===409&&$actual['reason']==='changed'&&$actual['orders_created']===0&&$actual['stock_remaining']===20);
+}
+
+// Continue observations with a genuinely reviewed fresh quote after a rejected stale quote.
+if (!isset($order)) {
+    $fresh=$module->cart->quote(1);
+    $order=$module->orders->checkout(1,['address_id'=>1,'quote_token'=>$fresh['quote_token']],'adversarial-fresh-checkout');
 }
 
 if(isset($order)) {
@@ -57,5 +67,5 @@ try {
 }
 file_put_contents($directory.'/results.json',json_encode(['findings'=>$findings],JSON_PRETTY_PRINT));
 echo 'Audit evidence: '.$directory.'/results.json'.PHP_EOL;
-echo 'This audit records known failures; it is not a passing release gate.'.PHP_EOL;
+echo 'Audit gates the reproduced defects; observations remain separate integration work.'.PHP_EOL;
 exit(array_filter($findings,fn(array $finding): bool=>$finding['passed']===false)?1:0);

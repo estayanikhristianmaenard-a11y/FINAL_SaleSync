@@ -119,7 +119,9 @@ try {
     await customer.request('/auth/verify-email', { method: 'POST', body: { token } });
     await customer.request('/auth/verify-email', { method: 'POST', body: { token }, status: 422 });
     await customer.request('/checkout', { method: 'POST', body: { address_id: address.address_id }, status: 422 });
-    const order = await customer.request('/checkout', { method: 'POST', body: { address_id: address.address_id, total: 1 }, key: 'http-checkout-key-0001' });
+    await customer.request('/checkout',{method:'POST',body:{address_id:address.address_id},key:'missing-reviewed-quote',status:409});
+    const reviewedQuote=await customer.request('/checkout/quote',{method:'POST',body:{}});
+    const order = await customer.request('/checkout', { method: 'POST', body: { address_id: address.address_id, total: 1,quote_token:reviewedQuote.quote_token }, key: 'http-checkout-key-0001' });
     check(order.total === 20000 && order.status === 'pending_payment', 'Verified checkout ignores forged total');
     const retry = await customer.request('/checkout', { method: 'POST', body: { address_id: address.address_id }, key: 'http-checkout-key-0001' });
     check(retry.order_id === order.order_id, 'HTTP checkout idempotency');

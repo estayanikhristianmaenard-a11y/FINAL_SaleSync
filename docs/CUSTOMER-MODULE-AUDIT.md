@@ -1,6 +1,6 @@
 # Customer module audit — October 27, 2026
 
-Latest verdict: [October 28 adversarial readiness audit](CUSTOMER-READINESS-AUDIT.md) confirms five open defects and incomplete business integrations. The [earlier regression pass](CUSTOMER-QA.md) did not exercise these failure cases and does not establish readiness.
+Latest local update: [the five adversarial defects are fixed](CUSTOMER-DEFECT-FIXES.md). The [readiness audit](CUSTOMER-READINESS-AUDIT.md) retains the original reproductions and incomplete business integrations. Passing these checks does not establish external-service or cross-role readiness.
 
 Updated after implementing the seven gaps identified in the earlier audit. Scope follows the user's [final role plan](FINAL-ROLE-PLAN.md), registration/18+ policy and Philippine address requirements. Work remains on `customer`; other modules have not been merged or certified.
 

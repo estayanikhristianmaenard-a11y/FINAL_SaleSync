@@ -17,12 +17,13 @@ final class OrderService
         $vouchers=$input['voucher_ids'] ?? [];
         if (!is_array($vouchers)) { throw new ApiError(422,'Invalid voucher selection.'); }
         if ($selection !== null && !is_array($selection)) { throw new ApiError(422, 'Invalid cart selection.'); }
-        return $this->db->transaction(function () use ($userId, $addressId, $key, $selection,$vouchers): array {
+        return $this->db->transaction(function () use ($userId, $addressId, $key, $selection,$vouchers,$input): array {
             $existing = $this->db->one('SELECT order_id FROM orders WHERE customer_id=? AND checkout_key=?', [$userId, $key]);
             if ($existing) { return $this->get($userId, (int) $existing['order_id']); }
             $address = (new ProfileService($this->db))->address($userId, $addressId);
             unset($address['user_id'], $address['is_default'], $address['address_id']);
-            $cart = $this->cart->quote($userId, $selection,$vouchers);
+            $cart = $this->cart->quote($userId, $selection,$vouchers,false);
+            (new CheckoutQuote($this->db))->verify($userId, $input['quote_token'] ?? null, $cart);
             if ($cart['total']<=0) { throw new ApiError(422,'This voucher combination leaves no payable amount. Choose another combination.'); }
             if (!$cart['items']) { throw new ApiError(422, 'Your cart is empty.'); }
             foreach ($cart['items'] as $item) {

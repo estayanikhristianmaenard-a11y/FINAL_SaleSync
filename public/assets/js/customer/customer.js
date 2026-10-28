@@ -1,11 +1,23 @@
 import { api } from './api.js';
-import { applyCart, loadPrivate, refresh, selection } from './customer-data.js';
+import { applyCart, clearPrivateState, loadPrivate, refresh, selection } from './customer-data.js';
 import { mount as mountLocations, fields as locationFields } from './location-picker.js';
 import { featureAction, quote, voucherIds, readChat, sendMessage } from './customer-features.js';
 import { loadConversations } from './customer-data.js';
 import { chooseDeliveryAddress, updateAddressChoice, viewInvoice } from './customer-controls.js';
 
 export { api };
+
+window.addEventListener('salesync:session-ended', event => {
+    const wasAuthenticated=Boolean(userId);
+    const destination=route();
+    clearPrivateState();
+    view.error=''; view.authTab='Sign in';
+    if (event.detail.redirect && wasAuthenticated) {
+        view.afterLogin=destination;
+        go('login');
+        toast('Your session ended. Please sign in again.',true);
+    } else if (SaleSync.ready) render();
+});
 
 window.customerDisabledActions = new Set(['follow','forgot','go-seller','go-sell','received','return-shipped','review','report-review']);
 
@@ -101,7 +113,7 @@ async function placeOrder() {
     guard(address, 'Add a delivery address first.');
     guard(getUser()?.verified, 'Verify your email in My Account before checkout.');
     const storageKey = `salesync-checkout:${userId}`;
-    const body = { address_id:Number(address.id), items:selection(),voucher_ids:voucherIds() };
+    const body = { address_id:Number(address.id), items:selection(),voucher_ids:voucherIds(),quote_token:view.quote?.quote_token };
     const fingerprint = JSON.stringify(body);
     let attempt;
     try { attempt = JSON.parse(sessionStorage.getItem(storageKey)); } catch { /* no previous attempt */ }
@@ -116,6 +128,11 @@ async function placeOrder() {
         order = await api('/checkout', { method:'POST', body:attempt.body, idempotencyKey:attempt.key });
     } catch (error) {
         if (error.status && error.status < 500) sessionStorage.removeItem(storageKey);
+        if (error.fields?.quote) {
+            await loadPrivate();
+            view.quote = await quote();
+            render();
+        }
         throw error;
     }
     sessionStorage.removeItem(storageKey);
@@ -255,7 +272,11 @@ async function runAction(action, element) {
     if (button) button.disabled = true;
     try { await act(action, element); }
     catch (error) { toast(error.message || 'Request failed.', true); }
-    finally { view.busy = false; if (button?.isConnected && !window.customerDisabledActions.has(action)) button.disabled = false; }
+    finally {
+        view.busy = false;
+        if (button?.isConnected && !window.customerDisabledActions.has(action)) button.disabled = false;
+        if (action === 'place-order' && route() === 'checkout') render();
+    }
 }
 
 document.addEventListener('click', event => {
@@ -386,5 +407,10 @@ try {
     SaleSync.ready = true;
     await routeChanged();
 } catch (error) {
-    view.loading = false; view.error = error.message; render();
+    view.loading = false;
+    if ([401,403].includes(error.status) && !userId) {
+        view.error=''; view.authTab='Sign in'; SaleSync.ready=true; go('login'); render();
+    } else {
+        view.error = error.message; render();
+    }
 }

@@ -102,7 +102,7 @@ try {
     $cart->set(1, 1, 2);
     $db->run('UPDATE products SET price=16000');
     check($cart->get(1)['total'] === 37000, 'Recalculate current prices and shipping');
-    $order = $orders->checkout(1, ['address_id' => $a['address_id'], 'total' => 1], 'checkout-request-0001');
+    $order = $orders->checkout(1, ['address_id' => $a['address_id'], 'total' => 1, 'quote_token'=>$cart->quote(1)['quote_token']], 'checkout-request-0001');
     check($order['total'] === 37000, 'Ignore client total');
     check($db->one('SELECT stock_qty FROM products')['stock_qty'] === 8, 'Reserve stock');
     check($cart->get(1)['items'] === [], 'Clear checked-out cart');
@@ -153,7 +153,7 @@ try {
     $ordersBeforeFailure = $db->one('SELECT COUNT(*) AS count FROM orders')['count'];
     $db->pdo->exec("CREATE TRIGGER simulate_write_failure BEFORE INSERT ON order_items BEGIN SELECT RAISE(ABORT, 'simulated disk/write failure'); END;");
     try {
-        $orders->checkout(1, ['address_id' => $a['address_id']], 'rollback-request-001');
+        $orders->checkout(1, ['address_id' => $a['address_id'], 'quote_token'=>$cart->quote(1)['quote_token']], 'rollback-request-001');
         throw new RuntimeException('Expected a simulated checkout write failure');
     } catch (PDOException $error) {
         check($db->one('SELECT stock_qty FROM products')['stock_qty'] === $stockBeforeFailure, 'Rollback reserved stock on mid-checkout write failure');
@@ -165,12 +165,12 @@ try {
     fails(409, fn() => $orders->checkout(1, ['address_id' => $a['address_id']], 'stock-race-request-01'), 'Reject stock changed after cart addition');
     check($db->one('SELECT COUNT(*) AS count FROM orders')['count'] === $before && count($cart->get(1)['items']) === 1, 'Stock failure preserves cart and creates no order');
     $db->run('UPDATE products SET stock_qty=10');
-    $cancel = $orders->checkout(1, ['address_id' => $a['address_id']], 'cancel-request-0001');
+    $cancel = $orders->checkout(1, ['address_id' => $a['address_id'], 'quote_token'=>$cart->quote(1)['quote_token']], 'cancel-request-0001');
     $orders->cancel(1, $cancel['order_id']);
     $orders->cancel(1, $cancel['order_id']);
     check($db->one('SELECT stock_qty FROM products')['stock_qty'] === 10, 'Cancellation releases reservation exactly once');
     $cart->set(1, 1, 1);
-    $expireOrder = $orders->checkout(1, ['address_id' => $a['address_id']], 'expiry-request-0001');
+    $expireOrder = $orders->checkout(1, ['address_id' => $a['address_id'], 'quote_token'=>$cart->quote(1)['quote_token']], 'expiry-request-0001');
     $payments->start(1, $expireOrder['order_id']);
     $gateway->session['attributes']['status'] = 'expired';
     $payments->refresh(1, $expireOrder['order_id']);
@@ -178,7 +178,7 @@ try {
     check($orders->get(1, $expireOrder['order_id'])['status'] === 'cancelled' && $db->one('SELECT stock_qty FROM products')['stock_qty'] === 10, 'Provider expiry releases reservation exactly once');
 
     $cart->set(1, 1, 1);
-    $unknown = $orders->checkout(1, ['address_id' => $a['address_id']], 'timeout-request-0001');
+    $unknown = $orders->checkout(1, ['address_id' => $a['address_id'], 'quote_token'=>$cart->quote(1)['quote_token']], 'timeout-request-0001');
     $gateway->fail = true;
     fails(502, fn() => $payments->start(1, $unknown['order_id']), 'Report provider timeout');
     $attempts = $gateway->creates;
@@ -209,7 +209,7 @@ try {
     $quote = $cart->quote(2,$selected);
     check(count($quote['items'])===1 && $quote['subtotal']===(99999+500)*3, 'Quote selected option at server-adjusted price');
     fails(409, fn() => $cart->quote(1,$selected), 'Cannot quote another customer cart selection');
-    $partial = $orders->checkout(2,['address_id'=>$b['address_id'],'items'=>$selected,'total'=>1],'variant-checkout-0001');
+    $partial = $orders->checkout(2,['address_id'=>$b['address_id'],'items'=>$selected,'total'=>1,'quote_token'=>$quote['quote_token']],'variant-checkout-0001');
     check($partial['items'][0]['variant_name_snapshot']==='Large' && $partial['items'][0]['unit_price']===100499, 'Snapshot selected option and authoritative price');
     check(count($cart->get(2)['items'])===1 && $cart->get(2)['items'][0]['variant_id']==='std', 'Preserve unchecked cart option after checkout');
     $db->run("UPDATE product_variants SET name='Changed option' WHERE product_id=1 AND variant_id='alt'");

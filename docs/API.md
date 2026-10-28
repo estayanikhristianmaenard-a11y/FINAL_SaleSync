@@ -2,6 +2,8 @@
 
 Base: `public/api/index.php?route=/ENDPOINT`. With rewrites, `public/api/ENDPOINT` also works. The supplied JavaScript helper resolves this path relative to itself and works inside a XAMPP subdirectory.
 
+**Reviewed checkout quote is now required:** `/checkout/quote` returns a customer-bound `quote_token` and `quote_expires_at` (15-minute validity). Include that token in `/checkout`. Changes to prices, quantities, shipping or discounts return HTTP 409 with `fields.quote=changed`; missing/expired/foreign tokens return 409 with `fields.quote=expired`. Show a new quote and require confirmation. Existing completed idempotent retries still return their order. See [the defect-fix handoff](CUSTOMER-DEFECT-FIXES.md).
+
 The [customer feature API extension](CUSTOMER-FEATURES.md) documents password changes, saved products, voucher claims and checkout `voucher_ids`, conversations, private attachments, returns/appeals, applications and preferences. `/session` additionally returns `return_request_days`; order details include `order_item_id`, line `discount_amount`, merchandise/shipping discounts and redeemed vouchers. Password changes rotate the CSRF token.
 
 Responses are JSON: `{ "data": ... }` on success (HTTP 200), or `{ "error": { "message": "...", "fields": {}, "request_id": "..." } }`. Unexpected errors may omit `fields`. Timestamps are UTC ISO 8601. Monetary fields are **integer centavos**, currency PHP. Display with `formatMoney()`; never calculate authoritative order totals in the browser.

@@ -82,22 +82,49 @@ function mapOrder(row) {
 }
 
 export async function loadConversations() {
+    const expectedUser = userId;
+    if (!expectedUser) return;
     const threads=await api('/conversations');
-    S.chats=await Promise.all(threads.map(async row=> {
-        const detail=await api(`/conversations/${row.thread_id}`);
+    const chats=await Promise.all(threads.map(async row=> {
+        let detail=await api(`/conversations/${row.thread_id}`);
+        const previous = S.chats.find(chat => chat.id === String(row.thread_id) && chat.customerId === expectedUser);
+        const oldest = previous?.messages[0]?.id;
+        const messages = [...detail.messages];
+        while (oldest && detail.has_older && detail.messages[0]?.message_id > oldest) {
+            detail = await api(`/conversations/${row.thread_id}`, { query:{ before:detail.messages[0].message_id } });
+            messages.unshift(...detail.messages);
+        }
+        if (userId !== expectedUser) return null;
         let store=S.stores.find(s=>s.backendId===row.seller_id);
         if (!store) { store=storeModel({seller_id:row.seller_id,store_name:row.store_name,description:''}); S.stores.push(store); }
-        return { id:String(row.thread_id),customerId:userId,storeId:store.id,hasOlder:detail.has_older,
-            messages:detail.messages.map(m=>({id:m.message_id,by:String(m.sender_id),text:m.body,time:m.created_at,read:Boolean(m.read_at)})) };
+        const current = S.chats.find(chat => chat.id === String(row.thread_id) && chat.customerId === expectedUser);
+        const merged = new Map((current?.messages || []).map(message => [message.id,message]));
+        for (const m of messages) merged.set(m.message_id,{id:m.message_id,by:String(m.sender_id),text:m.body,time:m.created_at,read:Boolean(m.read_at)});
+        return { id:String(row.thread_id),customerId:expectedUser,storeId:store.id,unread:row.unread,
+            hasOlder:current?.messages[0]?.id < messages[0]?.message_id ? current.hasOlder : detail.has_older,
+            messages:[...merged.values()].sort((a,b)=>a.id-b.id) };
     }));
+    if (userId === expectedUser) S.chats=chats.filter(Boolean);
 }
 
 export const attachmentUrl=id=>new URL(`../../../api/attachment.php?id=${Number(id)}`,import.meta.url).href;
 
+export function clearPrivateState() {
+    userId = '';
+    for (const key of ['users','cart','orders','payments','notifications','reviews','returns','chats','vouchers','claims','wishlist','following','views','applications','savedRows']) S[key]=[];
+    Object.assign(view,{ quote:null, addressId:'', chat:'', chatDrafts:{}, checkoutVoucher:'', shippingVoucher:'', shopVoucher:{}, modalSubmit:null });
+    const dialog=document.getElementById('dialog');
+    if (dialog?.open) dialog.close();
+    const fields=document.getElementById('modal-fields');
+    if (fields) fields.replaceChildren();
+}
+
 export async function loadPrivate() {
     if (!userId) { for (const key of ['cart','orders','payments','notifications','wishlist','vouchers','claims','chats','returns','applications','savedRows']) S[key]=[]; return; }
+    const expectedUser=userId;
     const [profile, addresses, cart, orderRows, notices, preferences, saved, vouchers, returns, applications] = await Promise.all([
         api('/profile'), api('/addresses'), api('/cart'), pages('/orders'), pages('/notifications'),api('/preferences'),api('/saved-products'),api('/vouchers'),api('/returns'),api('/seller-applications')]);
+    if (userId!==expectedUser) return;
     S.users = [{ id:String(profile.user_id), backendId:profile.user_id, name:profile.name, email:profile.email,
         phone:profile.phone || '', birthDate:profile.birth_date || '',
         role:'Customer', status:'Active', verified:Boolean(profile.email_verified_at), notificationPrefs:preferences,
@@ -107,6 +134,7 @@ export async function loadPrivate() {
             city_code:address.city_code || '', barangay_code:address.barangay_code || '', postal_code:address.postal_code || '' })) }];
     applyCart(cart);
     const details = await Promise.all(orderRows.map(order => api(`/orders/${order.order_id}`)));
+    if (userId!==expectedUser) return;
     S.orders = details.map(mapOrder).reverse();
     S.savedRows=saved;
     S.wishlist=saved.map(row=>({userId,productId:ensureProduct(row).id}));
@@ -118,6 +146,7 @@ export async function loadPrivate() {
         qty:r.quantity,reason:r.reason,notes:r.explanation,status:r.status.split('_').map(s=>s[0].toUpperCase()+s.slice(1)).join(' '),created:r.created_at}));
     S.applications=applications;
     await loadConversations();
+    if (userId!==expectedUser) return;
     S.payments = S.orders.map(order => ({ orderId:order.id, status:order.paymentStatus, attempts:[{ method:'PayMongo', status:order.paymentStatus }] }));
     S.notifications = notices.map(notice => ({ id:String(notice.notification_id), userId, text:notice.message,
         title:notice.title, type:notice.type || 'Account', context:notice.context_type, contextId:notice.context_id,

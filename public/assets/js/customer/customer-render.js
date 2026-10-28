@@ -4,6 +4,11 @@ function unavailablePanel(title, message) {
     return `<section class="panel empty"><h1 class="h2">${esc(title)}</h1><p>${esc(message)}</p>${btn('route','Continue shopping','data-to="shop"','primary')}</section>`;
 }
 function render() {
+    const oldChatForm=document.getElementById('chat-form');
+    if (getUser() && oldChatForm) {
+        view.chatDrafts ??= {};
+        view.chatDrafts[oldChatForm.dataset.thread]=oldChatForm.elements.text.value;
+    }
     const path = route(), [page, parameter] = path.split('/');
     document.body.className = 'portal-customer';
     if (view.loading) { app.innerHTML = unavailablePanel('Loading SaleSync', 'Getting your latest account and catalogue…'); return; }
@@ -66,6 +71,8 @@ function render() {
         if (action) { action.disabled = !getUser()?.verified || !checkoutAddress() || view.busy; action.title = !getUser()?.verified ? 'Verify your email in My Account first.' : ''; }
     }
     if(page==='messages') {
+        const chatForm=document.getElementById('chat-form');
+        if (chatForm) chatForm.elements.text.value=view.chatDrafts?.[chatForm.dataset.thread] || '';
         const current=S.chats.find(t=>t.id===view.chat)||(!view.messageUnread?S.chats[0]:null);
         if(current?.hasOlder) app.querySelector('.chat-messages')?.insertAdjacentHTML('afterbegin',btn('chat-older','Load older messages',`data-id="${current.id}"`,'ghost sm'));
     }

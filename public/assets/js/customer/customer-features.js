@@ -23,6 +23,7 @@ export async function readChat(id) {
     if (!id) return;
     await api(`/conversations/${id}/read`,{method:'PATCH'});
     const chat=S.chats.find(c=>c.id===String(id));
+    if (chat) chat.unread=0;
     chat?.messages.forEach(m=>{if(m.by!==userId)m.read=true;});
 }
 
@@ -35,6 +36,8 @@ export async function sendMessage(form) {
     if (form.dataset.message!==body) { form.dataset.key=crypto.randomUUID();form.dataset.message=body; }
     try {
         await api(`/conversations/${form.dataset.thread}/messages`,{method:'POST',body:{body,client_key:form.dataset.key}});
+        form.elements.text.value='';
+        if (view.chatDrafts) delete view.chatDrafts[form.dataset.thread];
         await loadConversations();render();
     } catch(error) { toast(error.message,true); }
     finally { delete form.dataset.sending;button.disabled=false; }

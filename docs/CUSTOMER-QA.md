@@ -1,6 +1,6 @@
 # Customer QA — October 28, 2026
 
-**Readiness correction:** the later [adversarial readiness audit](CUSTOMER-READINESS-AUDIT.md) reproduced five open defects despite these passing checks. This earlier regression pass is not a release/readiness verdict. The new audit commands exit nonzero until their failing scenarios are fixed.
+**Readiness correction:** the later [adversarial readiness audit](CUSTOMER-READINESS-AUDIT.md) reproduced five defects despite these passing checks. All five have since been [fixed and verified](CUSTOMER-DEFECT-FIXES.md). This earlier regression pass is not a release/readiness verdict, and the external-service/cross-role gaps remain.
 
 Scope: current local `customer` branch, including registration, strict 11-digit phone input and the latest invoice/password/address/Favorites changes. Seller/admin branches were not merged or modified. Automated business mutations use isolated databases; the existing local customer database received read-only integrity checks.
 
