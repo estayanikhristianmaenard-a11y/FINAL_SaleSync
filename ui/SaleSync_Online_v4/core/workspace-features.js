@@ -1,84 +1,1217 @@
 /* Guarded catalog administration and shared workspace components. */
-function productRow(p){return `<div class="catalog-record"><div class="catalog-record-image">${art(p)}</div><div><b>${esc(p.name)}</b><span>${esc(p.brand||p.category)} · ${esc(S.storeCategories.find(c=>c.id===p.storeCategoryId)?.name||'Unassigned')}</span></div></div>`}
-function scopedProducts(sid,key){view.catalogFilters??={};const f=view.catalogFilters[key]||{};return S.products.filter(p=>(!sid||p.storeId===sid)&&(!f.query||(p.name+' '+p.sku+' '+getStore(p.storeId)?.name).toLowerCase().includes(f.query.toLowerCase()))&&(!f.status||(f.status==='Hidden'?p.hidden:f.status==='Published'?p.published&&!p.hidden:!p.published&&!p.hidden)))}
-function catalogFilterBar(key){const f=view.catalogFilters?.[key]||{};return `<div class="workspace-filterbar"><label>Find a product<input id="${key}-query" class="input" value="${esc(f.query||'')}" data-workspace-filter="${key}" data-field="query" placeholder="Product, SKU or store"></label><label>Listing status<select class="input" data-workspace-filter="${key}" data-field="status">${['','Published','Draft','Hidden'].map(s=>`<option value="${s}" ${f.status===s?'selected':''}>${s||'All listings'}</option>`).join('')}</select></label><span class="small muted">Filters apply to this workspace view.</span></div>`}
-function collectionAdmin(sid){const categories=storeCollections(sid),store=getStore(sid);return h('Store collections','These categories organize products inside '+esc(store.name)+'.',btn('collection-new','Add collection',`data-store="${sid}"`,'primary'))+`<div class="panel collection-admin">${categories.length?categories.map((c,index)=>`<div class="simple-row"><div><b>${esc(c.name)}</b><div class="small muted">${S.products.filter(p=>p.storeId===sid&&p.storeCategoryId===c.id).length} assigned products</div></div><div class="row flexwrap">${btn('collection-edit','Rename',`data-id="${c.id}"`,'ghost sm')}${btn('collection-move','↑',`data-id="${c.id}" data-direction="-1" aria-label="Move ${esc(c.name)} up" ${index===0?'disabled':''}`,'ghost sm')}${btn('collection-move','↓',`data-id="${c.id}" data-direction="1" aria-label="Move ${esc(c.name)} down" ${index===categories.length-1?'disabled':''}`,'ghost sm')}${btn('collection-archive','Archive',`data-id="${c.id}"`,'danger sm')}</div></div>`).join(''):'<div class="empty">Add your first collection to organize this store.</div>'}</div>`}
-function globalCategoryAdmin(){const categories=S.marketCategories.filter(c=>!c.archived).sort((a,b)=>a.order-b.order);return h('Marketplace categories','Manage names, images and order. Archiving an occupied category requires reassignment.',btn('global-category-new','Add category','','primary'))+`<div class="panel">${categories.map((c,index)=>`<div class="simple-row"><div class="row"><div class="category-admin-photo">${categoryArt(c.name)}</div><div><b>${esc(c.name)}</b><div class="small muted">${S.products.filter(p=>p.categoryId===c.id).length} products · ${esc(c.id)}</div></div></div><div class="row flexwrap">${btn('global-category-edit','Edit',`data-id="${c.id}"`,'ghost sm')}${btn('global-category-move','↑',`data-id="${c.id}" data-direction="-1" aria-label="Move ${esc(c.name)} up" ${index===0?'disabled':''}`,'ghost sm')}${btn('global-category-move','↓',`data-id="${c.id}" data-direction="1" aria-label="Move ${esc(c.name)} down" ${index===categories.length-1?'disabled':''}`,'ghost sm')}${btn('global-category-archive','Archive',`data-id="${c.id}"`,'danger sm')}</div></div>`).join('')}</div>`}
-function registrySection(){const products=scopedProducts(null,'registry'),request=S.productRequests.find(r=>r.id===view.registryRequest&&r.status==='Pending');return h('Official product registry','Create the shared product record here, then assign it to a seller as a draft.',btn('registry-create','Create product',request?`data-request="${request.id}"`:'','primary'))+(request?`<div class="notice">Selected request: ${esc(request.name)} · ${esc(getStore(request.storeId)?.name)}. Create product opens a prefilled registry form.</div>`:'')+catalogFilterBar('registry')+list(['Product','SKU','Store','Marketplace category','Store collection','State'],products.map(p=>[productRow(p),esc(p.sku),esc(getStore(p.storeId)?.name),esc(p.category),esc(S.storeCategories.find(c=>c.id===p.storeCategoryId)?.name),badge(p.hidden?'Hidden':p.published?'Published':'Draft')]));}
-function workspaceExtraSection(kind,section){
- const enhanced=typeof enhancedWorkspace==='function'?enhancedWorkspace(kind,section):null;if(enhanced!==null)return enhanced;
- if(kind==='seller'){
-  const store=ownedStore(),sid=store?.id;if(!store)return '<div class="panel empty">A store is required to use this workspace.</div>';
-  if(section==='Store Collections')return collectionAdmin(sid);
-  if(section==='My Orders'){
-   const shipments=sellerShipments(),stage=view.fulfillmentStage||'All',query=(view.fulfillmentQuery||'').toLowerCase();
-   const filtered=shipments.filter(({o,sh})=>(stage==='All'||stage==='Exceptions'&&['Delivery Attempt Failed','Return to Sender','Cancelled'].includes(sh.status)||sh.status===stage)&&(!query||(o.id+' '+(o.recipientName||'')+' '+o.items.filter(i=>i.storeId===sid).map(i=>i.name).join(' ')).toLowerCase().includes(query))).reverse();
-   return h('Fulfillment queue','Pack paid orders, record handover and follow courier progress.')+stats([['To process',shipments.filter(x=>x.sh.status==='To Process').length,'Ready to start'],['Packing',shipments.filter(x=>x.sh.status==='Processing').length,'Being prepared'],['Ready for handover',shipments.filter(x=>x.sh.status==='Ready for Shipment').length,'Awaiting courier'],['In transit',shipments.filter(x=>['Shipped','Out for Delivery'].includes(x.sh.status)).length,'Courier has parcel']])+`<div class="workspace-filterbar"><label>Find an order<input class="input" id="fulfillment-search" data-fulfillment-search value="${esc(view.fulfillmentQuery||'')}" placeholder="Order, recipient or product"></label></div><div class="workspace-status-tabs">${['All','To Process','Processing','Ready for Shipment','Shipped','Delivered','Completed','Exceptions'].map(status=>btn('fulfillment-stage',status,`data-status="${status}" aria-pressed="${stage===status}"`,stage===status?'soft sm':'ghost sm')).join('')}</div>`+list(['Order / shipment','Recipient','Items','Progress','Actions'],filtered.map(({o,sh})=>[`${esc(o.id)}<div class="small muted">${dateTime(o.created)}</div>`,`<b>${esc(o.recipientName||S.users.find(u=>u.id===o.customerId)?.name)}</b><div class="small">${esc(o.recipientPhone||'Phone not recorded')}</div><div class="small muted">${esc(o.address)}</div>${sh.message?'<p class="small">Note: '+esc(sh.message)+'</p>':''}`,o.items.filter(i=>i.storeId===sid).map(i=>`<div>${esc(i.name)} × ${i.qty}</div>`).join(''),`${badge(sh.status)}<div class="small muted">${esc(sh.tracking||'Tracking not assigned')}</div>`,btn('order-detail','View order',`data-id="${o.id}"`,'ghost sm')+(sh.status==='To Process'?btn('ship-step','Start packing',`data-id="${sh.id}"`,'primary sm'):sh.status==='Processing'?btn('ship-step','Mark ready',`data-id="${sh.id}"`,'primary sm'):sh.status==='Ready for Shipment'?btn('handover','Record handover',`data-id="${sh.id}"`,'primary sm'):'')+(['To Process','Processing','Ready for Shipment'].includes(sh.status)&&o.shipments.every(s=>['To Process','Processing','Ready for Shipment'].includes(s.status))?btn('seller-cancel','Cancel & refund',`data-id="${o.id}"`,'danger sm'):'')]),'No shipments match this status and search.');
+function productRow(p) {
+  return `<div class="catalog-record"><div class="catalog-record-image">${art(p)}</div><div><b>${esc(p.name)}</b><span>${esc(p.brand || p.category)} · ${esc(S.storeCategories.find((c) => c.id === p.storeCategoryId)?.name || "Unassigned")}</span></div></div>`;
+}
+function scopedProducts(sid, key) {
+  view.catalogFilters ??= {};
+  const f = view.catalogFilters[key] || {};
+  return S.products.filter(
+    (p) =>
+      (!sid || p.storeId === sid) &&
+      (!f.query ||
+        (p.name + " " + p.sku + " " + getStore(p.storeId)?.name)
+          .toLowerCase()
+          .includes(f.query.toLowerCase())) &&
+      (!f.status ||
+        (f.status === "Hidden"
+          ? p.hidden
+          : f.status === "Published"
+            ? p.published && !p.hidden
+            : !p.published && !p.hidden)),
+  );
+}
+function catalogFilterBar(key) {
+  const f = view.catalogFilters?.[key] || {};
+  return `<div class="workspace-filterbar"><label>Find a product<input id="${key}-query" class="input" value="${esc(f.query || "")}" data-workspace-filter="${key}" data-field="query" placeholder="Product, SKU or store"></label><label>Listing status<select class="input" data-workspace-filter="${key}" data-field="status">${["", "Published", "Draft", "Hidden"].map((s) => `<option value="${s}" ${f.status === s ? "selected" : ""}>${s || "All listings"}</option>`).join("")}</select></label><span class="small muted">Filters apply to this workspace view.</span></div>`;
+}
+function collectionAdmin(sid) {
+  const categories = storeCollections(sid),
+    store = getStore(sid);
+  return (
+    h(
+      "Store collections",
+      "These categories organize products inside " + esc(store.name) + ".",
+      btn("collection-new", "Add collection", `data-store="${sid}"`, "primary"),
+    ) +
+    `<div class="panel collection-admin">${categories.length ? categories.map((c, index) => `<div class="simple-row"><div><b>${esc(c.name)}</b><div class="small muted">${S.products.filter((p) => p.storeId === sid && p.storeCategoryId === c.id).length} assigned products</div></div><div class="row flexwrap">${btn("collection-edit", "Rename", `data-id="${c.id}"`, "ghost sm")}${btn("collection-move", "↑", `data-id="${c.id}" data-direction="-1" aria-label="Move ${esc(c.name)} up" ${index === 0 ? "disabled" : ""}`, "ghost sm")}${btn("collection-move", "↓", `data-id="${c.id}" data-direction="1" aria-label="Move ${esc(c.name)} down" ${index === categories.length - 1 ? "disabled" : ""}`, "ghost sm")}${btn("collection-archive", "Archive", `data-id="${c.id}"`, "danger sm")}</div></div>`).join("") : '<div class="empty">Add your first collection to organize this store.</div>'}</div>`
+  );
+}
+function globalCategoryAdmin() {
+  const categories = S.marketCategories
+    .filter((c) => !c.archived)
+    .sort((a, b) => a.order - b.order);
+  return (
+    h(
+      "Marketplace categories",
+      "Manage names, images and order. Archiving an occupied category requires reassignment.",
+      btn("global-category-new", "Add category", "", "primary"),
+    ) +
+    `<div class="panel">${categories.map((c, index) => `<div class="simple-row"><div class="row"><div class="category-admin-photo">${categoryArt(c.name)}</div><div><b>${esc(c.name)}</b><div class="small muted">${S.products.filter((p) => p.categoryId === c.id).length} products · ${esc(c.id)}</div></div></div><div class="row flexwrap">${btn("global-category-edit", "Edit", `data-id="${c.id}"`, "ghost sm")}${btn("global-category-move", "↑", `data-id="${c.id}" data-direction="-1" aria-label="Move ${esc(c.name)} up" ${index === 0 ? "disabled" : ""}`, "ghost sm")}${btn("global-category-move", "↓", `data-id="${c.id}" data-direction="1" aria-label="Move ${esc(c.name)} down" ${index === categories.length - 1 ? "disabled" : ""}`, "ghost sm")}${btn("global-category-archive", "Archive", `data-id="${c.id}"`, "danger sm")}</div></div>`).join("")}</div>`
+  );
+}
+function registrySection() {
+  const products = scopedProducts(null, "registry"),
+    request = S.productRequests.find(
+      (r) => r.id === view.registryRequest && r.status === "Pending",
+    );
+  return (
+    h(
+      "Official product registry",
+      "Create the shared product record here, then assign it to a seller as a draft.",
+      btn(
+        "registry-create",
+        "Create product",
+        request ? `data-request="${request.id}"` : "",
+        "primary",
+      ),
+    ) +
+    (request
+      ? `<div class="notice">Selected request: ${esc(request.name)} · ${esc(getStore(request.storeId)?.name)}. Create product opens a prefilled registry form.</div>`
+      : "") +
+    catalogFilterBar("registry") +
+    list(
+      [
+        "Product",
+        "SKU",
+        "Store",
+        "Marketplace category",
+        "Store collection",
+        "State",
+      ],
+      products.map((p) => [
+        productRow(p),
+        esc(p.sku),
+        esc(getStore(p.storeId)?.name),
+        esc(p.category),
+        esc(S.storeCategories.find((c) => c.id === p.storeCategoryId)?.name),
+        badge(p.hidden ? "Hidden" : p.published ? "Published" : "Draft"),
+      ]),
+    )
+  );
+}
+function workspaceExtraSection(kind, section) {
+  const enhanced =
+    typeof enhancedWorkspace === "function"
+      ? enhancedWorkspace(kind, section)
+      : null;
+  if (enhanced !== null) return enhanced;
+  if (kind === "seller") {
+    const store = ownedStore(),
+      sid = store?.id;
+    if (!store)
+      return '<div class="panel empty">A store is required to use this workspace.</div>';
+    if (section === "Store Collections") return collectionAdmin(sid);
+    if (section === "My Orders") {
+      const shipments = sellerShipments(),
+        stage = view.fulfillmentStage || "All",
+        query = (view.fulfillmentQuery || "").toLowerCase();
+      const filtered = shipments
+        .filter(
+          ({ o, sh }) =>
+            (stage === "All" ||
+              (stage === "Exceptions" &&
+                [
+                  "Delivery Attempt Failed",
+                  "Return to Sender",
+                  "Cancelled",
+                ].includes(sh.status)) ||
+              sh.status === stage) &&
+            (!query ||
+              (
+                o.id +
+                " " +
+                (o.recipientName || "") +
+                " " +
+                o.items
+                  .filter((i) => i.storeId === sid)
+                  .map((i) => i.name)
+                  .join(" ")
+              )
+                .toLowerCase()
+                .includes(query)),
+        )
+        .reverse();
+      return (
+        h(
+          "Fulfillment queue",
+          "Pack paid orders, record handover and follow courier progress.",
+        ) +
+        stats([
+          [
+            "To process",
+            shipments.filter((x) => x.sh.status === "To Process").length,
+            "Ready to start",
+          ],
+          [
+            "Packing",
+            shipments.filter((x) => x.sh.status === "Processing").length,
+            "Being prepared",
+          ],
+          [
+            "Ready for handover",
+            shipments.filter((x) => x.sh.status === "Ready for Shipment")
+              .length,
+            "Awaiting courier",
+          ],
+          [
+            "In transit",
+            shipments.filter((x) =>
+              ["Shipped", "Out for Delivery"].includes(x.sh.status),
+            ).length,
+            "Courier has parcel",
+          ],
+        ]) +
+        `<div class="workspace-filterbar"><label>Find an order<input class="input" id="fulfillment-search" data-fulfillment-search value="${esc(view.fulfillmentQuery || "")}" placeholder="Order, recipient or product"></label></div><div class="workspace-status-tabs">${["All", "To Process", "Processing", "Ready for Shipment", "Shipped", "Delivered", "Completed", "Exceptions"].map((status) => btn("fulfillment-stage", status, `data-status="${status}" aria-pressed="${stage === status}"`, stage === status ? "soft sm" : "ghost sm")).join("")}</div>` +
+        list(
+          ["Order / shipment", "Recipient", "Items", "Progress", "Actions"],
+          filtered.map(({ o, sh }) => [
+            `${esc(o.id)}<div class="small muted">${dateTime(o.created)}</div>`,
+            `<b>${esc(o.recipientName || S.users.find((u) => u.id === o.customerId)?.name)}</b><div class="small">${esc(o.recipientPhone || "Phone not recorded")}</div><div class="small muted">${esc(o.address)}</div>${sh.message ? '<p class="small">Note: ' + esc(sh.message) + "</p>" : ""}`,
+            o.items
+              .filter((i) => i.storeId === sid)
+              .map((i) => `<div>${esc(i.name)} × ${i.qty}</div>`)
+              .join(""),
+            `${badge(sh.status)}<div class="small muted">${esc(sh.tracking || "Tracking not assigned")}</div>`,
+            btn("order-detail", "View order", `data-id="${o.id}"`, "ghost sm") +
+              (sh.status === "To Process"
+                ? btn(
+                    "ship-step",
+                    "Start packing",
+                    `data-id="${sh.id}"`,
+                    "primary sm",
+                  )
+                : sh.status === "Processing"
+                  ? btn(
+                      "ship-step",
+                      "Mark ready",
+                      `data-id="${sh.id}"`,
+                      "primary sm",
+                    )
+                  : sh.status === "Ready for Shipment"
+                    ? btn(
+                        "handover",
+                        "Record handover",
+                        `data-id="${sh.id}"`,
+                        "primary sm",
+                      )
+                    : "") +
+              (["To Process", "Processing", "Ready for Shipment"].includes(
+                sh.status,
+              ) &&
+              o.shipments.every((s) =>
+                ["To Process", "Processing", "Ready for Shipment"].includes(
+                  s.status,
+                ),
+              )
+                ? btn(
+                    "seller-cancel",
+                    "Cancel & refund",
+                    `data-id="${o.id}"`,
+                    "danger sm",
+                  )
+                : ""),
+          ]),
+          "No shipments match this status and search.",
+        )
+      );
+    }
+    if (section === "Sales Overview") {
+      const f = view.sellerPeriod || {},
+        totals = finances(sid, f.from || "", f.to || "");
+      return (
+        h(
+          "Sales performance",
+          "Calculated from paid order snapshots; shipping is shown separately.",
+        ) +
+        `<div class="workspace-filterbar"><label>From<input class="input" type="date" data-seller-period="from" value="${esc(f.from || "")}"></label><label>To<input class="input" type="date" data-seller-period="to" value="${esc(f.to || "")}"></label>${btn("seller-period-clear", "All dates", "", "ghost sm")}</div>` +
+        stats([
+          ["Gross item sales", money(totals.gross), "Paid merchandise"],
+          ["Refunds", money(totals.refunds), "Recorded item refunds"],
+          ["Commission", money(totals.commission), "Order rate snapshots"],
+          [
+            "Net payout basis",
+            money(totals.net),
+            "After shop discounts, refunds and fees",
+          ],
+        ]) +
+        `<div class="panel"><h3>Sales by day</h3>${salesTrend(sid, f.from, f.to)}${kv("Paid orders", totals.orders)}${kv("Shop-funded discounts", money(totals.sellerDiscount))}</div>`
+      );
+    }
+    if (section === "Store Settings")
+      return (
+        h(
+          "Store identity",
+          "Your SaleSync collection identity is distinct from official brand artwork.",
+          btn("store-edit", "Edit identity", "", "primary"),
+        ) +
+        `<div class="workspace-store-preview" style="--store-tone:${store.identity.tone};--store-accent:${store.identity.accent}">${storeEmblem(store)}<div><h3>${esc(store.name)}</h3><p>${esc(store.identity.tagline)}</p><p class="small">${esc(store.description)}</p></div><div class="workspace-store-art">${storeIdentityArt(store)}</div></div><div class="panel top-gap">${kv("Store collections", storeCollections(sid).length)}${kv("Products", sellerProducts().length)}${kv("Public status", badge(store.status))}${kv("Shipping per seller", money(S.settings.shipping))}${kv("Return request window", S.settings.returnDays + " days")}${btn("store-view", "Preview storefront", `data-id="${sid}"`, "soft sm")}</div>`
+      );
+    if (section === "My Products") {
+      const ps = scopedProducts(sid, "seller-products");
+      return (
+        h(
+          "Product listings",
+          "Edit your assigned records, collection, images and available options.",
+          btn("product-request", "Request product", "", "primary"),
+        ) +
+        catalogFilterBar("seller-products") +
+        stats([
+          ["Listings", sellerProducts().length, "Owned products"],
+          [
+            "Published",
+            sellerProducts().filter((p) => p.published && !p.hidden).length,
+            "Visible when store approved",
+          ],
+          [
+            "Drafts",
+            sellerProducts().filter((p) => !p.published).length,
+            "Ready for editing",
+          ],
+          [
+            "Low stock",
+            sellerProducts().filter((p) => available(p.id) < 6).length,
+            "Fewer than six available",
+          ],
+        ]) +
+        list(
+          ["Product", "SKU", "Price", "Available", "State", "Actions"],
+          ps.map((p) => [
+            productRow(p),
+            esc(p.sku),
+            money(p.price),
+            available(p.id),
+            badge(p.hidden ? "Hidden" : p.published ? "Published" : "Draft"),
+            btn(
+              "seller-edit",
+              "Edit listing",
+              `data-id="${p.id}"`,
+              "ghost sm",
+            ) +
+              btn(
+                "toggle-product",
+                p.published ? "Unpublish" : "Publish",
+                `data-id="${p.id}" ${p.hidden || store.status !== "Approved" ? "disabled" : ""}`,
+                "soft sm",
+              ),
+          ]),
+        )
+      );
+    }
   }
-  if(section==='Sales Overview'){const f=view.sellerPeriod||{},totals=finances(sid,f.from||'',f.to||'');return h('Sales performance','Calculated from paid order snapshots; shipping is shown separately.')+`<div class="workspace-filterbar"><label>From<input class="input" type="date" data-seller-period="from" value="${esc(f.from||'')}"></label><label>To<input class="input" type="date" data-seller-period="to" value="${esc(f.to||'')}"></label>${btn('seller-period-clear','All dates','','ghost sm')}</div>`+stats([['Gross item sales',money(totals.gross),'Paid merchandise'],['Refunds',money(totals.refunds),'Recorded item refunds'],['Commission',money(totals.commission),'Order rate snapshots'],['Net payout basis',money(totals.net),'After shop discounts, refunds and fees']])+`<div class="panel"><h3>Sales by day</h3>${salesTrend(sid,f.from,f.to)}${kv('Paid orders',totals.orders)}${kv('Shop-funded discounts',money(totals.sellerDiscount))}</div>`}
-  if(section==='Store Settings')return h('Store identity','Your SaleSync collection identity is distinct from official brand artwork.',btn('store-edit','Edit identity','','primary'))+`<div class="workspace-store-preview" style="--store-tone:${store.identity.tone};--store-accent:${store.identity.accent}">${storeEmblem(store)}<div><h3>${esc(store.name)}</h3><p>${esc(store.identity.tagline)}</p><p class="small">${esc(store.description)}</p></div><div class="workspace-store-art">${storeIdentityArt(store)}</div></div><div class="panel top-gap">${kv('Store collections',storeCollections(sid).length)}${kv('Products',sellerProducts().length)}${kv('Public status',badge(store.status))}${kv('Shipping per seller',money(S.settings.shipping))}${kv('Return request window',S.settings.returnDays+' days')}${btn('store-view','Preview storefront',`data-id="${sid}"`,'soft sm')}</div>`;
-  if(section==='My Products'){const ps=scopedProducts(sid,'seller-products');return h('Product listings','Edit your assigned records, collection, images and available options.',btn('product-request','Request product','','primary'))+catalogFilterBar('seller-products')+stats([['Listings',sellerProducts().length,'Owned products'],['Published',sellerProducts().filter(p=>p.published&&!p.hidden).length,'Visible when store approved'],['Drafts',sellerProducts().filter(p=>!p.published).length,'Ready for editing'],['Low stock',sellerProducts().filter(p=>available(p.id)<6).length,'Fewer than six available']])+list(['Product','SKU','Price','Available','State','Actions'],ps.map(p=>[productRow(p),esc(p.sku),money(p.price),available(p.id),badge(p.hidden?'Hidden':p.published?'Published':'Draft'),btn('seller-edit','Edit listing',`data-id="${p.id}"`,'ghost sm')+btn('toggle-product',p.published?'Unpublish':'Publish',`data-id="${p.id}" ${p.hidden||store.status!=='Approved'?'disabled':''}`,'soft sm')]));}
- }
- if(kind==='management'){
-  if(section==='Product Moderation'){const products=scopedProducts(null,'moderation');return h('Listing moderation','Inspect the product and seller before recording a policy decision.')+catalogFilterBar('moderation')+list(['Product','Store','Marketplace category','Listing state','Action'],products.map(p=>[productRow(p),esc(getStore(p.storeId)?.name),esc(p.category),badge(p.hidden?'Hidden':p.published?'Published':'Draft'),btn('moderate-product',p.hidden?'Restore visibility':'Hide listing',`data-id="${p.id}"`,'soft sm')]));}
-  if(section==='Product Registry'||section==='System Settings')return registrySection();
-  if(section==='Global Categories')return globalCategoryAdmin();
-  if(section==='Homepage & Banners')return h('Homepage banners','Edit the headline and select matching artwork from the local catalog.')+`<div class="panel">${S.banners.map(b=>`<div class="simple-row"><div><b>${esc(b.title)}</b><p class="small muted">${esc(b.subtitle)}</p></div>${btn('banner-edit','Edit banner',`data-id="${b.id}"`,'soft sm')}</div>`).join('')}</div>`;
-  if(section==='Business Rules')return h('Business rules','The same rules are used by checkout, refunds and housekeeping.',btn('business-rules','Edit rules','','primary'))+`<div class="panel">${kv('Shipping / seller',money(S.settings.shipping))}${kv('Commission',S.settings.commission+'%')}${kv('Return window',S.settings.returnDays+' days')}${kv('Auto-completion',S.settings.autoCompleteDays+' days after delivery')}</div>`;
-  if(section==='Reference Data')return h('Historical sample data','Generate one idempotent set of 200 labeled transactions spread across the preceding 12 months.',btn('seed-history',S.historySeeded?'History already generated':'Generate 200 sample records',S.historySeeded?'disabled':'','primary'))+`<div class="panel">${kv('Generated history',badge(S.historySeeded?'Generated':'Not generated'))}${kv('Synthetic orders',S.orders.filter(o=>o.synthetic).length)}<p class="small muted">Use Sales Reports to filter and export the resulting records. No provider is contacted.</p></div>`;
- }
- return null;
+  if (kind === "management") {
+    if (section === "Product Moderation") {
+      const products = scopedProducts(null, "moderation");
+      return (
+        h(
+          "Listing moderation",
+          "Inspect the product and seller before recording a policy decision.",
+        ) +
+        catalogFilterBar("moderation") +
+        list(
+          [
+            "Product",
+            "Store",
+            "Marketplace category",
+            "Listing state",
+            "Action",
+          ],
+          products.map((p) => [
+            productRow(p),
+            esc(getStore(p.storeId)?.name),
+            esc(p.category),
+            badge(p.hidden ? "Hidden" : p.published ? "Published" : "Draft"),
+            btn(
+              "moderate-product",
+              p.hidden ? "Restore visibility" : "Hide listing",
+              `data-id="${p.id}"`,
+              "soft sm",
+            ),
+          ]),
+        )
+      );
+    }
+    if (section === "Product Registry" || section === "System Settings")
+      return registrySection();
+    if (section === "Global Categories") return globalCategoryAdmin();
+    if (section === "Homepage & Banners")
+      return (
+        h(
+          "Homepage banners",
+          "Edit the headline and select matching artwork from the local catalog.",
+        ) +
+        `<div class="panel">${S.banners.map((b) => `<div class="simple-row"><div><b>${esc(b.title)}</b><p class="small muted">${esc(b.subtitle)}</p></div>${btn("banner-edit", "Edit banner", `data-id="${b.id}"`, "soft sm")}</div>`).join("")}</div>`
+      );
+    if (section === "Business Rules")
+      return (
+        h(
+          "Business rules",
+          "The same rules are used by checkout, refunds and housekeeping.",
+          btn("business-rules", "Edit rules", "", "primary"),
+        ) +
+        `<div class="panel">${kv("Shipping / seller", money(S.settings.shipping))}${kv("Commission", S.settings.commission + "%")}${kv("Return window", S.settings.returnDays + " days")}${kv("Auto-completion", S.settings.autoCompleteDays + " days after delivery")}</div>`
+      );
+    if (section === "Reference Data")
+      return (
+        h(
+          "Historical sample data",
+          "Generate one idempotent set of 200 labeled transactions spread across the preceding 12 months.",
+          btn(
+            "seed-history",
+            S.historySeeded
+              ? "History already generated"
+              : "Generate 200 sample records",
+            S.historySeeded ? "disabled" : "",
+            "primary",
+          ),
+        ) +
+        `<div class="panel">${kv("Generated history", badge(S.historySeeded ? "Generated" : "Not generated"))}${kv("Synthetic orders", S.orders.filter((o) => o.synthetic).length)}<p class="small muted">Use Sales Reports to filter and export the resulting records. No provider is contacted.</p></div>`
+      );
+  }
+  return null;
 }
-function salesTrend(sid=null,from='',to=''){
- const rows=csvRows(from||'',to||'').filter(r=>(!sid||r.storeId===sid)&&['Paid','Partially Refunded','Refunded'].includes(r.payment));
- const buckets=new Map();for(const row of rows)buckets.set(row.date,(buckets.get(row.date)||0)+row.gross-row.refund);
- const entries=[...buckets].sort((a,b)=>a[0].localeCompare(b[0])).slice(-12),max=Math.max(1,...entries.map(([,n])=>n));
- if(!entries.length)return '<div class="chart-empty"><b>No paid sales in this period</b><p>Confirmed simulated payments will appear here.</p></div>';
- return `<div class="sales-chart" role="img" aria-label="Net merchandise sales by day, calculated from order records">${entries.map(([day,total])=>`<div class="sales-chart-day"><span class="sales-chart-value">${money(total)}</span><div class="sales-chart-column"><span style="height:${Math.max(2,total/max*100)}%"></span></div><span>${esc(day.slice(5))}</span></div>`).join('')}</div><details class="chart-data"><summary>View chart values</summary>${list(['Manila date','Net merchandise sales'],entries.map(([day,total])=>[esc(day),money(total)]))}</details>`;
+function salesTrend(sid = null, from = "", to = "") {
+  const rows = csvRows(from || "", to || "").filter(
+    (r) =>
+      (!sid || r.storeId === sid) &&
+      ["Paid", "Partially Refunded", "Refunded"].includes(r.payment),
+  );
+  const buckets = new Map();
+  for (const row of rows)
+    buckets.set(
+      row.date,
+      (buckets.get(row.date) || 0) + row.gross - row.refund,
+    );
+  const entries = [...buckets]
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .slice(-12),
+    max = Math.max(1, ...entries.map(([, n]) => n));
+  if (!entries.length)
+    return '<div class="chart-empty"><b>No paid sales in this period</b><p>Confirmed simulated payments will appear here.</p></div>';
+  return `<div class="sales-chart" role="img" aria-label="Net merchandise sales by day, calculated from order records">${entries.map(([day, total]) => `<div class="sales-chart-day"><span class="sales-chart-value">${money(total)}</span><div class="sales-chart-column"><span style="height:${Math.max(2, (total / max) * 100)}%"></span></div><span>${esc(day.slice(5))}</span></div>`).join("")}</div><details class="chart-data"><summary>View chart values</summary>${list(
+    ["Manila date", "Net merchandise sales"],
+    entries.map(([day, total]) => [esc(day), money(total)]),
+  )}</details>`;
 }
-function canEditStore(sid){return !!getUser()&&(isManagement()||ownerOfStore(sid)===userId&&hasSeller())}
-function requireStoreOwner(sid){guard(canEditStore(sid),'You cannot edit this store')}
-function imageTypeOptions(){return [...new Set([...Object.keys(CATALOG_IMAGES),...Object.keys(PRODUCT_VECTORS)])].sort().map(type=>[type,type.replace(/([a-z])([A-Z])/g,'$1 $2')])}
-function localImagePath(type){return PRODUCT_VECTORS[type]?'assets/illustrations/'+type+'.svg':'assets/products/'+type+'.webp'}
-function resolveImage(src){if(!allowedImage(src))return '';const photo=src.match(/^assets\/products\/([a-z0-9-]+)\.webp$/);if(photo)return PRODUCT_OPTION_ASSETS[src]||PRODUCT_PHOTO_ASSETS[src]?.src||CATALOG_IMAGES[photo[1]]?.src||'';const vector=src.match(/^assets\/illustrations\/([a-z0-9-]+)\.svg$/);if(vector)return PRODUCT_VECTORS[vector[1]]?'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(PRODUCT_VECTORS[vector[1]]):'';return src}
-async function uploadedImage(file){if(!file?.size)return null;guard(['image/png','image/jpeg','image/webp'].includes(file.type)&&file.size<=4000000,'Choose a PNG, JPEG or WebP image under 4 MB');const bitmap=await createImageBitmap(file);try{const scale=Math.min(1,1200/Math.max(bitmap.width,bitmap.height)),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));canvas.getContext('2d').drawImage(bitmap,0,0,canvas.width,canvas.height);const src=canvas.toDataURL('image/webp',.82);guard(src.length<650000,'Image is too large for local browser storage; use a smaller photo');return src}finally{bitmap.close()}}
-function photoUploadFields(p){return `<div class="form-section"><h3>Product photography</h3><p class="small muted">Add up to five genuine product views. PNG, JPEG or WebP, up to 4 MB each; images are optimized for local storage. Existing images stay when no files are chosen.</p><label class="field">Replace gallery<input class="input" type="file" name="photos" multiple accept="image/png,image/jpeg,image/webp"></label>${textarea('imageCredit','Image source / credit',p?.imageCredit||'','')}</div>`}
-async function galleryFromForm(existing){const files=[...($('#modal-form [name=photos]')?.files||[])];if(!files.length)return existing||[];guard(files.length<=5,'Choose no more than five product images');const gallery=[];for(const file of files){const src=await uploadedImage(file);gallery.push({src,alt:'Product view '+(gallery.length+1),userProvided:true})}guard(gallery.reduce((n,i)=>n+i.src.length,0)<1800000,'This gallery is too large for browser storage; choose fewer or smaller images');return gallery}
-function openSellerListing(pid){const p=getP(pid);guard(p&&ownerOfStore(p.storeId)===userId,'Not your product');const categories=storeCollections(p.storeId);openModal('Edit product listing',`<div class="form-section"><h3>Listing information</h3>${field('name','Product title','text',p.name)}${field('brand','Brand','text',p.brand||'','')}${field('model','Model','text',p.model||'','')}${select('collection','Store collection',categories.map(c=>[c.id,c.name]),p.storeCategoryId)}${textarea('description','Product description',p.description||'', '')}</div><div class="form-section"><h3>Price & inventory</h3>${field('price','Selling price (PHP)','number',p.price,'required min="0.01" step="0.01"')}${field('delta','Change available stock by','number',0,'required step="1"')}${textarea('reason','Stock change reason','','')}${textarea('options','Available options (one per line)',p.variants.map(v=>v.name).join('\n'))}<p class="small muted">Options share the product inventory ledger. Existing option IDs are retained for cart and order references.</p></div>${photoUploadFields(p)}${textarea('specs','Specifications (Key: Value per line)',Object.entries(p.specs||{}).map(([k,v])=>k+': '+v).join('\n'),'')}`,'Save listing',async f=>{
-  guard(ownerOfStore(p.storeId)===userId,'Not your product');const price=Number(f.price),delta=Number(f.delta),name=f.name.trim(),options=f.options.split('\n').map(x=>x.trim()).filter(Boolean);guard(name.length>=3&&Number.isFinite(price)&&price>0&&Number.isInteger(delta),'Enter a title, positive price and whole-number stock adjustment');guard(categories.some(c=>c.id===f.collection&&!c.archived),'Choose an active collection');guard(options.length>=p.variants.length&&options.length<=12&&new Set(options).size===options.length,'Keep existing options; use up to 12 distinct option labels');if(delta)guard(f.reason.trim().length>=5,'Explain the stock change');if(delta<0)guard(available(pid)>=-delta,'Cannot remove reserved or unavailable stock');const specs=parseSpecLines(f.specs,{}),images=await galleryFromForm(p.images);if(delta){ledger(pid,delta>0?'adjust':'reserve',Math.abs(delta),'Seller listing: '+f.reason);if(delta<0)ledger(pid,'commit',-delta,'Seller listing adjustment')}
-  p.optionsEdited=true;Object.assign(p,{name,brand:f.brand.trim(),model:f.model.trim(),description:f.description.trim(),price,storeCategoryId:f.collection,specs,images,imageCredit:f.imageCredit.trim(),variants:options.map((name,index)=>({...p.variants[index],id:p.variants[index]?.id||'option-'+(index+1),name,add:p.variants[index]?.add||0,attributes:p.variants[index]?.attributes||{Design:name,Color:'As pictured'},imageIndex:p.variants[index]?.imageIndex||0}))});audit('Listing metadata updated',pid);commit('product.changed',{id:pid});
- },true)}
-function openStoreIdentity(){const store=ownedStore();guard(store,'No store to edit');openModal('Edit store identity',field('name','Store display name','text',store.name)+textarea('description','Store introduction',store.description)+field('tagline','Cover headline','text',store.identity.tagline)+field('tone','Primary color','color',store.identity.tone)+field('accent','Accent color','color',store.identity.accent)+select('coverType','Featured product image',imageTypeOptions(),store.identity.coverType)+`<label class="field">Your collection logo (optional)<input class="input" name="logo" type="file" accept="image/png,image/jpeg,image/webp"></label><label class="field">Your cover photograph (optional)<input class="input" name="cover" type="file" accept="image/png,image/jpeg,image/webp"></label><p class="small muted">Use artwork you have permission to display. Without uploads, SaleSync uses an original collection emblem and local product imagery.</p>`,'Save identity',async f=>{requireStoreOwner(store.id);guard(f.name.trim().length>=3&&f.tagline.trim().length>=4,'Enter a store name and cover headline');guard(/^#[a-f0-9]{6}$/i.test(f.tone)&&/^#[a-f0-9]{6}$/i.test(f.accent),'Choose valid colors');guard(imageTypeOptions().some(([type])=>type===f.coverType),'Choose a local image');const logo=await uploadedImage(f.logo),cover=await uploadedImage(f.cover);store.name=f.name.trim();store.description=f.description.trim();Object.assign(store.identity,{tagline:f.tagline.trim(),tone:f.tone,accent:f.accent,coverType:f.coverType,...(logo?{logo}:{}),...(cover?{cover}:{})});audit('Store identity updated',store.id);commit('store.updated')},true)}
-function openRegistry(requestId){guard(isManagement(),'Management authorization required');const context=workspaceContext('management',decodeURIComponent(route().split('/').slice(1).join('/')));guard(context?.module.name==='System Settings','Open System Settings → Product Registry to create a product');const req=S.productRequests.find(r=>r.id===requestId&&r.status==='Pending'),sid=req?.storeId||S.stores.find(s=>s.status==='Approved')?.id;openModal('Official product registry',field('name','Product title','text',req?.name||'')+field('sku','Unique SKU')+field('brand','Brand','text','','')+field('model','Model','text','','')+select('category','Marketplace category',CATS.map(([c])=>c),req?.category||CATS[0][0])+select('store','Assigned seller',S.stores.filter(s=>s.status==='Approved').map(s=>[s.id,s.name]),sid)+select('collection','Store collection',storeCollections(sid).map(c=>[c.id,c.name]))+select('type','Local product image family',imageTypeOptions())+field('price','Selling price (PHP)','number',599,'required min="0.01" step="0.01"')+field('stock','Opening units','number',10,'required min="0" step="1"')+textarea('description','Description','','')+photoUploadFields()+textarea('specs','Specifications (Key: Value per line)','',''),'Create draft',async f=>{guard(isManagement(),'Management authorization required');const price=Number(f.price),stock=Number(f.stock),store=getStore(f.store),category=S.marketCategories.find(c=>c.name===f.category&&!c.archived),collection=S.storeCategories.find(c=>c.id===f.collection&&c.storeId===f.store&&!c.archived);guard(f.name.trim().length>=3&&f.sku.trim().length>=3,'Enter a product title and SKU');guard(!S.products.some(p=>p.sku.toLowerCase()===f.sku.trim().toLowerCase()),'SKU already exists');guard(Number.isFinite(price)&&price>0&&Number.isInteger(stock)&&stock>=0,'Invalid price or opening stock');guard(store?.status==='Approved'&&category&&collection,'Choose an approved store and valid categories');guard(imageTypeOptions().some(([t])=>t===f.type),'Choose a local product image family');const specs=parseSpecLines(f.specs,{}),images=await galleryFromForm([{src:localImagePath(f.type),alt:f.name.trim()+' illustrative image'}]),pid=id('p').toLowerCase();const p={id:pid,name:f.name.trim(),sku:f.sku.trim(),brand:f.brand.trim(),model:f.model.trim(),description:f.description.trim(),category:f.category,categoryId:category.id,storeCategoryId:collection.id,storeId:f.store,type:f.type,price,listPrice:price,base:stock,variants:[{id:'std',name:'Standard',add:0}],specs,images,imageCredit:f.imageCredit.trim(),published:false,hidden:false,reviewSeed:0,ratingSeed:0,flash:false};S.products.push(p);S.ledger.push({id:id('LED'),productId:pid,kind:'open',qty:stock,ref:'Official product registry',time:now()});if(req){req.status='Assigned';req.productId=pid}view.registryRequest='';audit('Official product created',pid);commit('product.assigned',p)},true)}
-function orderDetail(oid){const order=getO(oid),seller=SaleSync.activePortal()==='seller';guard(order&&(isManagement()||seller&&order.shipments.some(sh=>ownerOfStore(sh.storeId)===userId)||order.customerId===userId),'Order unavailable');const shipments=order.shipments.filter(sh=>!seller||ownerOfStore(sh.storeId)===userId);openModal('Order '+order.id,`<div class="order-detail-summary"><b>${esc(order.recipientName||S.users.find(u=>u.id===order.customerId)?.name||'Recipient not recorded')}</b><p>${esc(order.recipientPhone||'Phone not recorded')}</p><p>${esc(order.address)}</p>${kv('Created',dateTime(order.created))}${kv('Payment',badge(order.paymentStatus))}${!seller?kv('Order total',money(order.amount)):''}</div>${shipments.map(sh=>`<div class="panel"><h3>${esc(sh.storeName||getStore(sh.storeId)?.name)}</h3>${badge(sh.status)}<p class="small">${esc(sh.courier||'Courier not assigned')} · ${esc(sh.tracking||'No tracking reference')}</p>${sh.message?`<div class="notice"><b>Buyer message</b><p>${esc(sh.message)}</p></div>`:''}${list(['Item','Qty','Unit price'],order.items.filter(i=>i.storeId===sh.storeId).map(i=>[esc(i.name),i.qty,money(i.price)]))}<div class="timeline top-gap">${sh.history.map(h=>`<div class="event"><b>${esc(h.status)}</b><p class="small muted">${dateTime(h.time)} · ${esc(h.source)}</p></div>`).join('')||'<p class="small muted">Awaiting first shipment update.</p>'}</div>${seller?btn('packing-slip','Packing slip',`data-id="${oid}" data-shipment="${sh.id}"`,'soft sm'):''}</div>`).join('')}`,'Close',()=>{},true)}
-function packingSlip(oid,shipmentId){const o=getO(oid),sh=o?.shipments.find(s=>s.id===shipmentId);guard(sh&&ownerOfStore(sh.storeId)===userId,'Not your shipment');const html=`<article class="packing-slip"><p>SALESYNC · SIMULATED PACKING SLIP</p><h2>${esc(sh.storeName||getStore(sh.storeId)?.name)}</h2><h3>${esc(o.id)}</h3><p>${esc(o.recipientName||'Recipient not recorded')} · ${esc(o.recipientPhone||'Phone not recorded')}</p><p>${esc(o.address)}</p>${list(['Product','SKU','Quantity'],o.items.filter(i=>i.storeId===sh.storeId).map(i=>[esc(i.name),esc(i.sku),i.qty]))}<p>Buyer note: ${esc(sh.message||'None')}</p><p>Courier: ${esc(sh.courier||'Not assigned')} · ${esc(sh.tracking||'Tracking not assigned')}</p><p>This document is not a carrier-issued waybill.</p></article>`;openModal('Packing slip preview',html,'Print slip',()=>{const win=window.open('','_blank','width=800,height=700');guard(win,'Allow the print preview window to open');win.document.write('<!doctype html><html><head><title>Packing slip</title><style>body{font:16px system-ui;padding:30px;color:#182033}table{width:100%;border-collapse:collapse}td,th{padding:12px;border:1px solid #ccc;text-align:left}</style></head><body>'+html+'</body></html>');win.document.close();win.focus();win.print()},true)}
-function workspaceAction(action,el){const d=el.dataset||{},pid=d.id;switch(action){
- case 'workspace-tab':{const module=WORKSPACE_MODULES[d.kind]?.find(m=>m.name===d.module);guard(module?.tabs.some(t=>t[1]===d.section),'Unknown workspace section');view.workspaceTabs??={};view.workspaceTabs[d.kind+'/'+d.module]=d.section;go(d.kind+'/'+d.module);return true}
- case 'registry-request':guard(isManagement(),'Management only');view.registryRequest=d.request;view.workspaceTabs??={};view.workspaceTabs['management/System Settings']='Product Registry';go('management/System Settings');return true;
- case 'registry-create':openRegistry(d.request||view.registryRequest);return true;
- case 'seller-edit':openSellerListing(pid);return true;
- case 'store-edit':openStoreIdentity();return true;
- case 'seller-period-clear':view.sellerPeriod={};render();return true;
- case 'fulfillment-stage':guard(hasSeller(),'Seller access required');view.fulfillmentStage=d.status;render();return true;
- case 'order-detail':orderDetail(pid);return true;
- case 'packing-slip':packingSlip(pid,d.shipment);return true;
- case 'shop-reset':if(view.storeBrowse?.[pid])Object.assign(view.storeBrowse[pid],{category:'',query:'',sort:'Recommended',inStock:false});render();return true;
- case 'shop-tab':case 'shop-collection':case 'shop-search':{const store=getStore(pid);guard(store?.status==='Approved','Store unavailable');view.storeBrowse??={};const state=view.storeBrowse[pid]??={tab:'Home',category:'',query:'',sort:'Recommended',inStock:false};if(action==='shop-tab'){guard(['Home','All Products','Categories','About'].includes(d.tab),'Unknown shop section');state.tab=d.tab}if(action==='shop-collection'){guard(!d.category||storeCollections(pid).some(c=>c.id===d.category),'Unknown store collection');state.category=d.category||'';state.tab='All Products'}if(action==='shop-search'){state.query=$('#in-store-search')?.value.trim()||'';state.tab='All Products'}render();return true}
- case 'collection-new':case 'collection-edit':{const c=S.storeCategories.find(c=>c.id===pid),sid=c?.storeId||d.store;requireStoreOwner(sid);return openModal(action==='collection-new'?'New store collection':'Rename store collection',field('name','Collection name','text',c?.name||''),'Save collection',f=>{requireStoreOwner(sid);const name=f.name.trim();guard(name.length>=2&&name.length<=48,'Use a collection name of 2–48 characters');guard(!storeCollections(sid).some(x=>x.id!==c?.id&&x.name.toLowerCase()===name.toLowerCase()),'Collection name already exists');if(c)c.name=name;else S.storeCategories.push({id:id('SC'),storeId:sid,name,order:storeCollections(sid).length,archived:false});audit('Store collection saved',sid+' · '+name);commit('store.categories')})||true}
- case 'collection-move':{const c=S.storeCategories.find(c=>c.id===pid);guard(c&&!c.archived,'Collection unavailable');requireStoreOwner(c.storeId);const list=storeCollections(c.storeId),index=list.indexOf(c),other=list[index+Number(d.direction)];guard(other,'Already at the edge');[c.order,other.order]=[other.order,c.order];audit('Store collection reordered',pid);commit('store.categories');return true}
- case 'collection-archive':{const c=S.storeCategories.find(c=>c.id===pid);guard(c&&!c.archived,'Collection unavailable');requireStoreOwner(c.storeId);const products=S.products.filter(p=>p.storeId===c.storeId&&p.storeCategoryId===pid),targets=storeCollections(c.storeId).filter(x=>x.id!==pid);guard(!products.length||targets.length,'Create another collection before moving these products');openModal('Archive collection',`<p>${esc(c.name)} contains ${products.length} products. Reassign them before archiving.</p>`+(products.length?select('target','Move products to',targets.map(c=>[c.id,c.name])):''),'Archive collection',f=>{requireStoreOwner(c.storeId);if(products.length)guard(targets.some(c=>c.id===f.target&&!c.archived),'Choose an active destination');products.forEach(p=>p.storeCategoryId=f.target);c.archived=true;audit('Store collection archived',pid);commit('store.categories')});return true}
- case 'global-category-new':case 'global-category-edit':{guard(isManagement(),'Management only');const c=S.marketCategories.find(c=>c.id===pid);openModal(c?'Edit marketplace category':'New marketplace category',field('name','Category name','text',c?.name||'')+select('imageType','Category thumbnail',imageTypeOptions(),c?.imageType||'headphones'),'Save category',f=>{guard(isManagement(),'Management only');const name=f.name.trim();guard(name.length>=2&&name.length<=40,'Use a category name of 2–40 characters');guard(!S.marketCategories.some(x=>x.id!==c?.id&&x.name.toLowerCase()===name.toLowerCase()),'Category name already exists');guard(imageTypeOptions().some(([type])=>type===f.imageType),'Choose a local image');if(c){const old=c.name;c.name=name;c.imageType=f.imageType;S.products.filter(p=>p.categoryId===c.id||p.category===old).forEach(p=>{p.categoryId=c.id;p.category=name});S.stores.filter(s=>s.category===old).forEach(s=>s.category=name);S.productRequests.filter(r=>r.category===old).forEach(r=>r.category=name)}else S.marketCategories.push({id:id('CAT'),name,icon:'',imageType:f.imageType,order:S.marketCategories.length,archived:false});view.category='All';audit('Marketplace category saved',name);commit('catalog.categories')});return true}
- case 'global-category-move':{guard(isManagement(),'Management only');const list=S.marketCategories.filter(c=>!c.archived).sort((a,b)=>a.order-b.order),c=list.find(c=>c.id===pid),other=list[list.indexOf(c)+Number(d.direction)];guard(c&&other,'Cannot reorder category');[c.order,other.order]=[other.order,c.order];audit('Marketplace category reordered',pid);commit('catalog.categories');return true}
- case 'global-category-archive':{guard(isManagement(),'Management only');const c=S.marketCategories.find(c=>c.id===pid&&!c.archived),targets=S.marketCategories.filter(c=>c.id!==pid&&!c.archived);guard(c&&targets.length,'Keep at least one active marketplace category');openModal('Archive marketplace category',`<p>All products and store profiles in ${esc(c.name)} will move to the category below. Store-owned collections remain intact.</p>`+select('target','Destination category',targets.map(c=>[c.id,c.name])),'Reassign and archive',f=>{guard(isManagement(),'Management only');const target=targets.find(c=>c.id===f.target&&!c.archived);guard(target,'Choose an active destination');S.products.filter(p=>p.categoryId===pid||p.category===c.name).forEach(p=>{p.categoryId=target.id;p.category=target.name});S.stores.filter(s=>s.category===c.name).forEach(s=>s.category=target.name);S.productRequests.filter(r=>r.category===c.name).forEach(r=>r.category=target.name);c.archived=true;view.category='All';audit('Marketplace category archived',c.name+' → '+target.name);commit('catalog.categories')});return true}
- case 'banner-edit':{guard(isManagement(),'Management only');const b=S.banners.find(b=>b.id===pid);guard(b,'Banner unavailable');openModal('Edit homepage banner',field('title','Headline','text',b.title)+textarea('subtitle','Subtitle',b.subtitle)+select('type','Matching product image',imageTypeOptions(),b.type),'Save banner',f=>{guard(isManagement(),'Management only');guard(f.title.trim().length>=4&&f.subtitle.trim().length>=5,'Provide a headline and subtitle');guard(imageTypeOptions().some(([t])=>t===f.type),'Choose a local image');Object.assign(b,{title:f.title.trim(),subtitle:f.subtitle.trim(),type:f.type});audit('Homepage banner updated',b.id);commit('banner.updated')});return true}
- default:return false;
-}}
-function workspaceChange(target){
- if(target.hasAttribute('data-fulfillment-search')){view.fulfillmentQuery=target.value;render();return true}
- if(target.dataset.workspaceFilter){view.catalogFilters??={};const f=view.catalogFilters[target.dataset.workspaceFilter]??={};f[target.dataset.field]=target.value;render();return true}
- if(target.dataset.sellerPeriod){view.sellerPeriod??={};view.sellerPeriod[target.dataset.sellerPeriod]=target.value;render();return true}
- if(target.dataset.storeFilter){view.storeBrowse??={};const f=view.storeBrowse[target.dataset.storeFilter];if(!f)return false;f[target.dataset.field]=target.type==='checkbox'?target.checked:target.value;render();return true}
- if(target.id==='catalog-store'){view.shop=target.value;view.seeMore=25;render();return true}
- if(target.closest('#modal-form')&&target.name==='store'){const select=$('#modal-form [name=collection]');if(select)select.innerHTML=storeCollections(target.value).map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('');return true}
- return false;
+function canEditStore(sid) {
+  return (
+    !!getUser() &&
+    (isManagement() || (ownerOfStore(sid) === userId && hasSeller()))
+  );
+}
+function requireStoreOwner(sid) {
+  guard(canEditStore(sid), "You cannot edit this store");
+}
+function imageTypeOptions() {
+  return [
+    ...new Set([
+      ...Object.keys(CATALOG_IMAGES),
+      ...Object.keys(PRODUCT_VECTORS),
+    ]),
+  ]
+    .sort()
+    .map((type) => [type, type.replace(/([a-z])([A-Z])/g, "$1 $2")]);
+}
+function localImagePath(type) {
+  return PRODUCT_VECTORS[type]
+    ? "assets/illustrations/" + type + ".svg"
+    : "assets/products/" + type + ".webp";
+}
+function resolveImage(src) {
+  if (!allowedImage(src)) return "";
+  const photo = src.match(/^assets\/products\/([a-z0-9-]+)\.webp$/);
+  if (photo)
+    return (
+      PRODUCT_OPTION_ASSETS[src] ||
+      PRODUCT_PHOTO_ASSETS[src]?.src ||
+      CATALOG_IMAGES[photo[1]]?.src ||
+      ""
+    );
+  const vector = src.match(/^assets\/illustrations\/([a-z0-9-]+)\.svg$/);
+  if (vector)
+    return PRODUCT_VECTORS[vector[1]]
+      ? "data:image/svg+xml;charset=utf-8," +
+          encodeURIComponent(PRODUCT_VECTORS[vector[1]])
+      : "";
+  return src;
+}
+async function uploadedImage(file) {
+  if (!file?.size) return null;
+  guard(
+    ["image/png", "image/jpeg", "image/webp"].includes(file.type) &&
+      file.size <= 4000000,
+    "Choose a PNG, JPEG or WebP image under 4 MB",
+  );
+  const bitmap = await createImageBitmap(file);
+  try {
+    const scale = Math.min(1, 1200 / Math.max(bitmap.width, bitmap.height)),
+      canvas = document.createElement("canvas");
+    canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+    canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+    canvas
+      .getContext("2d")
+      .drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    const src = canvas.toDataURL("image/webp", 0.82);
+    guard(
+      src.length < 650000,
+      "Image is too large for local browser storage; use a smaller photo",
+    );
+    return src;
+  } finally {
+    bitmap.close();
+  }
+}
+function photoUploadFields(p) {
+  return `<div class="form-section"><h3>Product photography</h3><p class="small muted">Add up to five genuine product views. PNG, JPEG or WebP, up to 4 MB each; images are optimized for local storage. Existing images stay when no files are chosen.</p><label class="field">Replace gallery<input class="input" type="file" name="photos" multiple accept="image/png,image/jpeg,image/webp"></label>${textarea("imageCredit", "Image source / credit", p?.imageCredit || "", "")}</div>`;
+}
+async function galleryFromForm(existing) {
+  const files = [...($("#modal-form [name=photos]")?.files || [])];
+  if (!files.length) return existing || [];
+  guard(files.length <= 5, "Choose no more than five product images");
+  const gallery = [];
+  for (const file of files) {
+    const src = await uploadedImage(file);
+    gallery.push({
+      src,
+      alt: "Product view " + (gallery.length + 1),
+      userProvided: true,
+    });
+  }
+  guard(
+    gallery.reduce((n, i) => n + i.src.length, 0) < 1800000,
+    "This gallery is too large for browser storage; choose fewer or smaller images",
+  );
+  return gallery;
+}
+function openSellerListing(pid) {
+  const p = getP(pid);
+  guard(p && ownerOfStore(p.storeId) === userId, "Not your product");
+  const categories = storeCollections(p.storeId);
+  openModal(
+    "Edit product listing",
+    `<div class="form-section"><h3>Listing information</h3>${field("name", "Product title", "text", p.name)}${field("brand", "Brand", "text", p.brand || "", "")}${field("model", "Model", "text", p.model || "", "")}${select(
+      "collection",
+      "Store collection",
+      categories.map((c) => [c.id, c.name]),
+      p.storeCategoryId,
+    )}${textarea("description", "Product description", p.description || "", "")}</div><div class="form-section"><h3>Price & inventory</h3>${field("price", "Selling price (PHP)", "number", p.price, 'required min="0.01" step="0.01"')}${field("delta", "Change available stock by", "number", 0, 'required step="1"')}${textarea("reason", "Stock change reason", "", "")}${textarea("options", "Available options (one per line)", p.variants.map((v) => v.name).join("\n"))}<p class="small muted">Options share the product inventory ledger. Existing option IDs are retained for cart and order references.</p></div>${photoUploadFields(p)}${textarea(
+      "specs",
+      "Specifications (Key: Value per line)",
+      Object.entries(p.specs || {})
+        .map(([k, v]) => k + ": " + v)
+        .join("\n"),
+      "",
+    )}`,
+    "Save listing",
+    async (f) => {
+      guard(ownerOfStore(p.storeId) === userId, "Not your product");
+      const price = Number(f.price),
+        delta = Number(f.delta),
+        name = f.name.trim(),
+        options = f.options
+          .split("\n")
+          .map((x) => x.trim())
+          .filter(Boolean);
+      guard(
+        name.length >= 3 &&
+          Number.isFinite(price) &&
+          price > 0 &&
+          Number.isInteger(delta),
+        "Enter a title, positive price and whole-number stock adjustment",
+      );
+      guard(
+        categories.some((c) => c.id === f.collection && !c.archived),
+        "Choose an active collection",
+      );
+      guard(
+        options.length >= p.variants.length &&
+          options.length <= 12 &&
+          new Set(options).size === options.length,
+        "Keep existing options; use up to 12 distinct option labels",
+      );
+      if (delta) guard(f.reason.trim().length >= 5, "Explain the stock change");
+      if (delta < 0)
+        guard(
+          available(pid) >= -delta,
+          "Cannot remove reserved or unavailable stock",
+        );
+      const specs = parseSpecLines(f.specs, {}),
+        images = await galleryFromForm(p.images);
+      if (delta) {
+        ledger(
+          pid,
+          delta > 0 ? "adjust" : "reserve",
+          Math.abs(delta),
+          "Seller listing: " + f.reason,
+        );
+        if (delta < 0)
+          ledger(pid, "commit", -delta, "Seller listing adjustment");
+      }
+      p.optionsEdited = true;
+      Object.assign(p, {
+        name,
+        brand: f.brand.trim(),
+        model: f.model.trim(),
+        description: f.description.trim(),
+        price,
+        storeCategoryId: f.collection,
+        specs,
+        images,
+        imageCredit: f.imageCredit.trim(),
+        variants: options.map((name, index) => ({
+          ...p.variants[index],
+          id: p.variants[index]?.id || "option-" + (index + 1),
+          name,
+          add: p.variants[index]?.add || 0,
+          attributes: p.variants[index]?.attributes || {
+            Design: name,
+            Color: "As pictured",
+          },
+          imageIndex: p.variants[index]?.imageIndex || 0,
+        })),
+      });
+      audit("Listing metadata updated", pid);
+      commit("product.changed", { id: pid });
+    },
+    true,
+  );
+}
+function openStoreIdentity() {
+  const store = ownedStore();
+  guard(store, "No store to edit");
+  openModal(
+    "Edit store identity",
+    field("name", "Store display name", "text", store.name) +
+      textarea("description", "Store introduction", store.description) +
+      field("tagline", "Cover headline", "text", store.identity.tagline) +
+      field("tone", "Primary color", "color", store.identity.tone) +
+      field("accent", "Accent color", "color", store.identity.accent) +
+      select(
+        "coverType",
+        "Featured product image",
+        imageTypeOptions(),
+        store.identity.coverType,
+      ) +
+      `<label class="field">Your collection logo (optional)<input class="input" name="logo" type="file" accept="image/png,image/jpeg,image/webp"></label><label class="field">Your cover photograph (optional)<input class="input" name="cover" type="file" accept="image/png,image/jpeg,image/webp"></label><p class="small muted">Use artwork you have permission to display. Without uploads, SaleSync uses an original collection emblem and local product imagery.</p>`,
+    "Save identity",
+    async (f) => {
+      requireStoreOwner(store.id);
+      guard(
+        f.name.trim().length >= 3 && f.tagline.trim().length >= 4,
+        "Enter a store name and cover headline",
+      );
+      guard(
+        /^#[a-f0-9]{6}$/i.test(f.tone) && /^#[a-f0-9]{6}$/i.test(f.accent),
+        "Choose valid colors",
+      );
+      guard(
+        imageTypeOptions().some(([type]) => type === f.coverType),
+        "Choose a local image",
+      );
+      const logo = await uploadedImage(f.logo),
+        cover = await uploadedImage(f.cover);
+      store.name = f.name.trim();
+      store.description = f.description.trim();
+      Object.assign(store.identity, {
+        tagline: f.tagline.trim(),
+        tone: f.tone,
+        accent: f.accent,
+        coverType: f.coverType,
+        ...(logo ? { logo } : {}),
+        ...(cover ? { cover } : {}),
+      });
+      audit("Store identity updated", store.id);
+      commit("store.updated");
+    },
+    true,
+  );
+}
+function openRegistry(requestId) {
+  guard(isManagement(), "Management authorization required");
+  const context = workspaceContext(
+    "management",
+    decodeURIComponent(route().split("/").slice(1).join("/")),
+  );
+  guard(
+    context?.module.name === "System Settings",
+    "Open System Settings → Product Registry to create a product",
+  );
+  const req = S.productRequests.find(
+      (r) => r.id === requestId && r.status === "Pending",
+    ),
+    sid = req?.storeId || S.stores.find((s) => s.status === "Approved")?.id;
+  openModal(
+    "Official product registry",
+    field("name", "Product title", "text", req?.name || "") +
+      field("sku", "Unique SKU") +
+      field("brand", "Brand", "text", "", "") +
+      field("model", "Model", "text", "", "") +
+      select(
+        "category",
+        "Marketplace category",
+        CATS.map(([c]) => c),
+        req?.category || CATS[0][0],
+      ) +
+      select(
+        "store",
+        "Assigned seller",
+        S.stores
+          .filter((s) => s.status === "Approved")
+          .map((s) => [s.id, s.name]),
+        sid,
+      ) +
+      select(
+        "collection",
+        "Store collection",
+        storeCollections(sid).map((c) => [c.id, c.name]),
+      ) +
+      select("type", "Local product image family", imageTypeOptions()) +
+      field(
+        "price",
+        "Selling price (PHP)",
+        "number",
+        599,
+        'required min="0.01" step="0.01"',
+      ) +
+      field(
+        "stock",
+        "Opening units",
+        "number",
+        10,
+        'required min="0" step="1"',
+      ) +
+      textarea("description", "Description", "", "") +
+      photoUploadFields() +
+      textarea("specs", "Specifications (Key: Value per line)", "", ""),
+    "Create draft",
+    async (f) => {
+      guard(isManagement(), "Management authorization required");
+      const price = Number(f.price),
+        stock = Number(f.stock),
+        store = getStore(f.store),
+        category = S.marketCategories.find(
+          (c) => c.name === f.category && !c.archived,
+        ),
+        collection = S.storeCategories.find(
+          (c) => c.id === f.collection && c.storeId === f.store && !c.archived,
+        );
+      guard(
+        f.name.trim().length >= 3 && f.sku.trim().length >= 3,
+        "Enter a product title and SKU",
+      );
+      guard(
+        !S.products.some(
+          (p) => p.sku.toLowerCase() === f.sku.trim().toLowerCase(),
+        ),
+        "SKU already exists",
+      );
+      guard(
+        Number.isFinite(price) &&
+          price > 0 &&
+          Number.isInteger(stock) &&
+          stock >= 0,
+        "Invalid price or opening stock",
+      );
+      guard(
+        store?.status === "Approved" && category && collection,
+        "Choose an approved store and valid categories",
+      );
+      guard(
+        imageTypeOptions().some(([t]) => t === f.type),
+        "Choose a local product image family",
+      );
+      const specs = parseSpecLines(f.specs, {}),
+        images = await galleryFromForm([
+          {
+            src: localImagePath(f.type),
+            alt: f.name.trim() + " illustrative image",
+          },
+        ]),
+        pid = id("p").toLowerCase();
+      const p = {
+        id: pid,
+        name: f.name.trim(),
+        sku: f.sku.trim(),
+        brand: f.brand.trim(),
+        model: f.model.trim(),
+        description: f.description.trim(),
+        category: f.category,
+        categoryId: category.id,
+        storeCategoryId: collection.id,
+        storeId: f.store,
+        type: f.type,
+        price,
+        listPrice: price,
+        base: stock,
+        variants: [{ id: "std", name: "Standard", add: 0 }],
+        specs,
+        images,
+        imageCredit: f.imageCredit.trim(),
+        published: false,
+        hidden: false,
+        reviewSeed: 0,
+        ratingSeed: 0,
+        flash: false,
+      };
+      S.products.push(p);
+      S.ledger.push({
+        id: id("LED"),
+        productId: pid,
+        kind: "open",
+        qty: stock,
+        ref: "Official product registry",
+        time: now(),
+      });
+      if (req) {
+        req.status = "Assigned";
+        req.productId = pid;
+      }
+      view.registryRequest = "";
+      audit("Official product created", pid);
+      commit("product.assigned", p);
+    },
+    true,
+  );
+}
+function orderDetail(oid) {
+  const order = getO(oid),
+    seller = SaleSync.activePortal() === "seller";
+  guard(
+    order &&
+      (isManagement() ||
+        (seller &&
+          order.shipments.some((sh) => ownerOfStore(sh.storeId) === userId)) ||
+        order.customerId === userId),
+    "Order unavailable",
+  );
+  const shipments = order.shipments.filter(
+    (sh) => !seller || ownerOfStore(sh.storeId) === userId,
+  );
+  openModal(
+    "Order " + order.id,
+    `<div class="order-detail-summary"><b>${esc(order.recipientName || S.users.find((u) => u.id === order.customerId)?.name || "Recipient not recorded")}</b><p>${esc(order.recipientPhone || "Phone not recorded")}</p><p>${esc(order.address)}</p>${kv("Created", dateTime(order.created))}${kv("Payment", badge(order.paymentStatus))}${!seller ? kv("Order total", money(order.amount)) : ""}</div>${shipments
+      .map(
+        (sh) =>
+          `<div class="panel"><h3>${esc(sh.storeName || getStore(sh.storeId)?.name)}</h3>${badge(sh.status)}<p class="small">${esc(sh.courier || "Courier not assigned")} · ${esc(sh.tracking || "No tracking reference")}</p>${sh.message ? `<div class="notice"><b>Buyer message</b><p>${esc(sh.message)}</p></div>` : ""}${list(
+            ["Item", "Qty", "Unit price"],
+            order.items
+              .filter((i) => i.storeId === sh.storeId)
+              .map((i) => [esc(i.name), i.qty, money(i.price)]),
+          )}<div class="timeline top-gap">${sh.history.map((h) => `<div class="event"><b>${esc(h.status)}</b><p class="small muted">${dateTime(h.time)} · ${esc(h.source)}</p></div>`).join("") || '<p class="small muted">Awaiting first shipment update.</p>'}</div>${seller ? btn("packing-slip", "Packing slip", `data-id="${oid}" data-shipment="${sh.id}"`, "soft sm") : ""}</div>`,
+      )
+      .join("")}`,
+    "Close",
+    () => {},
+    true,
+  );
+}
+function packingSlip(oid, shipmentId) {
+  const o = getO(oid),
+    sh = o?.shipments.find((s) => s.id === shipmentId);
+  guard(sh && ownerOfStore(sh.storeId) === userId, "Not your shipment");
+  const html = `<article class="packing-slip"><p>SALESYNC · SIMULATED PACKING SLIP</p><h2>${esc(sh.storeName || getStore(sh.storeId)?.name)}</h2><h3>${esc(o.id)}</h3><p>${esc(o.recipientName || "Recipient not recorded")} · ${esc(o.recipientPhone || "Phone not recorded")}</p><p>${esc(o.address)}</p>${list(
+    ["Product", "SKU", "Quantity"],
+    o.items
+      .filter((i) => i.storeId === sh.storeId)
+      .map((i) => [esc(i.name), esc(i.sku), i.qty]),
+  )}<p>Buyer note: ${esc(sh.message || "None")}</p><p>Courier: ${esc(sh.courier || "Not assigned")} · ${esc(sh.tracking || "Tracking not assigned")}</p><p>This document is not a carrier-issued waybill.</p></article>`;
+  openModal(
+    "Packing slip preview",
+    html,
+    "Print slip",
+    () => {
+      const win = window.open("", "_blank", "width=800,height=700");
+      guard(win, "Allow the print preview window to open");
+      win.document.write(
+        "<!doctype html><html><head><title>Packing slip</title><style>body{font:16px system-ui;padding:30px;color:#182033}table{width:100%;border-collapse:collapse}td,th{padding:12px;border:1px solid #ccc;text-align:left}</style></head><body>" +
+          html +
+          "</body></html>",
+      );
+      win.document.close();
+      win.focus();
+      win.print();
+    },
+    true,
+  );
+}
+function workspaceAction(action, el) {
+  const d = el.dataset || {},
+    pid = d.id;
+  switch (action) {
+    case "workspace-tab": {
+      const module = WORKSPACE_MODULES[d.kind]?.find(
+        (m) => m.name === d.module,
+      );
+      guard(
+        module?.tabs.some((t) => t[1] === d.section),
+        "Unknown workspace section",
+      );
+      view.workspaceTabs ??= {};
+      view.workspaceTabs[d.kind + "/" + d.module] = d.section;
+      go(d.kind + "/" + encodeURIComponent(d.section));
+      return true;
+    }
+    case "registry-request":
+      guard(isManagement(), "Management only");
+      view.registryRequest = d.request;
+      view.workspaceTabs ??= {};
+      view.workspaceTabs["management/System Settings"] = "Product Registry";
+      go("management/System Settings");
+      return true;
+    case "registry-create":
+      openRegistry(d.request || view.registryRequest);
+      return true;
+    case "seller-edit":
+      openSellerListing(pid);
+      return true;
+    case "store-edit":
+      openStoreIdentity();
+      return true;
+    case "seller-period-clear":
+      view.sellerPeriod = {};
+      render();
+      return true;
+    case "fulfillment-stage":
+      guard(hasSeller(), "Seller access required");
+      view.fulfillmentStage = d.status;
+      render();
+      return true;
+    case "order-detail":
+      orderDetail(pid);
+      return true;
+    case "packing-slip":
+      packingSlip(pid, d.shipment);
+      return true;
+    case "shop-reset":
+      if (view.storeBrowse?.[pid])
+        Object.assign(view.storeBrowse[pid], {
+          category: "",
+          query: "",
+          sort: "Recommended",
+          inStock: false,
+        });
+      render();
+      return true;
+    case "shop-tab":
+    case "shop-collection":
+    case "shop-search": {
+      const store = getStore(pid);
+      guard(store?.status === "Approved", "Store unavailable");
+      view.storeBrowse ??= {};
+      const state = (view.storeBrowse[pid] ??= {
+        tab: "Home",
+        category: "",
+        query: "",
+        sort: "Recommended",
+        inStock: false,
+      });
+      if (action === "shop-tab") {
+        guard(
+          ["Home", "All Products", "Categories", "About"].includes(d.tab),
+          "Unknown shop section",
+        );
+        state.tab = d.tab;
+      }
+      if (action === "shop-collection") {
+        guard(
+          !d.category || storeCollections(pid).some((c) => c.id === d.category),
+          "Unknown store collection",
+        );
+        state.category = d.category || "";
+        state.tab = "All Products";
+      }
+      if (action === "shop-search") {
+        state.query = $("#in-store-search")?.value.trim() || "";
+        state.tab = "All Products";
+      }
+      render();
+      return true;
+    }
+    case "collection-new":
+    case "collection-edit": {
+      const c = S.storeCategories.find((c) => c.id === pid),
+        sid = c?.storeId || d.store;
+      requireStoreOwner(sid);
+      return (
+        openModal(
+          action === "collection-new"
+            ? "New store collection"
+            : "Rename store collection",
+          field("name", "Collection name", "text", c?.name || ""),
+          "Save collection",
+          (f) => {
+            requireStoreOwner(sid);
+            const name = f.name.trim();
+            guard(
+              name.length >= 2 && name.length <= 48,
+              "Use a collection name of 2–48 characters",
+            );
+            guard(
+              !storeCollections(sid).some(
+                (x) =>
+                  x.id !== c?.id && x.name.toLowerCase() === name.toLowerCase(),
+              ),
+              "Collection name already exists",
+            );
+            if (c) c.name = name;
+            else
+              S.storeCategories.push({
+                id: id("SC"),
+                storeId: sid,
+                name,
+                order: storeCollections(sid).length,
+                archived: false,
+              });
+            audit("Store collection saved", sid + " · " + name);
+            commit("store.categories");
+          },
+        ) || true
+      );
+    }
+    case "collection-move": {
+      const c = S.storeCategories.find((c) => c.id === pid);
+      guard(c && !c.archived, "Collection unavailable");
+      requireStoreOwner(c.storeId);
+      const list = storeCollections(c.storeId),
+        index = list.indexOf(c),
+        other = list[index + Number(d.direction)];
+      guard(other, "Already at the edge");
+      [c.order, other.order] = [other.order, c.order];
+      audit("Store collection reordered", pid);
+      commit("store.categories");
+      return true;
+    }
+    case "collection-archive": {
+      const c = S.storeCategories.find((c) => c.id === pid);
+      guard(c && !c.archived, "Collection unavailable");
+      requireStoreOwner(c.storeId);
+      const products = S.products.filter(
+          (p) => p.storeId === c.storeId && p.storeCategoryId === pid,
+        ),
+        targets = storeCollections(c.storeId).filter((x) => x.id !== pid);
+      guard(
+        !products.length || targets.length,
+        "Create another collection before moving these products",
+      );
+      openModal(
+        "Archive collection",
+        `<p>${esc(c.name)} contains ${products.length} products. Reassign them before archiving.</p>` +
+          (products.length
+            ? select(
+                "target",
+                "Move products to",
+                targets.map((c) => [c.id, c.name]),
+              )
+            : ""),
+        "Archive collection",
+        (f) => {
+          requireStoreOwner(c.storeId);
+          if (products.length)
+            guard(
+              targets.some((c) => c.id === f.target && !c.archived),
+              "Choose an active destination",
+            );
+          products.forEach((p) => (p.storeCategoryId = f.target));
+          c.archived = true;
+          audit("Store collection archived", pid);
+          commit("store.categories");
+        },
+      );
+      return true;
+    }
+    case "global-category-new":
+    case "global-category-edit": {
+      guard(isManagement(), "Management only");
+      const c = S.marketCategories.find((c) => c.id === pid);
+      openModal(
+        c ? "Edit marketplace category" : "New marketplace category",
+        field("name", "Category name", "text", c?.name || "") +
+          select(
+            "imageType",
+            "Category thumbnail",
+            imageTypeOptions(),
+            c?.imageType || "headphones",
+          ),
+        "Save category",
+        (f) => {
+          guard(isManagement(), "Management only");
+          const name = f.name.trim();
+          guard(
+            name.length >= 2 && name.length <= 40,
+            "Use a category name of 2–40 characters",
+          );
+          guard(
+            !S.marketCategories.some(
+              (x) =>
+                x.id !== c?.id && x.name.toLowerCase() === name.toLowerCase(),
+            ),
+            "Category name already exists",
+          );
+          guard(
+            imageTypeOptions().some(([type]) => type === f.imageType),
+            "Choose a local image",
+          );
+          if (c) {
+            const old = c.name;
+            c.name = name;
+            c.imageType = f.imageType;
+            S.products
+              .filter((p) => p.categoryId === c.id || p.category === old)
+              .forEach((p) => {
+                p.categoryId = c.id;
+                p.category = name;
+              });
+            S.stores
+              .filter((s) => s.category === old)
+              .forEach((s) => (s.category = name));
+            S.productRequests
+              .filter((r) => r.category === old)
+              .forEach((r) => (r.category = name));
+          } else
+            S.marketCategories.push({
+              id: id("CAT"),
+              name,
+              icon: "",
+              imageType: f.imageType,
+              order: S.marketCategories.length,
+              archived: false,
+            });
+          view.category = "All";
+          audit("Marketplace category saved", name);
+          commit("catalog.categories");
+        },
+      );
+      return true;
+    }
+    case "global-category-move": {
+      guard(isManagement(), "Management only");
+      const list = S.marketCategories
+          .filter((c) => !c.archived)
+          .sort((a, b) => a.order - b.order),
+        c = list.find((c) => c.id === pid),
+        other = list[list.indexOf(c) + Number(d.direction)];
+      guard(c && other, "Cannot reorder category");
+      [c.order, other.order] = [other.order, c.order];
+      audit("Marketplace category reordered", pid);
+      commit("catalog.categories");
+      return true;
+    }
+    case "global-category-archive": {
+      guard(isManagement(), "Management only");
+      const c = S.marketCategories.find((c) => c.id === pid && !c.archived),
+        targets = S.marketCategories.filter((c) => c.id !== pid && !c.archived);
+      guard(
+        c && targets.length,
+        "Keep at least one active marketplace category",
+      );
+      openModal(
+        "Archive marketplace category",
+        `<p>All products and store profiles in ${esc(c.name)} will move to the category below. Store-owned collections remain intact.</p>` +
+          select(
+            "target",
+            "Destination category",
+            targets.map((c) => [c.id, c.name]),
+          ),
+        "Reassign and archive",
+        (f) => {
+          guard(isManagement(), "Management only");
+          const target = targets.find((c) => c.id === f.target && !c.archived);
+          guard(target, "Choose an active destination");
+          S.products
+            .filter((p) => p.categoryId === pid || p.category === c.name)
+            .forEach((p) => {
+              p.categoryId = target.id;
+              p.category = target.name;
+            });
+          S.stores
+            .filter((s) => s.category === c.name)
+            .forEach((s) => (s.category = target.name));
+          S.productRequests
+            .filter((r) => r.category === c.name)
+            .forEach((r) => (r.category = target.name));
+          c.archived = true;
+          view.category = "All";
+          audit("Marketplace category archived", c.name + " → " + target.name);
+          commit("catalog.categories");
+        },
+      );
+      return true;
+    }
+    case "banner-edit": {
+      guard(isManagement(), "Management only");
+      const b = S.banners.find((b) => b.id === pid);
+      guard(b, "Banner unavailable");
+      openModal(
+        "Edit homepage banner",
+        field("title", "Headline", "text", b.title) +
+          textarea("subtitle", "Subtitle", b.subtitle) +
+          select("type", "Matching product image", imageTypeOptions(), b.type),
+        "Save banner",
+        (f) => {
+          guard(isManagement(), "Management only");
+          guard(
+            f.title.trim().length >= 4 && f.subtitle.trim().length >= 5,
+            "Provide a headline and subtitle",
+          );
+          guard(
+            imageTypeOptions().some(([t]) => t === f.type),
+            "Choose a local image",
+          );
+          Object.assign(b, {
+            title: f.title.trim(),
+            subtitle: f.subtitle.trim(),
+            type: f.type,
+          });
+          audit("Homepage banner updated", b.id);
+          commit("banner.updated");
+        },
+      );
+      return true;
+    }
+    default:
+      return false;
+  }
+}
+function workspaceChange(target) {
+  if (target.hasAttribute("data-fulfillment-search")) {
+    view.fulfillmentQuery = target.value;
+    render();
+    return true;
+  }
+  if (target.dataset.workspaceFilter) {
+    view.catalogFilters ??= {};
+    const f = (view.catalogFilters[target.dataset.workspaceFilter] ??= {});
+    f[target.dataset.field] = target.value;
+    render();
+    return true;
+  }
+  if (target.dataset.sellerPeriod) {
+    view.sellerPeriod ??= {};
+    view.sellerPeriod[target.dataset.sellerPeriod] = target.value;
+    render();
+    return true;
+  }
+  if (target.dataset.storeFilter) {
+    view.storeBrowse ??= {};
+    const f = view.storeBrowse[target.dataset.storeFilter];
+    if (!f) return false;
+    f[target.dataset.field] =
+      target.type === "checkbox" ? target.checked : target.value;
+    render();
+    return true;
+  }
+  if (target.id === "catalog-store") {
+    view.shop = target.value;
+    view.seeMore = 25;
+    render();
+    return true;
+  }
+  if (target.closest("#modal-form") && target.name === "store") {
+    const select = $("#modal-form [name=collection]");
+    if (select)
+      select.innerHTML = storeCollections(target.value)
+        .map((c) => `<option value="${esc(c.id)}">${esc(c.name)}</option>`)
+        .join("");
+    return true;
+  }
+  return false;
 }
